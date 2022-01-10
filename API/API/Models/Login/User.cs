@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace API.Models.Login
 {
+    [Table("tb_Users")]
     public class User
     {
         public string Id { get; set; }

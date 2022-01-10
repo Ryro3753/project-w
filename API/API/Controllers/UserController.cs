@@ -12,15 +12,15 @@ namespace API.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthenticateRequest model)
+        [HttpPost("Authenticate")]
+        public IActionResult Authenticate([FromBody] AuthenticateRequest model)
         {
             var response = _userService.Authenticate(model);
 
@@ -30,12 +30,11 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpPost("Register")]
+        public async Task<User> Register([FromBody] RegisterRequest request)
         {
-            var users = _userService.GetAll();
-            return Ok(users);
+            return await _userService.Register(request);
         }
+
     }
 }
