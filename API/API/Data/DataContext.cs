@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using API.Models.Login;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
     public class DataContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
