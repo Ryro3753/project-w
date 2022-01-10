@@ -31,7 +31,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<User> Register([FromBody] RegisterRequest request)
+        public async Task<AuthenticateResponse> Register([FromBody] RegisterRequest request)
         {
             return await _userService.Register(request);
         }

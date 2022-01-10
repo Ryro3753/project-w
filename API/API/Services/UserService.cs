@@ -18,7 +18,7 @@ namespace API.Services
     {
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
         Task<User> GetById(string id);
-        Task<User> Register(RegisterRequest request);
+        Task<AuthenticateResponse> Register(RegisterRequest request);
     }
 
     public class UserService : IUserService
@@ -34,12 +34,19 @@ namespace API.Services
 
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == request.Username && HashPasswordComparison(request.Password,x.Password));
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == request.Username);
 
-            // return null if user not found
-            if (user == null) return null;
+            if (user == null) 
+            {
+                throw new Exception("Invalid Username");
+            } 
 
-            // authentication successful so generate jwt token
+            if(!HashPasswordComparison(request.Password, user.Password))
+            {
+                throw new Exception("Invalid Password");
+
+            }
+
             var token = GenerateJwtToken(user);
 
             return new AuthenticateResponse(user, token);
@@ -50,7 +57,7 @@ namespace API.Services
             return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<User> Register(RegisterRequest request)
+        public async Task<AuthenticateResponse> Register(RegisterRequest request)
         {
             var alreadyExists = await _context.Users.AnyAsync(x => x.Username == request.Username || x.Email == request.Email);
 
@@ -73,7 +80,9 @@ namespace API.Services
 
             await _context.SaveChangesAsync();
 
-            return newUser; 
+            var auth = await Authenticate(new AuthenticateRequest { Password = request.Password, Username = newUser.Username });
+
+            return auth; 
 
         }
 
