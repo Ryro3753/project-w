@@ -8,16 +8,20 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from './services/common/token.interceptor';
 import { storeReducer } from './store/reducer/reducer';
 import { HeaderComponent } from './components/header/header.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     StoreModule.forRoot({ state : storeReducer })
   ],
   providers: [

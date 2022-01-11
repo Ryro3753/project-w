@@ -1,0 +1,12 @@
+.alerts{
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.alerts .alert{
+    min-width: 5rem;
+    max-width: 25rem;
+    overflow-wrap: break-word;
+}

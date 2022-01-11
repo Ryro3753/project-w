@@ -1,0 +1,12 @@
+<div class="alerts">
+    <div *ngFor="let item of alerts">
+        <ng-container *ngTemplateOutlet="alertBorder;context:{alert:item}"></ng-container>
+    </div>
+</div>
+
+
+<ng-template #alertBorder let-item="alert">
+    <div class="alert alert-{{item.alertInfo.type}}" role="alert"  [@newAlert]>
+        <span [innerText]="item.alertInfo.message"></span>
+      </div>
+</ng-template>
