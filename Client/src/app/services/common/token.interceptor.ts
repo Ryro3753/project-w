@@ -7,7 +7,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = JSON.parse(localStorage.getItem("token") as string);
-
     
     if (!token) {
       return next.handle(req);

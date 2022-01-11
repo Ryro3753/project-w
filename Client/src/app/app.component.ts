@@ -9,9 +9,4 @@ import { AuthenticationService } from './services/common/authentication.service'
 export class AppComponent{
   title = 'Project-w';
 
-  constructor(readonly authen: AuthenticationService){
-  }
-
-  ngOnInit(){
-  }
 }

@@ -7,3 +7,9 @@ export interface User {
     HasImage: boolean;
     token?: string;
 }
+
+export interface Logged {
+    id: string;
+    email: string;
+    
+}

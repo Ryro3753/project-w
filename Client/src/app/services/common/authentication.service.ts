@@ -24,7 +24,7 @@ export class AuthenticationService {
         return this.http.post<any>(`${environment.apiURL}/user/authenticate`, { username, password })
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                localStorage.setItem('token', JSON.stringify(user.token));
+                localStorage.setItem('token', JSON.stringify(user.Token));
                 this.currentUserSubject.next(user);
                 return user;
             }));
