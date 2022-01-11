@@ -20,14 +20,11 @@ namespace API.Controllers
         }
 
         [HttpPost("Authenticate")]
-        public IActionResult Authenticate([FromBody] AuthenticateRequest model)
+        public Task<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest model)
         {
             var response = _userService.Authenticate(model);
 
-            if (response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-
-            return Ok(response);
+            return response;
         }
 
         [HttpPost("Register")]

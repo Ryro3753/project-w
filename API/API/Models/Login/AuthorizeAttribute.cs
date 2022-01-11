@@ -10,10 +10,16 @@ namespace API.Models.Login
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = (User)context.HttpContext.Items["User"];
-            if (user == null)
+            var userContext = context.HttpContext.Items["User"];
+            if(userContext == null)
             {
-                // not logged in
+                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                return;
+            }
+            var userResult = userContext.GetType().GetProperty("Result");
+            var userValue = userResult.GetValue(userContext, null);
+            if (userValue == null)
+            {
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
         }
