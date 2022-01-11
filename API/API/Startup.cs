@@ -33,7 +33,7 @@ namespace API
         {
 
             services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddDbContext<DataContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("postgresql")));
+            services.AddDbContext<DataContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("postgresql")), ServiceLifetime.Transient);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });

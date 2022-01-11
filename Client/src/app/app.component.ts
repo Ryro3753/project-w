@@ -13,6 +13,5 @@ export class AppComponent{
   }
 
   ngOnInit(){
-    this.authen.login('asd','1234').subscribe(i => console.log(i));
   }
 }
