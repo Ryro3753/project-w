@@ -1,0 +1,7 @@
+::ng-deep .click:hover{
+    cursor: pointer;
+}
+
+::ng-deep .underline:hover{
+    text-decoration: underline;
+}

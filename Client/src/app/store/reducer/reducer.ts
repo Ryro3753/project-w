@@ -13,7 +13,6 @@ export const initialState: State = {
 const _storeReducer = createReducer(
     initialState,
     on(login, (state: State, payload: User | undefined) => {
-    console.log(state,payload);
         return ({ ...state, user: payload });
     }),
     on(logout, (state:State) => {

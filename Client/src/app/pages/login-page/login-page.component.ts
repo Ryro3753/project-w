@@ -12,13 +12,10 @@ import { State } from 'src/app/store/reducer/reducer';
 export class LoginPageComponent implements OnInit {
 
   constructor(readonly auth: AuthenticationService,
-              readonly store: Store<{ state: State }>,) { }
+              readonly store: Store<{ state: State }>) { }
 
   ngOnInit(): void {
-    console.log("ttt")
-    //this.auth.login("asd","1234").subscribe(i => { console.log(i);this.store.dispatch(login(i));});
-
-    this.store.select('state').subscribe(i => console.log(i.user));
+    //this.auth.login("asd","1234").subscribe(i => { this.store.dispatch(login(i));});
   }
 
 }

@@ -2,6 +2,21 @@
     background-color: #10002b;
     border-style: solid;
     border-width: 0px;
-    border-bottom-width: 3px;
+    border-bottom-width: 5px;
     border-color: #7b2cbf;
+}
+
+.diceIcon{
+    height: 3rem;
+    width: 3rem;
+}
+
+.personIcon{
+    color: white; 
+    font-size: xx-large;
+}
+
+.loggedName{
+    color:white;
+    font-size: larger;
 }
