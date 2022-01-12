@@ -70,6 +70,7 @@ namespace API
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAuthService, AuthService>();
 
             services.AddCors(options =>
             {

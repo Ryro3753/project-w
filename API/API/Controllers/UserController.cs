@@ -1,15 +1,14 @@
 ﻿using API.Models.Login;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -18,20 +17,26 @@ namespace API.Controllers
         {
             _userService = userService;
         }
-
-        [HttpPost("Authenticate")]
-        public Task<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest model)
+        [HttpPost("UserUploadImage")]
+        public async Task<bool> UserUploadImage(string Id)
         {
-            var response = _userService.Authenticate(model);
+            var imageFilePath = Id + ".png";
+            imageFilePath = Path.Combine(_userService.GetImageFolderPath(), imageFilePath);
 
-            return response;
+            using var stream = System.IO.File.Create(imageFilePath);
+
+            foreach (var item in Request.Form.Files)
+            {
+                await item.CopyToAsync(stream);
+            }
+
+            return await _userService.UpdateHasImage(Id);
         }
 
-        [HttpPost("Register")]
-        public async Task<AuthenticateResponse> Register([FromBody] RegisterRequest request)
+        [HttpGet("GetUser")]
+        public async Task<User> GetUser(string Id)
         {
-            return await _userService.Register(request);
+            return await _userService.GetUser(Id);
         }
-
     }
 }

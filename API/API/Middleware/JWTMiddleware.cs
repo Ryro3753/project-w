@@ -22,17 +22,17 @@ namespace API.Middleware
             _appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context, IAuthService authService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContext(context, userService, token);
+                AttachUserToContext(context, authService, token);
 
             await _next(context);
         }
 
-        private void AttachUserToContext(HttpContext context, IUserService userService, string token)
+        private void AttachUserToContext(HttpContext context, IAuthService authService, string token)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace API.Middleware
                 var userId = jwtToken.Claims.First(x => x.Type == "id").Value.ToString();
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = userService.GetById(userId);
+                context.Items["User"] = authService.GetById(userId);
             }
             catch
             {

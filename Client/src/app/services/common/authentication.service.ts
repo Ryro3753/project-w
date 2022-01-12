@@ -21,7 +21,7 @@ export class AuthenticationService extends BaseDataService {
                 readonly store: Store<{ state: State }>,
                 readonly cookieService: CookieService,
                 readonly router: Router,) {
-        super(httpClient, 'User')
+        super(httpClient, 'Auth')
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
         this.currentUser = JSON.parse(localStorage.getItem('currentUser') as string)
     }

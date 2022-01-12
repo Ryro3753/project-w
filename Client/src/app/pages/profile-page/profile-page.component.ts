@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
 import { User } from 'src/app/models/common/user.model';
+import { UploadService } from 'src/app/services/common/upload.service';
+import { UserService } from 'src/app/services/common/user.service';
 import { State } from 'src/app/store/reducer/reducer';
 import { environment } from 'src/environments/environment';
 
@@ -14,16 +16,21 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   
   subscribes: SubscriptionLike[] = [];
 
-  constructor(readonly store: Store<{ state: State }>,) { }
+  constructor(readonly store: Store<{ state: State }>,
+              readonly uploadService: UploadService,
+              readonly userService: UserService) { }
 
   currentUser : User | undefined;
 
   apiURL = environment.apiURL;
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
-  profileImageBasePath = this.apiURL + '/images/miscimages/';
+  profileImageBasePath = this.apiURL + '/images/profileImages/';
 
   ngOnInit(): void {
-    const sub = this.store.select('state').subscribe(i => this.currentUser = i.user);
+    const sub = this.store.select('state').subscribe(async i => {
+      if(i.user)
+        this.currentUser = await this.userService.getUser(i.user.Id)
+    });
     this.subscribes.push(sub);
   }
 
@@ -31,5 +38,12 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     while(this.subscribes.length > 0) {
       this.subscribes.pop()?.unsubscribe();
     }
+  }
+
+
+  addImage(e: any){
+    if(!this.currentUser)
+      return;
+    this.uploadService.uploadProfileImage(e.target.files[0],this.currentUser.Id);
   }
 }
