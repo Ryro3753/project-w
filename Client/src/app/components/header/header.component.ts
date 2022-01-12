@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs/internal/types';
-import { User } from 'src/app/models/user.model';
+import { User } from 'src/app/models/common/user.model';
 import { State } from 'src/app/store/reducer/reducer';
 import { environment } from 'src/environments/environment';
 
@@ -32,7 +32,6 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   login(){
-    console.log(this.currentUser)
     if(!this.currentUser)
       this.route.navigateByUrl('/Login');
     else

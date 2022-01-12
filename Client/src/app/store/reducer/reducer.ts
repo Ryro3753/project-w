@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { login, logout } from '../actions/login.action';
-import { User } from '../../models/user.model';
+import { User } from '../../models/common/user.model';
 
 export interface State {
     user: User | undefined;

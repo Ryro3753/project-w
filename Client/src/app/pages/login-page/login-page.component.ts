@@ -15,7 +15,8 @@ export class LoginPageComponent implements OnInit {
   constructor(readonly auth: AuthenticationService,
               readonly store: Store<{ state: State }>,
               readonly alertService: AlertService,
-              private route: ActivatedRoute,) { }
+              readonly route: ActivatedRoute,
+              readonly router: Router) { }
 
   username: string | undefined;
   password: string | undefined;
@@ -25,6 +26,9 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnURL = this.route.snapshot.queryParams['returnUrl'];
+    if(this.auth.currentUser){
+      this.router.navigateByUrl('/Profile')
+    }
   }
 
   login(){
@@ -37,7 +41,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.auth.login(this.username, this.password,this.rememberMe,this.returnURL);
+    this.auth.login(this.username, this.password,this.rememberMe,this.returnURL,true);
   }
 
 }

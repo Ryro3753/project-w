@@ -8,8 +8,8 @@ export interface User {
     Token?: string;
 }
 
-export interface Logged {
-    id: string;
-    email: string;
-    
+export interface RegisterRequest{
+    Email: string;
+    Username: string;
+    Password: string;
 }

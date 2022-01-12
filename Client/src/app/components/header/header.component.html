@@ -8,10 +8,10 @@
                 </li>
             </ul>
         </div>
-        <div class="nav-login row click">
+        <div class="nav-login row click" (click)="login()">
             <div>
                 <a class="bi bi-person personIcon mr-5"></a>
-                <span (click)="login()" [innerText]="currentUser ? currentUser.Username : 'Login'" class="loggedName underline"></span>
+                <span  [innerText]="currentUser ? currentUser.Username : 'Login'" class="loggedName underline"></span>
             </div>
         </div>
     </div>
