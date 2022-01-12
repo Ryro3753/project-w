@@ -20,15 +20,19 @@ export class LoginPageComponent implements OnInit {
   password: string | undefined;
 
   ngOnInit(): void {
-    //this.auth.login("asd","1234").subscribe(i => { this.store.dispatch(login(i));});
   }
 
   login(){
-    console.log(this.username, this.password);
-  }
+    if(!this.username || this.username === '' ){
+      this.alertService.alert({alertInfo:{message:'Please make sure to enter Username',type:'danger',timeout:5000}});
+      return;
+    }
+    if(!this.password || this.password === ''){
+      this.alertService.alert({alertInfo:{message:'Please make sure to enter Password',type:'danger',timeout:5000}});
+      return;
+    }
 
-  tt(){
-    this.alertService.alert({alertInfo:{message:'asdqweqweqwasdqasdqweqweqwasdqweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsdasdqweqweqwasdqweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsdasdqweqweqwasdqweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsdasdqweqweqwasdqweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsdasdqweqweqwasdqweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsdasdqweqweqwasdqweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsdweqweqweqweqwdasdascxzcxzdsdasdqweqweqweqweqwdasdascxzcxzdsdeqweqwdasdascxzcxzdsd', type:'success'}});
+    this.auth.login(this.username, this.password);
   }
 
 }

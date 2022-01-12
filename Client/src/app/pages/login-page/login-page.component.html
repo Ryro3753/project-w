@@ -1,20 +1,16 @@
 <div class="login-page mt-5 container">
     <div class="row justify-content-center">
-        <form style="width: 40%;" class="">
+        <div style="width: 40%;" class="">
             <h3>Login</h3>
-            <div class="form-group has-validation ">
+            <div class="mt-3">
                 <label>Username</label>
-                <input class="form-control" placeholder="Username" id="validationTooltip" required>
-                <div class="valid-tooltip">
-                    Please choose a username.
-                  </div>
+                <input class="form-control"  placeholder="Username" id="validationTooltip" required [(ngModel)]="username">
             </div>
-            <div class="form-group">
+            <div class="mt-3">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="password" class="form-control" placeholder="Password" required [(ngModel)]="password">
             </div>
             <button type="submit" class="btn btn-primary mt-3" (click)="login()">Log In</button>
-        </form>
+        </div>
     </div>
-    <button class="btn btn-primary" (click)="tt()">asdasda</button>
 </div>

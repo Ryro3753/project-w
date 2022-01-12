@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user.model';
+import { BaseDataService } from './base-data.service';
+import { HttpClient } from '@angular/common/http';
+import { AlertService } from 'src/app/components/alert/alert.service';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/store/reducer/reducer';
+import { login } from 'src/app/store/actions/login.action';
 
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthenticationService extends BaseDataService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(override readonly httpClient: HttpClient,
+                readonly alertService: AlertService,
+                readonly store: Store<{ state: State }>) {
+        super(httpClient, 'User')
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -21,13 +27,18 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiURL}/user/authenticate`, { username, password })
-            .pipe(map(user => {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                localStorage.setItem('token', JSON.stringify(user.Token));
-                this.currentUserSubject.next(user);
-                return user;
-            }));
+        const loginRequest = this.post<User>(`authenticate`, { username, password });
+        loginRequest.then(user => {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('token', JSON.stringify(user.Token));
+            this.store.dispatch(login(user));
+            this.currentUserSubject.next(user);
+        }).catch(error => {
+            if(error.error instanceof Array){
+                this.alertService.alert({alertInfo:{message:error.error,type:'danger',timeout:5000}});
+            }
+        })
+
     }
 
     logout() {
@@ -35,4 +46,5 @@ export class AuthenticationService {
         localStorage.removeItem('token');
         //this.currentUserSubject.next(null);
     }
+    
 }

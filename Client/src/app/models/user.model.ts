@@ -5,7 +5,7 @@ export interface User {
     CreatedDate: Date;
     LastActive: Date;
     HasImage: boolean;
-    token?: string;
+    Token?: string;
 }
 
 export interface Logged {

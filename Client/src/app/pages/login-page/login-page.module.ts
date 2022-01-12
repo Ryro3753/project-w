@@ -14,7 +14,8 @@ import { LoginPageComponent } from './login-page.component';
       pathMatch: 'full',
       component: LoginPageComponent
     }]),
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [
   ],
