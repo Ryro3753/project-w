@@ -5,3 +5,25 @@
 ::ng-deep .underline:hover{
     text-decoration: underline;
 }
+
+::ng-deep .blockPurpleButton{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #7b2cbf;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+::ng-deep .blockPurpleButton:hover {
+    background-color: #10002b;
+  }
+
+  ::ng-deep  .responsive {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }

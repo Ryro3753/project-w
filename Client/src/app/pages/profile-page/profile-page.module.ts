@@ -14,8 +14,6 @@ import { ProfilePageComponent } from './profile-page.component';
       pathMatch: 'full',
       component: ProfilePageComponent
     }]),
-    CommonModule,
-    FormsModule
   ],
   providers: [
   ],

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/common/authentication.service';
 import { State } from 'src/app/store/reducer/reducer';
@@ -13,7 +12,6 @@ import { State } from 'src/app/store/reducer/reducer';
 export class LoginPageComponent implements OnInit {
 
   constructor(readonly auth: AuthenticationService,
-              readonly store: Store<{ state: State }>,
               readonly alertService: AlertService,
               readonly route: ActivatedRoute,
               readonly router: Router) { }
@@ -42,6 +40,10 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.auth.login(this.username, this.password,this.rememberMe,this.returnURL,true);
+  }
+
+  register(){
+    this.router.navigateByUrl('/Register');
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/common/authentication.service';
 
@@ -10,7 +11,8 @@ import { AuthenticationService } from 'src/app/services/common/authentication.se
 export class RegisterPageComponent implements OnInit {
 
   constructor(readonly alertService: AlertService,
-              readonly authService: AuthenticationService) { }
+              readonly authService: AuthenticationService,
+              readonly router: Router) { }
 
   email: string | undefined;
   username: string | undefined;
@@ -20,7 +22,6 @@ export class RegisterPageComponent implements OnInit {
   regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   ngOnInit(): void {
-    console.log('zzzz');
     this.authService.logout();
   }
 
@@ -52,5 +53,4 @@ export class RegisterPageComponent implements OnInit {
       Username: this.username
     });
   }
-
 }

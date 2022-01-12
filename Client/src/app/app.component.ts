@@ -16,12 +16,12 @@ export class AppComponent{
               readonly router: Router){}
 
   ngOnInit(){
+    this.loginWithCookies();
+  }
+
+  loginWithCookies(){
     if(this.cookieService.get('rememberMe') == 'true'){
       this.authService.login(this.cookieService.get('username'),this.cookieService.get('password'),true);
     }
-  }
-
-  register(){
-    this.router.navigateByUrl('Register');
   }
 }

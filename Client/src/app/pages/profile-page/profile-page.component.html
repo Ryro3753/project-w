@@ -1,1 +1,8 @@
-<p>profile-page works!</p>
+<div class="profile-page mt-5 container">
+    <div class="row justify-content-between">
+        <div class="col-sm-3">
+            <button [innerText]="currentUser?.HasImage ? 'Update Image' :'Add Image'" class="blockPurpleButton mb-3" style="align-self: center;"></button>
+            <img  [src]="currentUser?.HasImage ? profileImageBasePath + currentUser?.Id + '.png' : noImagePath" class="responsive" />
+        </div>
+    </div>
+</div>
