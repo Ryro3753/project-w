@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/common/authentication.service';
@@ -13,13 +14,17 @@ export class LoginPageComponent implements OnInit {
 
   constructor(readonly auth: AuthenticationService,
               readonly store: Store<{ state: State }>,
-              readonly alertService: AlertService) { }
+              readonly alertService: AlertService,
+              private route: ActivatedRoute,) { }
 
   username: string | undefined;
   password: string | undefined;
   rememberMe: boolean = false;
 
+  returnURL: string | undefined;
+
   ngOnInit(): void {
+    this.returnURL = this.route.snapshot.queryParams['returnUrl'];
   }
 
   login(){
@@ -32,7 +37,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.auth.login(this.username, this.password,this.rememberMe);
+    this.auth.login(this.username, this.password,this.rememberMe,this.returnURL);
   }
 
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { SubscriptionLike } from 'rxjs/internal/types';
 import { User } from 'src/app/models/user.model';
 import { State } from 'src/app/store/reducer/reducer';
 import { environment } from 'src/environments/environment';
@@ -10,7 +11,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnDestroy {
+
+  subscribes: SubscriptionLike[] = [];
 
   constructor(readonly store: Store<{ state: State }>,
               readonly route: Router) { }
@@ -22,12 +25,23 @@ export class HeaderComponent implements OnInit {
     this.refreshUserInformation();
   }
 
+  ngOnDestroy(): void {
+    while(this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
+  }
+
   login(){
-    this.route.navigateByUrl('/Login');
+    console.log(this.currentUser)
+    if(!this.currentUser)
+      this.route.navigateByUrl('/Login');
+    else
+      this.route.navigateByUrl('/Profile');
   }
 
   refreshUserInformation(){
-    this.store.select('state').subscribe(i => this.currentUser = i.user);
+    const sub = this.store.select('state').subscribe(i => this.currentUser = i.user);
+    this.subscribes.push(sub);
   }
 
   home(){

@@ -2,7 +2,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TokenInterceptor } from './services/common/token.interceptor';
@@ -16,7 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
