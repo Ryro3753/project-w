@@ -4,11 +4,18 @@
             <h3>Login</h3>
             <div class="mt-3">
                 <label>Username</label>
-                <input class="form-control"  placeholder="Username" id="validationTooltip" required [(ngModel)]="username">
+                <input class="form-control" placeholder="Username" id="validationTooltip" required
+                    [(ngModel)]="username">
             </div>
             <div class="mt-3">
                 <label>Password</label>
                 <input type="password" class="form-control" placeholder="Password" required [(ngModel)]="password">
+            </div>
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="rememberMe" required [(ngModel)]="rememberMe">
+                <label class="form-check-label" for="rememberMe">
+                    Remember Me
+                </label>
             </div>
             <button type="submit" class="btn btn-primary mt-3" (click)="login()">Log In</button>
         </div>

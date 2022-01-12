@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/components/alert/alert.service';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store/reducer/reducer';
 import { login } from 'src/app/store/actions/login.action';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +17,8 @@ export class AuthenticationService extends BaseDataService {
 
     constructor(override readonly httpClient: HttpClient,
                 readonly alertService: AlertService,
-                readonly store: Store<{ state: State }>) {
+                readonly store: Store<{ state: State }>,
+                readonly cookieService: CookieService) {
         super(httpClient, 'User')
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -26,7 +28,7 @@ export class AuthenticationService extends BaseDataService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
+    login(username: string, password: string, rememberMe: boolean) {
         const loginRequest = this.post<User>(`authenticate`, { username, password });
         loginRequest.then(user => {
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -36,15 +38,27 @@ export class AuthenticationService extends BaseDataService {
         }).catch(error => {
             if(error.error instanceof Array){
                 this.alertService.alert({alertInfo:{message:error.error,type:'danger',timeout:5000}});
+                this.logout();
             }
         })
-
+        if(rememberMe){
+            this.cookieService.set('username',username);
+            this.cookieService.set('password',password);
+            this.cookieService.set('rememberMe','true');
+        }
+        else{
+            this.cookieService.delete('username');
+            this.cookieService.delete('password');
+            this.cookieService.delete('rememberMe');
+        }
     }
 
     logout() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('token');
-        //this.currentUserSubject.next(null);
+        this.cookieService.delete('username');
+        this.cookieService.delete('password');
+        this.cookieService.delete('rememberMe');
     }
     
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/common/authentication.service';
-import { login } from 'src/app/store/actions/login.action';
 import { State } from 'src/app/store/reducer/reducer';
 
 @Component({
@@ -18,6 +17,7 @@ export class LoginPageComponent implements OnInit {
 
   username: string | undefined;
   password: string | undefined;
+  rememberMe: boolean = false;
 
   ngOnInit(): void {
   }
@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.auth.login(this.username, this.password);
+    this.auth.login(this.username, this.password,this.rememberMe);
   }
 
 }
