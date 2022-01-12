@@ -50,9 +50,29 @@ namespace API.Services
         }
 
         public async Task<User> GetUser(string Id)
-        {
+         {
+            var qq = await _context.Users.FirstOrDefaultAsync(i => i.Id == "dfd6d48c-5fe8-4d9e-afa8-d02fc865dcb0");
+            var qqq = _context.Campaigns;
+            var t = _context.Users.Join(_context.Campaigns, user => user.Id, c => c.CreatedUserId, (user, c) => new
+            {
+                userId = c.CreatedUserId,
+                userName = user.Username,
+                campaignName = c.Name
+            }).Select(x => new Za {
+                userId = x.userId,
+                userName = x.userName,
+                campaignName = x.campaignName
+            }).ToList();
+            var z = t;
             return await _context.Users.FirstOrDefaultAsync(i => i.Id == Id);
         }
 
+    }
+
+    public class Za
+    {
+        public string userId { get; set; }
+        public string userName { get; set; }
+        public string campaignName { get; set; }
     }
 }

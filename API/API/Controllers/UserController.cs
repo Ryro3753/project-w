@@ -1,5 +1,6 @@
 ﻿using API.Models.Login;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,7 +9,6 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
