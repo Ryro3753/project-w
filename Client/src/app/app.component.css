@@ -1,30 +1,53 @@
 ::ng-deep .click:hover{
-    cursor: pointer;
+cursor: pointer;
 }
 
 ::ng-deep .underline:hover{
-    text-decoration: underline;
+text-decoration: underline;
 }
 
 ::ng-deep .blockPurpleButton{
-    display: block;
-    width: 100%;
-    border: none;
-    background-color: #7b2cbf;
-    color: white;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
+display: block;
+width: 100%;
+border: none;
+background-color: #7b2cbf;
+color: white;
+padding: 14px 28px;
+font-size: 16px;
+cursor: pointer;
+text-align: center;
 }
 
 ::ng-deep .blockPurpleButton:hover {
-    background-color: #10002b;
-  }
+background-color: #10002b;
+}
 
-  ::ng-deep  .responsive {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    max-height: 300px;
-  }
+::ng-deep  .responsive {
+width: 100%;
+max-width: 300px;
+height: auto;
+max-height: 300px;
+}
+
+::ng-deep .smallLabel {
+color:gray;
+text-decoration: underline;
+font-size: smaller;
+margin: 0;
+}
+
+::ng-deep .mlr1{
+margin-left: 1rem;
+}
+::ng-deep .mlr2{
+margin-left: 2rem;
+}
+::ng-deep .mlr3{
+margin-left: 3rem;
+}
+::ng-deep .mlr4{
+margin-left: 4rem;
+}
+::ng-deep .mlr5{
+margin-left: 5rem;
+}

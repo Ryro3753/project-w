@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
 import { User } from 'src/app/models/common/user.model';
+import { AuthenticationService } from 'src/app/services/common/authentication.service';
 import { UploadService } from 'src/app/services/common/upload.service';
 import { UserService } from 'src/app/services/common/user.service';
 import { State } from 'src/app/store/reducer/reducer';
@@ -18,7 +20,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   constructor(readonly store: Store<{ state: State }>,
               readonly uploadService: UploadService,
-              readonly userService: UserService) { }
+              readonly userService: UserService,
+              readonly router: Router,
+              readonly authService: AuthenticationService) { }
 
   currentUser : User | undefined;
 
@@ -39,7 +43,10 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       this.subscribes.pop()?.unsubscribe();
     }
   }
-
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl('');
+  }
 
   addImage(e: any){
     if(!this.currentUser)

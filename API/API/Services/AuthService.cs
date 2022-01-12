@@ -51,6 +51,10 @@ namespace API.Services
 
             var token = GenerateJwtToken(user);
 
+            user.LastActive = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
             return new AuthenticateResponse(user, token);
         }
 
