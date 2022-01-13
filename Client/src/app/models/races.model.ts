@@ -4,3 +4,11 @@ export interface Race{
     HasImage: boolean;
     Username: string;
 }
+
+export interface RaceDetail{
+    RaceId: number;
+    Description: string;
+    Speed: number;
+    Size: string;
+    Features: string;
+}

@@ -9,6 +9,7 @@ namespace API.Services
     public interface IRaceService
     {
         Task<IEnumerable<Race>> GetAllRacesByUserId(string userId);
+        Task<RaceDetail> GetRaceDetail(int raceId);
     }
 
     public class RaceService : IRaceService
@@ -24,6 +25,11 @@ namespace API.Services
         public async Task<IEnumerable<Race>> GetAllRacesByUserId(string userId)
         {
             return await _connection.QueryAsync<Race>("Select * from public.fn_getracesbyuserid(@userid)", new { userid = userId });
+        }
+
+        public async Task<RaceDetail> GetRaceDetail(int raceId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<RaceDetail>("SELECT * from public.fn_getracedetails(@Id)", new { Id = raceId });
         }
     }
 }

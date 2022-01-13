@@ -20,5 +20,11 @@ namespace API.Controllers
         {
             return await _raceService.GetAllRacesByUserId(userId);
         }
+
+        [HttpGet("GetRaceDetail")]
+        public async Task<RaceDetail> GetRaceDetail(int raceId)
+        {
+            return await _raceService.GetRaceDetail(raceId);
+        }
     }
 }

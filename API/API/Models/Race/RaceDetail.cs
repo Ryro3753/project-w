@@ -5,8 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace API.Models.Login
 {
-    [Keyless]
-    [Table("tb_Race_Detail")]
     public class RaceDetail
     {
         public int RaceId { get; set; }
