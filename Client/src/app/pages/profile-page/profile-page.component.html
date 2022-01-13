@@ -5,7 +5,7 @@
             <button [innerText]="currentUser?.HasImage ? 'Update Image' :'Add Image'" class="blockPurpleButton mb-3"
                 (click)="imageUpload.click()"></button>
             <img [src]="currentUser?.HasImage ? profileImageBasePath + currentUser?.Id + '.png' : noImagePath"
-                class="responsive" />
+                class="responsiveProfileImage" />
         </div>
         <div class="col-sm-4">
             <div>

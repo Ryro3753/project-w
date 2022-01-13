@@ -22,11 +22,18 @@ text-align: center;
 background-color: #10002b;
 }
 
-::ng-deep  .responsive {
+::ng-deep  .responsiveProfileImage {
 width: 100%;
 max-width: 300px;
 height: auto;
 max-height: 300px;
+}
+
+::ng-deep  .responsiveIcon {
+width: 100%;
+max-width: 56px;
+height: auto;
+max-height: 56px;
 }
 
 ::ng-deep .smallLabel {
@@ -34,6 +41,11 @@ color:gray;
 text-decoration: underline;
 font-size: smaller;
 margin: 0;
+}
+
+::ng-deep .header4{
+    font-size: xx-large;
+    font-weight: bold;
 }
 
 ::ng-deep .mlr1{

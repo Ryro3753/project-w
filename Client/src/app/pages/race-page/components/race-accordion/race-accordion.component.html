@@ -1,1 +1,18 @@
-<p>race-accordion works!</p>
+<div class="raceAccordion" *ngIf="race">
+    <div class="row">
+        <div class="col-sm-1">
+            <img [src]="race.HasImage ? raceImageBasePath + race.Id + '.png' : noImagePath"
+            class="responsiveIcon" />
+        </div>
+        <div class="col-sm-2 raceName">
+            <span class="header4" [innerText]="race.Name"></span>
+        </div>
+        <div class="col-sm-2 offset-6 ">
+            <p class="centerlize">Created By:</p>
+            <p class="centerlize" [innerText]="race.Username"></p>
+        </div>
+        <div class="col-sm-1 centerlize header4 click"  (click)="detailsClick()">
+            <i [class]=" details ? 'bi bi-arrow-up-circle' : 'bi bi-arrow-down-circle'"></i>
+        </div>
+    </div>
+</div>

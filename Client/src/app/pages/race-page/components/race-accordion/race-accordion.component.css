@@ -1,0 +1,23 @@
+.raceAccordion{
+    display: inline-block;
+    width: 100%;
+    border-style: solid;
+    border-color: #10002b;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    background-color: #9D4EDD;
+}
+
+.raceName{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    text-align: left;
+    color: #10002b;
+}
+
+.centerlize{
+    display: block;
+    text-align: center;
+    margin: 0;
+}
