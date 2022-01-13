@@ -47,4 +47,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.route.navigateByUrl('');
   }
 
+  races(){
+    this.route.navigateByUrl('/Races');
+  }
+
 }

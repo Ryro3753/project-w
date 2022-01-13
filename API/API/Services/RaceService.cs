@@ -1,10 +1,7 @@
-﻿using API.Data;
-using API.Models.Login;
+﻿using API.Models.Login;
 using Dapper;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Services

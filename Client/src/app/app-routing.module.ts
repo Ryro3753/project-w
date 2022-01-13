@@ -16,6 +16,11 @@ const routes: Routes = [
     path: 'Register',
     loadChildren: () => import('./pages/register-page/register-page.module').then(m => m.RegisterPageModule),
   },
+  {
+    path: 'Races',
+    loadChildren: () => import('./pages/race-page/race-page.module').then(m => m.RacePageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({

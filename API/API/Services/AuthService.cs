@@ -1,16 +1,10 @@
-﻿using API.Data;
-using API.Models.Login;
+﻿using API.Models.Login;
 using Dapper;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -38,7 +32,7 @@ namespace API.Services
 
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
         {
-            var user = await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuserwithauth(@username)", new { username = request.Username });
+            var user = await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuserwithauth(@usernamet)", new { usernamet = request.Username });
 
             if (user == null) 
             {

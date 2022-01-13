@@ -1,8 +1,6 @@
-﻿using API.Data;
-using API.Models.Login;
+﻿using API.Models.Login;
 using Dapper;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;

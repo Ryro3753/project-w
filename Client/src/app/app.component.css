@@ -51,3 +51,18 @@ margin-left: 4rem;
 ::ng-deep .mlr5{
 margin-left: 5rem;
 }
+::ng-deep .mtr1{
+margin-top: 1rem;
+}
+::ng-deep .mtr2{
+margin-top: 2rem;
+}
+::ng-deep .mtr3{
+margin-top: 3rem;
+}
+::ng-deep .mtr4{
+margin-top: 4rem;
+}
+::ng-deep .mtr5{
+margin-top: 5rem;
+}
