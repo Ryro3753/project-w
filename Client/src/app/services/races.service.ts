@@ -17,8 +17,8 @@ export class RaceService extends BaseDataService {
     return this.get<Race[]>("GetAllRacesByUserId", { userId });
   }
 
-  getRaceDetail(raceId: number): Promise<RaceDetail[]> {
-    return this.get<RaceDetail[]>("GetRaceDetail", { raceId });
+  getRaceDetail(raceId: number): Promise<RaceDetail> {
+    return this.get<RaceDetail>("GetRaceDetail", { raceId });
   }
 
 }

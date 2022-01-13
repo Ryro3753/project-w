@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { Race } from 'src/app/models/races.model';
+import { Race, RaceDetail } from 'src/app/models/races.model';
+import { RaceService } from 'src/app/services/races.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,11 +25,13 @@ import { environment } from 'src/environments/environment';
 })
 export class RaceAccordionComponent implements OnInit {
 
-  constructor() { }
+  constructor(readonly raceService: RaceService) { }
 
   @Input() race: Race | undefined;
 
-  details: boolean = false;
+  detailsToggle: boolean = false;
+
+  raceDetail: RaceDetail | undefined;
 
   apiURL = environment.apiURL;
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
@@ -38,8 +41,11 @@ export class RaceAccordionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  detailsClick(){
-    this.details = !this.details;
+  async detailsClick(){
+    this.detailsToggle = !this.detailsToggle;
+    if(!this.raceDetail && this.race){
+      this.raceDetail = await this.raceService.getRaceDetail(this.race.Id);
+    }
   }
 
 }
