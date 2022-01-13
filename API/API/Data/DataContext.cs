@@ -7,6 +7,9 @@ namespace API.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<Race> Races { get; set; }
+        public DbSet<RaceDetail> RaceDetails { get; set; }
+        public DbSet<RaceShared> RaceShareds { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

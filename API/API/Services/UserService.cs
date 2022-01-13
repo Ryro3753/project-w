@@ -1,17 +1,10 @@
 ﻿using API.Data;
 using API.Models.Login;
+using Dapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+using System.Data;
 using System.IO;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -26,11 +19,11 @@ namespace API.Services
     public class UserService : IUserService
     {
         private readonly IWebHostEnvironment _env;
-        private readonly DataContext _context;
+        private readonly IDbConnection _connection;
 
-        public UserService(DataContext context, IWebHostEnvironment env)
+        public UserService(IDbConnection connection, IWebHostEnvironment env)
         {
-            _context = context;
+            _connection = connection;
             _env = env;
         }
 
@@ -41,38 +34,13 @@ namespace API.Services
 
         public async Task<bool> UpdateHasImage(string Id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(i => i.Id == Id);
-            user.HasImage = true;
-
-            await _context.SaveChangesAsync();
-
-            return user.HasImage;
+            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_getuser(@userid, @hasimage)", new { userid = Id, hasimage = true });
         }
 
         public async Task<User> GetUser(string Id)
          {
-            var qq = await _context.Users.FirstOrDefaultAsync(i => i.Id == "dfd6d48c-5fe8-4d9e-afa8-d02fc865dcb0");
-            var qqq = _context.Campaigns;
-            var t = _context.Users.Join(_context.Campaigns, user => user.Id, c => c.CreatedUserId, (user, c) => new
-            {
-                userId = c.CreatedUserId,
-                userName = user.Username,
-                campaignName = c.Name
-            }).Select(x => new Za {
-                userId = x.userId,
-                userName = x.userName,
-                campaignName = x.campaignName
-            }).ToList();
-            var z = t;
-            return await _context.Users.FirstOrDefaultAsync(i => i.Id == Id);
+            return await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuser(@userid)", new { userid = Id });
         }
 
-    }
-
-    public class Za
-    {
-        public string userId { get; set; }
-        public string userName { get; set; }
-        public string campaignName { get; set; }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using API.Data;
 using API.Models.Login;
+using Dapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -26,17 +28,17 @@ namespace API.Services
     public class AuthService : IAuthService
     {
         private readonly AppSettings _appSettings;
-        private readonly DataContext _context;
+        private readonly IDbConnection _connection;
 
-        public AuthService(IOptions<AppSettings> appSettings, DataContext context)
+        public AuthService(IOptions<AppSettings> appSettings, IDbConnection connection)
         {
+            _connection = connection;
             _appSettings = appSettings.Value;
-            _context = context;
         }
 
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == request.Username);
+            var user = await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuserwithauth(@username)", new { username = request.Username });
 
             if (user == null) 
             {
@@ -53,20 +55,19 @@ namespace API.Services
 
             user.LastActive = DateTime.Now;
 
-            await _context.SaveChangesAsync();
+            await _connection.QueryAsync("Select * from fn_updateuserlastactive(@userId)", new { userId = user.Id });
 
             return new AuthenticateResponse(user, token);
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<User> GetById(string Id)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuser(@userid)", new { userid = Id });
         }
 
         public async Task<AuthenticateResponse> Register(RegisterRequest request)
         {
-            var alreadyExists = await _context.Users.AnyAsync(x => x.Username == request.Username || x.Email == request.Email);
-
+            var alreadyExists = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_checkuseralreadyexists(@username,@email)", new { username = request.Username, email = request.Email });
             if (alreadyExists)
                 throw new Exception("This Email or Username already been taken.");
 
@@ -82,9 +83,16 @@ namespace API.Services
                 HasImage = false
             };
 
-            await _context.Users.AddAsync(newUser);
-
-            await _context.SaveChangesAsync();
+            await _connection.QueryAsync("Select * from public.fn_register(@id,@username,@email,@password,@createddate,@lastactive,@hasimage", new
+            {
+                id = newUser.Id,
+                username = newUser.Username,
+                email = newUser.Email,
+                password = newUser.Password,
+                createddate = newUser.CreatedDate,
+                lastactive = newUser.LastActive,
+                hasimage = newUser.HasImage
+            });
 
             var auth = await Authenticate(new AuthenticateRequest { Password = request.Password, Username = newUser.Username });
 
