@@ -1,3 +1,5 @@
+import { Feature } from "./feature.model";
+
 export interface Race{
     Id: number;
     Name: string;
@@ -10,5 +12,5 @@ export interface RaceDetail{
     Description: string;
     Speed: number;
     Size: string;
-    Features: string;
+    Features: Feature[];
 }

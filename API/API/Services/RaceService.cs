@@ -15,11 +15,12 @@ namespace API.Services
     public class RaceService : IRaceService
     {
         private readonly IDbConnection _connection;
+        private readonly IFeatureService _featureService;
 
-        public RaceService(IDbConnection connection)
+        public RaceService(IDbConnection connection, IFeatureService featureService)
         {
             _connection = connection;
-
+            _featureService = featureService;
         }
 
         public async Task<IEnumerable<Race>> GetAllRacesByUserId(string userId)
@@ -29,7 +30,16 @@ namespace API.Services
 
         public async Task<RaceDetail> GetRaceDetail(int raceId)
         {
-            return await _connection.QueryFirstOrDefaultAsync<RaceDetail>("SELECT * from public.fn_getracedetails(@Id)", new { Id = raceId });
+            var data = await _connection.QueryFirstOrDefaultAsync<RaceDetailQuery>("SELECT * from public.fn_getracedetails(@Id)", new { Id = raceId });
+            var result = new RaceDetail
+            {
+                RaceId = data.RaceId,
+                Description = data.Description,
+                Size = data.Size,
+                Speed = data.Speed,
+                Features = _featureService.ReadFeatures(data.Features)
+            };
+            return result;
         }
     }
 }
