@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace API.Models.Login
+namespace API.Models.Campaing
 {
-    [Table("tb_Campaign")]
     public class Campaign
     {
         [Key]

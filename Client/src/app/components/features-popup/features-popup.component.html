@@ -10,13 +10,13 @@
                 <div class="row">
                     <button class="mbr1" (click)="deneme(i)">asdasd</button>
                     <div class="col-sm-4">
-                        <ng-select [items]="defaultBindingsList" [(ngModel)]="section[i]" placeholder="section" [addTag]="true"></ng-select>
+                        <ng-select bindValue="label" [items]="sectionOptions" [(ngModel)]="section[i]" placeholder="section" [addTag]="true"></ng-select>
                     </div>
                     <div class="col-sm-4">
-                        <ng-select [(ngModel)]="type[i]" placeholder="type" [addTag]="true" [disabled]="!section[i]"></ng-select>
+                        <ng-select  bindValue="label" [items]="gettt(i)" [(ngModel)]="type[i]" placeholder="type" [addTag]="true" [disabled]="!section[i]"></ng-select>
                     </div>
                     <div class="col-sm-4">
-                        <ng-select [(ngModel)]="value[i]" placeholder="value" [addTag]="true" [disabled]="!type[i]"></ng-select>
+                        <ng-select bindValue="label" [(ngModel)]="value[i]" placeholder="value" [addTag]="true" [disabled]="!type[i]"></ng-select>
                     </div>
                     <div class="row mtr1">
                         <div class="col-sm-3">
@@ -29,13 +29,13 @@
                     <div *ngFor="let item of requirements[i]; let q = index">
                         <div class="row mtr1">
                             <div class="col-sm-3">
-                                <ng-select  [(ngModel)]="requirements[i][q].Section" placeholder="section" [addTag]="true"></ng-select>
+                                <ng-select  bindValue="label" [items]="sectionOptions" [(ngModel)]="requirements[i][q].Section" placeholder="section" [addTag]="true"></ng-select>
                             </div>
                             <div class="col-sm-4">
-                                <ng-select [(ngModel)]="requirements[i][q].Type" placeholder="type" [addTag]="true" [disabled]="!requirements[i][q].Section"></ng-select>
+                                <ng-select bindValue="label" [(ngModel)]="requirements[i][q].Type" placeholder="type" [addTag]="true" [disabled]="!requirements[i][q].Section"></ng-select>
                             </div>
                             <div class="col-sm-4">
-                                <ng-select [(ngModel)]="requirements[i][q].Value" placeholder="value" [addTag]="true" [disabled]="!requirements[i][q].Type"></ng-select>
+                                <ng-select bindValue="label" [(ngModel)]="requirements[i][q].Value" placeholder="value" [addTag]="true" [disabled]="!requirements[i][q].Type"></ng-select>
                             </div>
                             <div class="col-sm-1">
                                 <button class="btn btn-light" title="Delete This Requirement" (click)="deleteRequirement(i,q)">X</button>

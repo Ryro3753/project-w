@@ -1,4 +1,4 @@
-﻿namespace API.Models.Login
+﻿namespace API.Models.Race
 {
     public class Race
     {

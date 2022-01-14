@@ -4,6 +4,7 @@ import { SubscriptionLike } from 'rxjs';
 import { FeaturesPopupEvent, FeaturesClosePopupEvent } from 'src/app/events/features.popup.event';
 import { Feature, Requirement } from 'src/app/models/feature.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
+import { FeatureService } from 'src/app/services/feature.service';
 import { AlertService } from '../alert/alert.service';
 
 @Component({
@@ -24,13 +25,17 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   value: string[] = [];
   requirements: Requirement[][] = [[], []];
 
+  sectionOptions!: string[];
+
   constructor(readonly bus: MessageBusService,
     readonly ngxSmartModalService: NgxSmartModalService,
-    readonly alertService: AlertService) {
+    readonly alertService: AlertService,
+    readonly featureService: FeatureService) {
     this.subscribes.push(this.bus.of(FeaturesPopupEvent).subscribe(this.featuresPopupEvent.bind(this)));
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.sectionOptions = await this.featureService.getSections();
   }
 
   ngOnDestroy(): void {
@@ -38,6 +43,17 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       this.subscribes.pop()?.unsubscribe();
     }
   }
+
+  gett(i: any[] | null) : any[]{
+    if(i === null)
+      return [];
+    return i;
+  }
+
+  gettt(i: number) : any[]{
+    return [this.section[i]];
+  }
+
 
   featuresPopupEvent(featuresEvent: FeaturesPopupEvent) {
     this.features = JSON.parse(JSON.stringify(featuresEvent.features));
@@ -73,10 +89,20 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
     });
   }
 
+
   modelsToFeatures() {
     if(!this.controlModels()){
       return;
     }
+    for (let i = 0; i < this.features.length; i++) {
+      this.features[i] = {
+        Section: this.section[i],
+        Type: this.type[i],
+        Value: this.value[i],
+        Requirements: this.requirements[i]
+      }
+    }
+    console.log(this.features);
   }
 
   controlModels(): boolean {
@@ -92,7 +118,6 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       }
       }
     }
-
     return true;
   }
 

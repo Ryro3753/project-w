@@ -1,4 +1,4 @@
-﻿using API.Models.Login;
+﻿using API.Models.Features;
 using System;
 using System.Collections.Generic;
 
@@ -8,6 +8,7 @@ namespace API.Services
     {
         IEnumerable<Feature> ReadFeatures(string feature);
         string UnreadFeatures(List<Feature> features);
+        IEnumerable<string> GetSections();
     }
 
     public class FeatureService : IFeatureService
@@ -83,6 +84,11 @@ namespace API.Services
             }
 
             return String.Join('?', listString);
+        }
+
+        public IEnumerable<string> GetSections()
+        {
+            return FeatureConstants.Sections;
         }
 
     }

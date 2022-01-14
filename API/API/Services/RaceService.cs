@@ -1,4 +1,4 @@
-﻿using API.Models.Login;
+﻿using API.Models.Race;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;

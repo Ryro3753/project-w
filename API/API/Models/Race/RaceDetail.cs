@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using API.Models.Features;
+using System.Collections.Generic;
 
-namespace API.Models.Login
+namespace API.Models.Race
 {
     public class RaceDetail
     {
