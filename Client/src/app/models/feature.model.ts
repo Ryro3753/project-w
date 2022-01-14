@@ -2,7 +2,7 @@ export interface Feature{
     Section: string;
     Type: string;
     Value: string;
-    Requirements: Requirement[];
+    Requirements: Requirement[] | null;
 }
 
 export interface Requirement{

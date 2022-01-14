@@ -1,0 +1,22 @@
+.featureModal{
+    padding: 2rem;
+}
+::ng-deep .modalCustom{
+max-width: none !important;
+width: 50% !important;
+}
+
+.featureButton{
+    width: 100%;
+    padding: 0;
+    background-color: #7b2cbf;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+}
+
+.requirementsHeader{
+    font-size: x-large;
+    color: darkgreen;
+    font-weight: bold;
+}

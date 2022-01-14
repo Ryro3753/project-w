@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { FeaturesPopupEvent } from './events/features.popup.event';
+import { FeaturesClosePopupEvent, FeaturesPopupEvent } from './events/features.popup.event';
 import { Feature } from './models/feature.model';
 import { AuthenticationService } from './services/common/authentication.service';
 import { MessageBusService } from './services/common/messagebus.service';
@@ -19,7 +19,9 @@ export class AppComponent{
   constructor(readonly cookieService: CookieService,
               readonly authService: AuthenticationService,
               readonly router: Router,
-              readonly bus:MessageBusService){}
+              readonly bus:MessageBusService){
+                this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupEvent.bind(this));
+              }
 
   ngOnInit(){
     this.loginWithCookies();
@@ -33,5 +35,10 @@ export class AppComponent{
 
   asd(){
     this.bus.publish(new FeaturesPopupEvent("main",this.www));
+  }
+
+  featuresPopupEvent(asd:FeaturesClosePopupEvent){
+    console.log(this.www);
+
   }
 }

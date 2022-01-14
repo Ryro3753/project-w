@@ -78,3 +78,18 @@ margin-top: 4rem;
 ::ng-deep .mtr5{
 margin-top: 5rem;
 }
+::ng-deep .mbr1{
+margin-bottom: 1rem;
+}
+::ng-deep .mbr2{
+margin-bottom: 2rem;
+}
+::ng-deep .mbr3{
+margin-bottom: 3rem;
+}
+::ng-deep .mbr4{
+margin-bottom: 4rem;
+}
+::ng-deep .mbr5{
+margin-bottom: 5rem;
+}
