@@ -77,14 +77,12 @@ namespace API.Services
                 HasImage = false
             };
 
-            await _connection.QueryAsync("Select * from public.fn_register(@id,@username,@email,@password,@createddate,@lastactive,@hasimage", new
+            await _connection.QueryAsync("Select * from public.fn_register(@id,@username,@email,@password,@hasimage)", new
             {
                 id = newUser.Id,
                 username = newUser.Username,
                 email = newUser.Email,
                 password = newUser.Password,
-                createddate = newUser.CreatedDate,
-                lastactive = newUser.LastActive,
                 hasimage = newUser.HasImage
             });
 

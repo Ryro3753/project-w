@@ -31,6 +31,8 @@ namespace API.Services
         public async Task<RaceDetail> GetRaceDetail(int raceId)
         {
             var data = await _connection.QueryFirstOrDefaultAsync<RaceDetailQuery>("SELECT * from public.fn_getracedetails(@Id)", new { Id = raceId });
+            if (data == null)
+                return null;
             var result = new RaceDetail
             {
                 RaceId = data.RaceId,
