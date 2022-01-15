@@ -52,9 +52,13 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   }
 
   featuresPopupEvent(featuresEvent: FeaturesPopupEvent) {
+    console.log('ttt');
     this.features = JSON.parse(JSON.stringify(featuresEvent.features));
     this.from = featuresEvent.from;
-    this.featuresToModels();
+    if(this.features  != null)
+      this.featuresToModels();
+    else
+      this.features = [];
     this.ngxSmartModalService.getModal('featureModal').open();
   }
 
@@ -71,9 +75,9 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   }
 
 
-  modelsToFeatures() {
+  modelsToFeatures() : boolean {
     if (!this.controlModels()) {
-      return;
+      return false;
     }
     for (let i = 0; i < this.features.length; i++) {
       this.features[i] = {
@@ -83,6 +87,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
         Requirements: this.requirements[i]
       }
     }
+    return true;
   }
 
   controlModels(): boolean {
@@ -103,12 +108,15 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
 
   onClose() {
     this.currentCollapse = 0;
+    this.ngxSmartModalService.getModal('featureModal').close();
   }
 
   save() {
-    this.modelsToFeatures();
-    this.bus.publish(new FeaturesClosePopupEvent(this.from, this.features));
-    this.onClose();
+    if(this.modelsToFeatures()){
+      this.bus.publish(new FeaturesClosePopupEvent(this.from, this.features));
+      this.onClose();
+    }
+    
   }
 
   changeCollapse(i: number) {

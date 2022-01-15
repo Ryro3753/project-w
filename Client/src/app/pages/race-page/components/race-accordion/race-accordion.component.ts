@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { FeaturesPopupEvent } from 'src/app/events/features.popup.event';
 import { Race, RaceDetail } from 'src/app/models/races.model';
+import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { RaceService } from 'src/app/services/races.service';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +27,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RaceAccordionComponent implements OnInit {
 
-  constructor(readonly raceService: RaceService) { }
+  constructor(readonly raceService: RaceService,
+              readonly bus: MessageBusService) { }
 
   @Input() race!: Race;
 
@@ -33,14 +36,10 @@ export class RaceAccordionComponent implements OnInit {
 
   raceDetail: RaceDetail | undefined;
 
-  deneme: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
   apiURL = environment.apiURL;
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
   raceImageBasePath = this.apiURL + '/images/raceImages/';
-  denemew(){
-    console.log(this.deneme);
-  }
 
   ngOnInit(): void {
   }
@@ -51,6 +50,11 @@ export class RaceAccordionComponent implements OnInit {
       this.raceDetail = await this.raceService.getRaceDetail(this.race.Id);
       console.log(this.raceDetail);
     }
+  }
+
+  featuresClick(){
+    if(this.raceDetail)
+      this.bus.publish(new FeaturesPopupEvent(this.raceDetail.RaceId.toString(),this.raceDetail.Features));
   }
 
 }

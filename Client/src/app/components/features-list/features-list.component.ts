@@ -12,7 +12,7 @@ export class FeaturesListComponent implements OnInit {
 
   @Input() features !: Feature[];
   @Input() width : number = 10;
-  @Input() height : number = 10;
+  @Input() height : number = 150;
 
   ngOnInit(): void {
   }

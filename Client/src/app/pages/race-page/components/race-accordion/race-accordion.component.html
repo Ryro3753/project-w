@@ -34,16 +34,14 @@
             </div>
         </div>
         <div class="col-sm-5">
-            <label>Features</label>
-            <app-features-list></app-features-list>
+            <button class="btn btn-block  featureButton" (click)="featuresClick()">Features</button>
+            <app-features-list [features]="raceDetail.Features"></app-features-list>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-10">
             <label>Description</label>
-            <textarea class="form-control mbr2" [(ngModel)]="deneme" rows="10"></textarea>
+            <textarea class="form-control mbr2" [(ngModel)]="raceDetail.Description" rows="10"></textarea>
         </div>
     </div>
 </div>
-
-<button (click)="denemew()"></button>
