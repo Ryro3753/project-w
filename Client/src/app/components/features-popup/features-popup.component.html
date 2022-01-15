@@ -12,14 +12,13 @@
             </div>
             <div class="card card-body mbr1" *ngIf="(i + 1) == currentCollapse">
                 <div class="row">
-                    <button class="mbr1" (click)="deneme(i)">asdasd</button>
                     <div class="col-sm-4">
                         <ng-select bindValue="label" [items]="sectionOptions" [(ngModel)]="section[i]"
-                            placeholder="section" [addTag]="true"></ng-select>
+                            placeholder="section" ></ng-select>
                     </div>
                     <div class="col-sm-4">
                         <ng-select bindValue="label" [items]="typeOptions[section[i]]" [(ngModel)]="type[i]"
-                            placeholder="type" [addTag]="true" [disabled]="!section[i]"></ng-select>
+                            placeholder="type" [disabled]="!section[i]"></ng-select>
                     </div>
                     <div class="col-sm-4">
                         <ng-select bindValue="label" [(ngModel)]="value[i]" placeholder="value" [addTag]="true"
@@ -37,13 +36,13 @@
                         <div class="row mtr1">
                             <div class="col-sm-3">
                                 <ng-select bindValue="label" [items]="sectionOptions"
-                                    [(ngModel)]="requirements[i][q].Section" placeholder="section" [addTag]="true">
+                                    [(ngModel)]="requirements[i][q].Section" placeholder="section">
                                 </ng-select>
                             </div>
                             <div class="col-sm-4">
                                 <ng-select bindValue="label"
                                     [items]="typeOptionsForRequirements[requirements[i][q].Section]"
-                                    [(ngModel)]="requirements[i][q].Type" placeholder="type" [addTag]="true"
+                                    [(ngModel)]="requirements[i][q].Type" placeholder="type"
                                     [disabled]="!requirements[i][q].Section"></ng-select>
                             </div>
                             <div class="col-sm-4">

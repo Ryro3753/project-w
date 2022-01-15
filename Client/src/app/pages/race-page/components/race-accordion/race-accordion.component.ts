@@ -13,11 +13,11 @@ import { environment } from 'src/environments/environment';
       'detailsToggle', [
         transition(':enter', [
           style({height:0}),
-          animate('150ms', style({ height:100}))
+          animate('200ms', style({ height:100}))
         ]),
         transition(':leave', [
           style({height:100}),
-          animate('150ms', style({height:0}))
+          animate('200ms', style({height:0}))
         ])
       ],
     ),
@@ -45,6 +45,7 @@ export class RaceAccordionComponent implements OnInit {
     this.detailsToggle = !this.detailsToggle;
     if(!this.raceDetail && this.race){
       this.raceDetail = await this.raceService.getRaceDetail(this.race.Id);
+      console.log(this.raceDetail);
     }
   }
 

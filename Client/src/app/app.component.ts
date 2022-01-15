@@ -31,6 +31,10 @@ export class AppComponent{
     if(this.cookieService.get('rememberMe') == 'true'){
       this.authService.login(this.cookieService.get('username'),this.cookieService.get('password'),true);
     }
+    else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('currentUser');
+    }
   }
 
   asd(){

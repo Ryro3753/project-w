@@ -25,7 +25,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   value: string[] = [];
   requirements: Requirement[][] = [[], []];
 
-  tq: {[id:string] : string[]} = { 'Character': ['zzz','ttt']};;
+  tq: { [id: string]: string[] } = { 'Character': ['zzz', 'ttt'] };;
 
   sectionOptions!: string[];
 
@@ -51,35 +51,9 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
     }
   }
 
-  gett(i: any[] | null) : any[]{
-    if(i === null)
-      return [];
-    return i;
-  }
-
-  gettt(i: number) : any[]{
-    return [this.section[i]];
-  }
-
-
   featuresPopupEvent(featuresEvent: FeaturesPopupEvent) {
     this.features = JSON.parse(JSON.stringify(featuresEvent.features));
     this.from = featuresEvent.from;
-    this.features.push({
-      Section: 'Vilnius',
-      Type: 'aaa',
-      Value: 'zzz',
-      Requirements: [{
-        Section: 'sss',
-        Type: 'qqq',
-        Value: 'rrr'
-      },
-      {
-        Section: 'zzz',
-        Type: 'zzz2',
-        Value: 'zzz3'
-      }]
-    })
     this.featuresToModels();
     this.ngxSmartModalService.getModal('featureModal').open();
   }
@@ -98,7 +72,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
 
 
   modelsToFeatures() {
-    if(!this.controlModels()){
+    if (!this.controlModels()) {
       return;
     }
     for (let i = 0; i < this.features.length; i++) {
@@ -109,7 +83,6 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
         Requirements: this.requirements[i]
       }
     }
-    console.log(this.features);
   }
 
   controlModels(): boolean {
@@ -121,21 +94,21 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       for (let q = 0; q < this.requirements[i].length; q++) {
         if (!this.requirements[i][q].Section || !this.requirements[i][q].Type || !this.requirements[i][q].Value) {
           this.alertService.alert({ alertInfo: { message: 'There are invalid Features. Please check feature number:' + (i + 1), type: 'warning', timeout: 3000 } })
-        return false;
-      }
+          return false;
+        }
       }
     }
     return true;
   }
 
   onClose() {
-    this.bus.publish(new FeaturesClosePopupEvent(this.from, this.features));
     this.currentCollapse = 0;
   }
 
   save() {
     this.modelsToFeatures();
-    //this.ngxSmartModalService.getModal('featureModal').close();
+    this.bus.publish(new FeaturesClosePopupEvent(this.from, this.features));
+    this.onClose();
   }
 
   changeCollapse(i: number) {
@@ -163,17 +136,6 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
     })
     this.currentCollapse = this.features.length;
   }
-
-  defaultBindingsList = [
-    { value: 'Vilnius', label: 'Vilnius' },
-    { value: 'Kaunas', label: 'Kaunas' },
-    { value: 'Pavilnys', label: 'Pavilnys', disabled: true }
-  ];
-
-  deneme(i: number) {
-    console.log(this.section[i], this.type[i], this.value[i], this.requirements[i]);
-  }
-
   addRequirement(index: number) {
     this.requirements[index].push({
       Section: "",

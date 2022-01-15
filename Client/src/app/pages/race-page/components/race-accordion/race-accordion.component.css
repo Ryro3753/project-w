@@ -21,3 +21,11 @@
     text-align: center;
     margin: 0;
 }
+
+.raceDetailBox{
+    border-color: #9D4EDD;
+    border-style: solid;
+    border-top-style: none;
+    border-width: 1%;
+    overflow-y: hidden;
+}
