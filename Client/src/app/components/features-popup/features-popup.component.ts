@@ -25,7 +25,12 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   value: string[] = [];
   requirements: Requirement[][] = [[], []];
 
+  tq: {[id:string] : string[]} = { 'Character': ['zzz','ttt']};;
+
   sectionOptions!: string[];
+
+  typeOptions!: any;
+  typeOptionsForRequirements!: any;
 
   constructor(readonly bus: MessageBusService,
     readonly ngxSmartModalService: NgxSmartModalService,
@@ -36,6 +41,8 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.sectionOptions = await this.featureService.getSections();
+    this.typeOptions = await this.featureService.getTypes();
+    this.typeOptionsForRequirements = await this.featureService.getTypesForRequirements();
   }
 
   ngOnDestroy(): void {
@@ -144,6 +151,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
     this.value.splice(index, 1);
     this.requirements.splice(index, 1);
     this.features.splice(index, 1);
+    this.currentCollapse -= 1;
   }
 
   newFeature() {

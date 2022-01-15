@@ -17,5 +17,11 @@ export class FeatureService extends BaseDataService {
     return this.get<string[]>("GetSections");
   }
 
+  getTypes(){
+    return this.get("GetTypes");
+  }
 
+  getTypesForRequirements(){
+    return this.get("GetTypesForRequirements");
+  }
 }

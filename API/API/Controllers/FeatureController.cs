@@ -22,5 +22,17 @@ namespace API.Controllers
             return _featureService.GetSections();
         }
 
+        [HttpGet("GetTypes")]
+        public Dictionary<string, List<string>> GetTypes()
+        {
+            return _featureService.GetTypes();
+        }
+
+        [HttpGet("GetTypesForRequirements")]
+        public Dictionary<string, List<string>> GetTypesForRequirements()
+        {
+            return _featureService.GetTypesForRequirements();
+        }
+
     }
 }

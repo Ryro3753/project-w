@@ -9,6 +9,8 @@ namespace API.Services
         IEnumerable<Feature> ReadFeatures(string feature);
         string UnreadFeatures(List<Feature> features);
         IEnumerable<string> GetSections();
+        Dictionary<string, List<string>> GetTypes();
+        Dictionary<string, List<string>> GetTypesForRequirements();
     }
 
     public class FeatureService : IFeatureService
@@ -89,6 +91,16 @@ namespace API.Services
         public IEnumerable<string> GetSections()
         {
             return FeatureConstants.Sections;
+        }
+
+        public Dictionary<string, List<string>> GetTypes()
+        {
+            return FeatureConstants.Types;
+        }
+
+        public Dictionary<string, List<string>> GetTypesForRequirements()
+        {
+            return FeatureConstants.TypesForRequirements;
         }
 
     }
