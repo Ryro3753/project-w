@@ -17,8 +17,33 @@
     </div>
 </div>
 <div [@detailsToggle] *ngIf="detailsToggle && raceDetail" class="raceDetailBox">
-    <p>asdsadsa</p>
-    <p>asdsadsa</p>
-    <p>asdsadsa</p>
-    <p>asdsadsa</p>
+    <div class="row p-2 justify-content-center">
+        <div class="col-sm-5">
+            <div >
+                <label>Username</label>
+                <input class="" style="width: 100%;" placeholder="Name"  required
+                    [(ngModel)]="race.Name">
+            </div>
+            <div class="mt-2">
+                <label>Speed</label>
+                <input type="number" class="" style="width: 100%;" placeholder="Speed" required [(ngModel)]="raceDetail.Speed">
+            </div>
+            <div class="mt-2">
+                <label>Size</label>
+                <input class="" style="width: 100%;" placeholder="Size" required [(ngModel)]="raceDetail.Size">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <label>Features</label>
+            <app-features-list></app-features-list>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-10">
+            <label>Description</label>
+            <textarea class="form-control mbr2" [(ngModel)]="deneme" rows="10"></textarea>
+        </div>
+    </div>
 </div>
+
+<button (click)="denemew()"></button>

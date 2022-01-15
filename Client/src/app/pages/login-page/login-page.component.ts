@@ -24,8 +24,9 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnURL = this.route.snapshot.queryParams['returnUrl'];
-    if(this.auth.currentUser){
-      this.router.navigateByUrl('/Profile')
+    console.log(this.returnURL);
+    if(this.auth.currentUser && this.returnURL){
+      this.router.navigateByUrl(this.returnURL)
     }
   }
 

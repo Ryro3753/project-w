@@ -15,7 +15,6 @@ namespace API.Services
     public interface IAuthService
     {
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
-        Task<User> GetById(string id);
         Task<AuthenticateResponse> Register(RegisterRequest request);
     }
 
@@ -54,10 +53,6 @@ namespace API.Services
             return new AuthenticateResponse(user, token);
         }
 
-        public async Task<User> GetById(string Id)
-        {
-            return await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuser(@userid)", new { userid = Id });
-        }
 
         public async Task<AuthenticateResponse> Register(RegisterRequest request)
         {

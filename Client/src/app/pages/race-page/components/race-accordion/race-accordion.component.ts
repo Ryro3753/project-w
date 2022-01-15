@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
           animate('200ms', style({ height:100}))
         ]),
         transition(':leave', [
-          style({height:100}),
+          style({height:300}),
           animate('200ms', style({height:0}))
         ])
       ],
@@ -27,16 +27,20 @@ export class RaceAccordionComponent implements OnInit {
 
   constructor(readonly raceService: RaceService) { }
 
-  @Input() race: Race | undefined;
+  @Input() race!: Race;
 
   detailsToggle: boolean = false;
 
   raceDetail: RaceDetail | undefined;
 
+  deneme: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
   apiURL = environment.apiURL;
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
   raceImageBasePath = this.apiURL + '/images/raceImages/';
-
+  denemew(){
+    console.log(this.deneme);
+  }
 
   ngOnInit(): void {
   }

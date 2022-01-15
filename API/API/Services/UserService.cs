@@ -37,7 +37,8 @@ namespace API.Services
 
         public async Task<User> GetUser(string Id)
          {
-            return await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuser(@userid)", new { userid = Id });
+            var result = await _connection.QueryFirstOrDefaultAsync<User>("SELECT * from public.fn_getuser(@userid)", new { userid = Id });
+            return result;
         }
 
     }
