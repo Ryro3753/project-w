@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
+import { pageEmit } from 'src/app/models/common/common.model';
 import { User } from 'src/app/models/common/user.model';
 import { Race } from 'src/app/models/races.model';
 import { RaceService } from 'src/app/services/races.service';
@@ -19,15 +20,17 @@ export class RacePageComponent implements OnInit, OnDestroy {
     readonly raceService: RaceService) { }
 
   allRaces: Race[] | undefined;
-  racesShown!: Race[];
+  filteredRaces!: Race[];
+  shownRaces!: Race[];
   currentUser: User | undefined;
+
+  currentPageIndexes!: pageEmit;
 
   ngOnInit(): void {
     const sub = this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
       if (i.user){
-        this.allRaces = await this.raceService.getAllRacesByUserId(i.user.Id);
-        this.racesShown = this.allRaces;
+        await this.refreshData(i.user.Id);
       }
     });
     this.subscribes.push(sub);
@@ -37,6 +40,32 @@ export class RacePageComponent implements OnInit, OnDestroy {
     while (this.subscribes.length > 0) {
       this.subscribes.pop()?.unsubscribe();
     }
+  }
+
+  pageChange(page: pageEmit){
+    this.currentPageIndexes = page;
+    this.shownRaces = this.filteredRaces.slice(page.firstIndex, page.lastIndex+1);
+  }
+
+  async refreshData(userId: string){
+    this.allRaces = await this.raceService.getAllRacesByUserId(userId);
+    this.filteredRaces = JSON.parse(JSON.stringify(this.allRaces));
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.filteredRaces.push(...this.allRaces);
+    this.shownRaces = this.filteredRaces;
   }
 
 }

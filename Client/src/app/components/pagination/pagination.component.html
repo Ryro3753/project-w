@@ -1,9 +1,12 @@
 <nav>
     <ul class="pagination">
-        <li class="page-item"><a class="page-link">First</a></li>
+        <li class="page-item click" (click)="pageChange(1)"><a class="pageLink">First</a></li>
+        <li class="page-item click" (click)="previous()"><a class="pageLink">Previous</a></li>
         <div *ngFor="let item of currentShownPages">
-            <li class="page-item"><a class="page-link" [innerText]="item"></a></li>
+            <li class="page-item click" (click)="pageChange(item)"><a [class]="currentPage == item ? currentPageCssClasses : pageCssClasses "
+                     [innerText]="item"></a></li>
         </div>
-        <li class="page-item"><a class="page-link">Last</a></li>
+        <li class="page-item click" (click)="next()"><a class="pageLink">Next</a></li>
+        <li class="page-item click" (click)="pageChange(lastPage)"><a class="pageLink">Last</a></li>
     </ul>
 </nav>

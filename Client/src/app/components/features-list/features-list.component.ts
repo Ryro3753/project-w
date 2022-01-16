@@ -10,13 +10,12 @@ export class FeaturesListComponent implements OnInit {
 
   constructor() { }
 
-  //@Input() features !: Feature[];
   featureItems!: Feature[];
   @Input() width: number = 10;
   @Input() height: number = 150;
 
   cssClassesWithoutRequirement: string = 'list-group-item listItem';
-  cssClassesWithRequirement: string = 'list-group-item click listItem listItemWithRequirements';
+  cssClassesWithRequirement: string =  this.cssClassesWithoutRequirement + ' listItemWithRequirements';
 
   showRequirementsToggle : boolean[] = [];
 

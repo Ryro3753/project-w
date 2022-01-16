@@ -1,6 +1,6 @@
 <div class="container mtr5">
-    <app-pagination></app-pagination>
-    <div *ngFor="let item of racesShown">
+    <app-pagination [pageSize]="5" [data]="filteredRaces" (pageClicked)="pageChange($event)"></app-pagination>
+    <div *ngFor="let item of shownRaces">
         <app-race-accordion [race]="item"></app-race-accordion>
     </div>
 </div>
