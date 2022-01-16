@@ -52,6 +52,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   addImage(e: any){
     if(!this.currentUser)
       return;
-    this.uploadService.uploadProfileImage(e.target.files[0],this.currentUser.Id);
+    this.uploadService.uploadProfileImage(e.target.files[0],this.currentUser.Id).toPromise().then(i => {
+      if(this.currentUser)
+        this.currentUser.HasImage = true;
+    });
   }
 }

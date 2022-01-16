@@ -13,10 +13,13 @@ export class UploadService{
         const formData = new FormData();
         formData.append('file',File);
         const url = environment.apiURL+"/User/UserUploadImage?Id=" + Id;
-        return new Promise<any>((resolve, reject) => {
-           this.httpClient.post(url, formData, {responseType: 'text', observe: 'events'})
-           .subscribe(event => {
-        }, err => {reject(err)});
-        });
+        return this.httpClient.post(url, formData, {responseType: 'text', observe: 'events'})
+    }
+
+    uploadRaceImage(File: File,Id: number){
+        const formData = new FormData();
+        formData.append('file',File);
+        const url = environment.apiURL+"/Race/RaceUploadImage?raceId=" + Id;
+        return this.httpClient.post(url, formData, {responseType: 'text', observe: 'events'})
     }
 }

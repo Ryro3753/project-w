@@ -5,6 +5,7 @@ import { AlertService } from 'src/app/components/alert/alert.service';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/features.popup.event';
 import { Race, RaceDetail, RaceUpdateRequest } from 'src/app/models/races.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
+import { UploadService } from 'src/app/services/common/upload.service';
 import { RaceService } from 'src/app/services/races.service';
 import { environment } from 'src/environments/environment';
 
@@ -33,11 +34,12 @@ export class RaceAccordionComponent implements OnInit,OnDestroy {
   
   constructor(readonly raceService: RaceService,
               readonly bus: MessageBusService,
-              readonly alertService: AlertService) { 
+              readonly alertService: AlertService,
+              readonly uploadService: UploadService) { 
                this.subscribes.push(this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this)));
               }
 
-  @Input() race!: Race;
+  race!: Race;
 
   detailsToggle: boolean = false;
 
@@ -48,6 +50,8 @@ export class RaceAccordionComponent implements OnInit,OnDestroy {
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
   raceImageBasePath = this.apiURL + '/images/raceImages/';
 
+  imagePath !: string;
+
   ngOnInit(): void {
   }
 
@@ -57,7 +61,13 @@ export class RaceAccordionComponent implements OnInit,OnDestroy {
     }
   }
 
+  @Input() set raceData(race: Race){
+    this.race = race;
+    this.imagePath = this.getLinkPicture();
+  }
+
   async detailsClick(){
+    console.log(this.race);
     this.detailsToggle = !this.detailsToggle;
     if(!this.raceDetail && this.race){
       this.raceDetail = await this.raceService.getRaceDetail(this.race.Id);
@@ -92,6 +102,25 @@ export class RaceAccordionComponent implements OnInit,OnDestroy {
       this.alertService.alert({alertInfo:{message:'Updated saved successfully',timeout:5000,type:'success'}})
     else
     this.alertService.alert({alertInfo:{message:'Something wrong have happend, please try again.',timeout:5000,type:'warning'}})
+  }
+
+  async addImage(e: any){
+    if(this.race){
+
+      this.uploadService.uploadRaceImage(e.target.files[0],this.race.Id).toPromise().then(i => {
+        this.race.HasImage = true;
+        this.imagePath = this.getLinkPicture();
+        console.log(this.imagePath);
+      });
+
+    }
+  }
+
+  getLinkPicture(){
+    if(this.race.HasImage){
+      return this.raceImageBasePath + this.race.Id + '.png';
+    }
+    return this.noImagePath;
   }
 
 }

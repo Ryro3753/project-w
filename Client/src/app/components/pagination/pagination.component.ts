@@ -29,7 +29,6 @@ export class PaginationComponent implements OnInit {
   }
 
   @Input() set data(data: Race[]){
-    console.log('ttt');
     if(!data  || data == null) 
       return;
     this.pageCount = Math.ceil(data.length / this.pageSize);

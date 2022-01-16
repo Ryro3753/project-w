@@ -1,8 +1,9 @@
 <div class="raceAccordion widthFull" *ngIf="race">
     <div class="row">
         <div class="col-sm-1">
-            <img [src]="race.HasImage ? raceImageBasePath + race.Id + '.png' : noImagePath"
-            class="responsiveIcon" />
+            <input type="file" #imageUpload id="imageUpload" (change)="addImage($event)" style="display: none;" accept="image/png, image/gif, image/jpeg" >
+            <img [src]="imagePath"
+            class="responsiveIcon" (dblclick)="imageUpload.click()"/>
         </div>
         <div class="col-sm-2 raceName">
             <span class="header4" [innerText]="race.Name"></span>

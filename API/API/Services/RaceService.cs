@@ -1,7 +1,9 @@
 ﻿using API.Models.Race;
 using Dapper;
+using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -12,22 +14,32 @@ namespace API.Services
         Task<RaceDetail> GetRaceDetail(int raceId);
         Task<bool> UpdateRace(RaceUpdateRequest request);
         Task<Race> InsertRace(OnlyUserId request);
+        Task<bool> UpdateHasImage(int raceId);
+        string GetImageFolderPath();
     }
 
     public class RaceService : IRaceService
     {
         private readonly IDbConnection _connection;
         private readonly IFeatureService _featureService;
+        private readonly IWebHostEnvironment _env;
 
-        public RaceService(IDbConnection connection, IFeatureService featureService)
+        public RaceService(IDbConnection connection, IFeatureService featureService, IWebHostEnvironment env)
         {
             _connection = connection;
             _featureService = featureService;
+            _env = env;
+        }
+
+        public string GetImageFolderPath()
+        {
+            return Path.Combine(_env.WebRootPath, "images", "RaceImages");
         }
 
         public async Task<IEnumerable<Race>> GetAllRacesByUserId(string userId)
         {
-            return await _connection.QueryAsync<Race>("Select * from public.fn_getracesbyuserid(@userid)", new { userid = userId });
+            var result = await _connection.QueryAsync<Race>("Select * from public.fn_getracesbyuserid(@userid)", new { userid = userId });
+            return result;
         }
 
         public async Task<RaceDetail> GetRaceDetail(int raceId)
@@ -63,6 +75,9 @@ namespace API.Services
             return await _connection.QueryFirstOrDefaultAsync<Race>("SELECT * from public.fn_insertrace(@userid)",new { userid = request.UserId });
         }
 
-
+        public async Task<bool> UpdateHasImage(int raceId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_updateracehasimage(@raceid, @hasimage)", new { raceid = raceId, hasimage = true });
+        }
     }
 }

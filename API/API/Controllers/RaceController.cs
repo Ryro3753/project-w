@@ -2,6 +2,7 @@
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -34,10 +35,25 @@ namespace API.Controllers
         }
 
         [HttpPost("InsertRace")]
-        public async Task<Race> InsertRace([FromBody] OnlyUserId request)
+        public async Task<Race> InsertRace(OnlyUserId request)
         {
             return await _raceService.InsertRace(request);
         }
 
+        [HttpPost("RaceUploadImage")]
+        public async Task<bool> RaceUploadImage(int raceId)
+        {
+            var imageFilePath = raceId.ToString() + ".png";
+            imageFilePath = Path.Combine(_raceService.GetImageFolderPath(), imageFilePath);
+
+            using var stream = System.IO.File.Create(imageFilePath);
+
+            foreach (var item in Request.Form.Files)
+            {
+                await item.CopyToAsync(stream);
+            }
+
+            return await _raceService.UpdateHasImage(raceId);
+        }
     }
 }
