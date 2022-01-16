@@ -1,5 +1,18 @@
 <div class="container mtr5">
-    <app-pagination [pageSize]="5" [data]="filteredRaces" (pageClicked)="pageChange($event)"></app-pagination>
+    <div class="row">
+        <div class="col-sm-5">
+            <app-pagination [pageSize]="5" [data]="filteredRaces" (pageClicked)="pageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-block raceAddButton" title="Add New Race" (click)="addNewRace()" >+</button>
+        </div>
+        <div class="col-sm-2">
+            <input [(ngModel)]="search" placeholder="Search" class="widthFull  form-control" type="text">
+        </div>
+        <div class="col-sm-2">
+        <button class="btn btn-block   customBlockButton" (click)="searchClicked()">Search</button>
+    </div>
+    </div>
     <div *ngFor="let item of shownRaces">
         <app-race-accordion [race]="item"></app-race-accordion>
     </div>

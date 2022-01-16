@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { pageEmit } from 'src/app/models/common/common.model';
+import { Race } from 'src/app/models/races.model';
 
 @Component({
   selector: 'app-pagination',
@@ -27,8 +28,9 @@ export class PaginationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() set data(data: any[]){
-    if(!data || data.length == 0 || data == null)
+  @Input() set data(data: Race[]){
+    console.log('ttt');
+    if(!data  || data == null) 
       return;
     this.pageCount = Math.ceil(data.length / this.pageSize);
     this.currentPage = 1;
@@ -57,6 +59,7 @@ export class PaginationComponent implements OnInit {
       lastIndex: (this.currentPage * this.pageSize) - 1,
     } as pageEmit;
     this.pageClicked.emit(pages);
+    this.cdr.detectChanges();
   }
 
   next(){

@@ -23,8 +23,8 @@ export class RacePageComponent implements OnInit, OnDestroy {
   filteredRaces!: Race[];
   shownRaces!: Race[];
   currentUser: User | undefined;
-
   currentPageIndexes!: pageEmit;
+  search: string = '';
 
   ngOnInit(): void {
     const sub = this.store.select('state').subscribe(async i => {
@@ -50,22 +50,22 @@ export class RacePageComponent implements OnInit, OnDestroy {
   async refreshData(userId: string){
     this.allRaces = await this.raceService.getAllRacesByUserId(userId);
     this.filteredRaces = JSON.parse(JSON.stringify(this.allRaces));
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.filteredRaces.push(...this.allRaces);
-    this.shownRaces = this.filteredRaces;
+    this.shownRaces = JSON.parse(JSON.stringify(this.filteredRaces));
+  }
+
+  searchClicked(){
+    if(this.allRaces){
+      this.filteredRaces = this.allRaces.filter(i => i.Name.includes(this.search));
+    }
+  }
+
+  async addNewRace(){
+    if(this.currentUser && this.allRaces){
+      const newRace = await this.raceService.insertRace({UserId: this.currentUser.Id});
+      this.allRaces.unshift(newRace);
+      this.filteredRaces.unshift(newRace);
+      this.filteredRaces = JSON.parse(JSON.stringify(this.filteredRaces));
+    }
   }
 
 }

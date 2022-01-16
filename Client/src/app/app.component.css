@@ -44,8 +44,8 @@ margin: 0;
 }
 
 ::ng-deep .header4{
-    font-size: xx-large;
-    font-weight: bold;
+font-size: xx-large;
+font-weight: bold;
 }
 
 ::ng-deep .customBlockButton{

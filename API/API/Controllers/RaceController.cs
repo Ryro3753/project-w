@@ -33,5 +33,11 @@ namespace API.Controllers
             return await _raceService.UpdateRace(request);
         }
 
+        [HttpPost("InsertRace")]
+        public async Task<Race> InsertRace([FromBody] OnlyUserId request)
+        {
+            return await _raceService.InsertRace(request);
+        }
+
     }
 }

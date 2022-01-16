@@ -11,6 +11,7 @@ namespace API.Services
         Task<IEnumerable<Race>> GetAllRacesByUserId(string userId);
         Task<RaceDetail> GetRaceDetail(int raceId);
         Task<bool> UpdateRace(RaceUpdateRequest request);
+        Task<Race> InsertRace(OnlyUserId request);
     }
 
     public class RaceService : IRaceService
@@ -56,6 +57,12 @@ namespace API.Services
                 features = _featureService.UnreadFeatures(request.Features)
             } );
         }
+
+        public async Task<Race> InsertRace(OnlyUserId request)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<Race>("SELECT * from public.fn_insertrace(@userid)",new { userid = request.UserId });
+        }
+
 
     }
 }

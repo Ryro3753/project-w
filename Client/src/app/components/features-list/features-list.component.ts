@@ -15,7 +15,7 @@ export class FeaturesListComponent implements OnInit {
   @Input() height: number = 150;
 
   cssClassesWithoutRequirement: string = 'list-group-item listItem';
-  cssClassesWithRequirement: string =  this.cssClassesWithoutRequirement + ' listItemWithRequirements';
+  cssClassesWithRequirement: string =  this.cssClassesWithoutRequirement + ' listItemWithRequirements click';
 
   showRequirementsToggle : boolean[] = [];
 
@@ -23,6 +23,7 @@ export class FeaturesListComponent implements OnInit {
   }
 
   showRequirements(feature: Feature, index: number) {
+    console.log(feature);
     if (feature.Requirements == null || !feature.Requirements || feature.Requirements.length == 0)
       return;
     this.showRequirementsToggle[index] = !this.showRequirementsToggle[index];
