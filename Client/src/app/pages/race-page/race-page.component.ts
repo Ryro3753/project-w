@@ -18,14 +18,17 @@ export class RacePageComponent implements OnInit, OnDestroy {
   constructor(readonly store: Store<{ state: State }>,
     readonly raceService: RaceService) { }
 
-  races: Race[] | undefined;
+  allRaces: Race[] | undefined;
+  racesShown!: Race[];
   currentUser: User | undefined;
 
   ngOnInit(): void {
     const sub = this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
-      if (i.user)
-        this.races = await this.raceService.getAllRacesByUserId(i.user?.Id)
+      if (i.user){
+        this.allRaces = await this.raceService.getAllRacesByUserId(i.user.Id);
+        this.racesShown = this.allRaces;
+      }
     });
     this.subscribes.push(sub);
   }

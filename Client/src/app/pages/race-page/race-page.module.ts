@@ -3,9 +3,8 @@ import { RouterModule } from '@angular/router';
 import { RacePageComponent } from './race-page.component';
 import { RaceAccordionComponent } from './components/race-accordion/race-accordion.component';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'src/app/shared.module';
 import { FormsModule } from '@angular/forms';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [

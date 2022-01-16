@@ -1,0 +1,9 @@
+<nav>
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link">First</a></li>
+        <div *ngFor="let item of currentShownPages">
+            <li class="page-item"><a class="page-link" [innerText]="item"></a></li>
+        </div>
+        <li class="page-item"><a class="page-link">Last</a></li>
+    </ul>
+</nav>

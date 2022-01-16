@@ -35,9 +35,4 @@ export class AppComponent{
       localStorage.removeItem('currentUser');
     }
   }
-
-  asd(){
-    this.bus.publish(new FeaturesPopupEvent("main",this.www));
-  }
-
 }
