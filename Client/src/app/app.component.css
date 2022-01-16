@@ -48,6 +48,19 @@ margin: 0;
     font-weight: bold;
 }
 
+::ng-deep .customBlockButton{
+    width: 100%;
+    padding: 0;
+    background-color: #7b2cbf;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+}
+
+::ng-deep .widthFull{
+    width: 100%;
+}
+
 ::ng-deep .mlr1{
 margin-left: 1rem;
 }

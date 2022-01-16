@@ -40,9 +40,9 @@ namespace API.Services
                 newFeature.Value = itemSplitted[2];
 
                 //split requirements
+                newFeature.Requirements = new List<Requirement>();
                 if (!string.IsNullOrEmpty(itemSplitted[3]))
                 {
-                    newFeature.Requirements = new List<Requirement>();
                     var requirementsSplitted = itemSplitted[3].Split(':');
                     for (int q = 0; q < requirementsSplitted.Length; q++)
                     {

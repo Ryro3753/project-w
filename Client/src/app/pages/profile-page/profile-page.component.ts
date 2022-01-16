@@ -43,6 +43,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       this.subscribes.pop()?.unsubscribe();
     }
   }
+  
   logout(){
     this.authService.logout();
     this.router.navigateByUrl('');

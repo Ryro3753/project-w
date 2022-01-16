@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/features.popup.event';
 import { Race, RaceDetail, RaceUpdateRequest } from 'src/app/models/races.model';
@@ -26,12 +27,14 @@ import { environment } from 'src/environments/environment';
     ),
   ]
 })
-export class RaceAccordionComponent implements OnInit {
+export class RaceAccordionComponent implements OnInit,OnDestroy {
 
+  subscribes: SubscriptionLike[] = [];
+  
   constructor(readonly raceService: RaceService,
               readonly bus: MessageBusService,
               readonly alertService: AlertService) { 
-                this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this));
+               this.subscribes.push(this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this)));
               }
 
   @Input() race!: Race;
@@ -46,6 +49,12 @@ export class RaceAccordionComponent implements OnInit {
   raceImageBasePath = this.apiURL + '/images/raceImages/';
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    while(this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
   async detailsClick(){

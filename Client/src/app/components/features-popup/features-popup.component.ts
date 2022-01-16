@@ -25,8 +25,6 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   value: string[] = [];
   requirements: Requirement[][] = [[], []];
 
-  tq: { [id: string]: string[] } = { 'Character': ['zzz', 'ttt'] };;
-
   sectionOptions!: string[];
 
   typeOptions!: any;
@@ -54,7 +52,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   featuresPopupEvent(featuresEvent: FeaturesPopupEvent) {
     this.features = JSON.parse(JSON.stringify(featuresEvent.features));
     this.from = featuresEvent.from;
-    if(this.features  != null)
+    if (this.features != null)
       this.featuresToModels();
     else
       this.features = [];
@@ -66,7 +64,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       this.section[i] = e.Section;
       this.type[i] = e.Type;
       this.value[i] = e.Value;
-      if (e.Requirements != null)
+      if (e.Requirements != null && e.Requirements)
         this.requirements[i] = e.Requirements;
       else
         this.requirements[i] = [];
@@ -74,7 +72,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   }
 
 
-  modelsToFeatures() : boolean {
+  modelsToFeatures(): boolean {
     if (!this.controlModels()) {
       return false;
     }
@@ -83,7 +81,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
         Section: this.section[i],
         Type: this.type[i],
         Value: this.value[i],
-        Requirements: this.requirements[i]
+        Requirements: this.requirements[i] ? this.requirements[i] : []
       }
     }
     return true;
@@ -95,10 +93,12 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
         this.alertService.alert({ alertInfo: { message: 'There are invalid Features. Please check feature number:' + (i + 1), type: 'warning', timeout: 3000 } })
         return false;
       }
-      for (let q = 0; q < this.requirements[i].length; q++) {
-        if (!this.requirements[i][q].Section || !this.requirements[i][q].Type || !this.requirements[i][q].Value) {
-          this.alertService.alert({ alertInfo: { message: 'There are invalid Features. Please check feature number:' + (i + 1), type: 'warning', timeout: 3000 } })
-          return false;
+      if (this.requirements[i] != null || this.requirements[i]) {
+        for (let q = 0; q < this.requirements[i].length; q++) {
+          if (!this.requirements[i][q].Section || !this.requirements[i][q].Type || !this.requirements[i][q].Value) {
+            this.alertService.alert({ alertInfo: { message: 'There are invalid Features. Please check feature number:' + (i + 1), type: 'warning', timeout: 3000 } })
+            return false;
+          }
         }
       }
     }
@@ -111,11 +111,11 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    if(this.modelsToFeatures()){
+    if (this.modelsToFeatures()) {
       this.bus.publish(new FeaturesClosePopupEvent(this.from, this.features));
       this.onClose();
     }
-    
+
   }
 
   changeCollapse(i: number) {
@@ -139,8 +139,13 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       Section: '',
       Type: '',
       Value: '',
-      Requirements: null
-    })
+      Requirements: []
+    });
+    const index = this.features.length - 1;
+    this.section[index] = '';
+    this.type[index] = '';
+    this.value[index] = '';
+    this.requirements[index] = [];
     this.currentCollapse = this.features.length;
   }
   addRequirement(index: number) {

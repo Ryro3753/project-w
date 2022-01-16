@@ -3,3 +3,14 @@
     font-weight: bold;
     text-align: center;
 }
+
+.listItemWithRequirements{
+    background-color: wheat;
+}
+
+
+.requirementListItem{
+    background-color: cornsilk;
+    font-weight: bold;
+    text-align: center;
+}

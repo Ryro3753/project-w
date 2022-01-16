@@ -1,6 +1,5 @@
 .raceAccordion{
     display: inline-block;
-    width: 100%;
     border-style: solid;
     border-color: #10002b;
     padding: 0.5rem;
@@ -29,13 +28,4 @@
     border-width: 1%;
     overflow-y: hidden;
     overflow-x: hidden;
-}
-
-.featureButton{
-    width: 100%;
-    padding: 0;
-    background-color: #7b2cbf;
-    font-size: larger;
-    font-weight: bold;
-    color: white;
 }

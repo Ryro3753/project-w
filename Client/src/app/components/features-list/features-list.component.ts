@@ -4,24 +4,35 @@ import { Feature } from 'src/app/models/feature.model';
 @Component({
   selector: 'app-features-list',
   templateUrl: './features-list.component.html',
-  styleUrls: ['./features-list.component.css']
+  styleUrls: ['./features-list.component.css'],
 })
 export class FeaturesListComponent implements OnInit {
 
   constructor() { }
 
-  @Input() features !: Feature[];
-  @Input() width : number = 10;
-  @Input() height : number = 150;
+  //@Input() features !: Feature[];
+  featureItems!: Feature[];
+  @Input() width: number = 10;
+  @Input() height: number = 150;
 
   cssClassesWithoutRequirement: string = 'list-group-item listItem';
-  cssClassesWithRequirement: string = 'list-group-item click listItem';
+  cssClassesWithRequirement: string = 'list-group-item click listItem listItemWithRequirements';
+
+  showRequirementsToggle : boolean[] = [];
 
   ngOnInit(): void {
   }
 
-  asd(){
-    console.log(this.features);
+  showRequirements(feature: Feature, index: number) {
+    if (feature.Requirements == null || !feature.Requirements || feature.Requirements.length == 0)
+      return;
+    this.showRequirementsToggle[index] = !this.showRequirementsToggle[index];
   }
+
+  @Input() set features(items: Feature[]){
+    this.featureItems = items;
+    this.showRequirementsToggle.fill(false,0,this.showRequirementsToggle.length);
+  }
+
 
 }

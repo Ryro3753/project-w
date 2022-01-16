@@ -1,7 +1,16 @@
-<div class="card" [style]="'height: ' + height + 'px;overflow-y: scroll;'">
-<ul class="list-group feature-list">
-    <div *ngFor="let item of features">
-        <li [class]="item.Requirements !== null && item.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement" (click)="asd()" [innerText]="item.Section + ' - ' + item.Type + ' - ' + item.Value">/p></li>
+<div class="card" [style]="'height: ' + height + 'px;overflow-y: scroll'">
+  <ul class="list-group feature-list">
+    <div *ngFor="let item of featureItems; let i = index;">
+      <li
+        [class]="item.Requirements !== null && item.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement"
+        (click)="showRequirements(item,i)" [innerText]="item.Section + ' - ' + item.Type + ' - ' + item.Value"
+        [title]="item.Requirements !== null && item.Requirements.length > 0 ? 'Click here to show requirements for this feature' : '' ">
+      </li>
+      <ul *ngIf="showRequirementsToggle[i]" class="list-group" [@requirementsToggle]>
+        <div *ngFor="let item of item.Requirements">
+          <li class="list-group-item requirementListItem" [innerText]="'Requirement: ' + item.Section + ' - ' + item.Type + ' - ' + item.Value"></li>
+        </div>
+      </ul>
     </div>
   </ul>
 
