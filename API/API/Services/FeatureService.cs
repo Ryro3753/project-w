@@ -66,6 +66,8 @@ namespace API.Services
 
         public string UnreadFeatures(List<Feature> features)
         {
+            if (features == null)
+                return String.Empty;
             var listString = new List<string>();
             for (int i = 0; i < features.Count; i++)
             {

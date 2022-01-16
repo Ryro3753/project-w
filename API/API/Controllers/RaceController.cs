@@ -27,7 +27,11 @@ namespace API.Controllers
             return await _raceService.GetRaceDetail(raceId);
         }
 
-
+        [HttpPost("UpdateRace")]
+        public async Task<bool> UpdateRace(RaceUpdateRequest request)
+        {
+            return await _raceService.UpdateRace(request);
+        }
 
     }
 }

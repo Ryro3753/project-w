@@ -1,21 +1,8 @@
 <div class="card" [style]="'height: ' + height + 'px;overflow-y: scroll;'">
 <ul class="list-group feature-list">
     <div *ngFor="let item of features">
-        <li class="list-group-item"><p>asdasd</p></li>
+        <li [class]="item.Requirements !== null && item.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement" (click)="asd()" [innerText]="item.Section + ' - ' + item.Type + ' - ' + item.Value">/p></li>
     </div>
-    <li class="list-group-item t"><p>asdsadsa</p></li>
-    <p>zzzzzz</p>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
-    <li class="list-group-item"><p>asdsadsa</p></li>
   </ul>
 
 </div>

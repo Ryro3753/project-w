@@ -52,7 +52,6 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   }
 
   featuresPopupEvent(featuresEvent: FeaturesPopupEvent) {
-    console.log('ttt');
     this.features = JSON.parse(JSON.stringify(featuresEvent.features));
     this.from = featuresEvent.from;
     if(this.features  != null)

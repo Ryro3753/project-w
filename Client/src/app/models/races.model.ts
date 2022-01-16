@@ -14,3 +14,12 @@ export interface RaceDetail{
     Size: string;
     Features: Feature[];
 }
+
+export interface RaceUpdateRequest{
+    RaceId: number;
+    Name: string;
+    Speed: number;
+    Size: string;
+    Description: string;
+    Features: Feature[];
+}

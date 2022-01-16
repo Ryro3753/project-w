@@ -61,7 +61,7 @@ export class AuthenticationService extends BaseDataService {
             this.cookieService.set('rememberMe','true');
         }
         if(returnURL && returnURL !== null){
-            setTimeout(() => this.router.navigateByUrl('/Profile'),0);
+            setTimeout(() => this.router.navigateByUrl(returnURL),0);
             
         }
         else{

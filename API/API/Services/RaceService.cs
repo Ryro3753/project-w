@@ -10,6 +10,7 @@ namespace API.Services
     {
         Task<IEnumerable<Race>> GetAllRacesByUserId(string userId);
         Task<RaceDetail> GetRaceDetail(int raceId);
+        Task<bool> UpdateRace(RaceUpdateRequest request);
     }
 
     public class RaceService : IRaceService
@@ -43,5 +44,18 @@ namespace API.Services
             };
             return result;
         }
+
+        public async Task<bool> UpdateRace(RaceUpdateRequest request)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_updaterace(@id,@name,@speed,@size,@description,@features)", new { 
+                id = request.RaceId,
+                name = request.Name,
+                speed = request.Speed,
+                size = request.Size,
+                description = request.Description,
+                features = _featureService.UnreadFeatures(request.Features)
+            } );
+        }
+
     }
 }

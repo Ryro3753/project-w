@@ -32,7 +32,7 @@ namespace API.Services
 
         public async Task<bool> UpdateHasImage(string Id)
         {
-            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_getuser(@userid, @hasimage)", new { userid = Id, hasimage = true });
+            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_updateuserhasimage(@userid, @hasimage)", new { userid = Id, hasimage = true });
         }
 
         public async Task<User> GetUser(string Id)

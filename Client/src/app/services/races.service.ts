@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { Race, RaceDetail } from "../models/races.model"
+import { Race, RaceDetail, RaceUpdateRequest } from "../models/races.model"
 import { BaseDataService } from "./common/base-data.service"
 
 
@@ -19,6 +19,10 @@ export class RaceService extends BaseDataService {
 
   getRaceDetail(raceId: number): Promise<RaceDetail> {
     return this.get<RaceDetail>("GetRaceDetail", { raceId });
+  }
+
+  updateRace(request: RaceUpdateRequest): Promise<boolean> {
+    return this.post<boolean>("UpdateRace", request);
   }
 
 }

@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { FeaturesPopupEvent } from 'src/app/events/features.popup.event';
-import { Race, RaceDetail } from 'src/app/models/races.model';
+import { AlertService } from 'src/app/components/alert/alert.service';
+import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/features.popup.event';
+import { Race, RaceDetail, RaceUpdateRequest } from 'src/app/models/races.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { RaceService } from 'src/app/services/races.service';
 import { environment } from 'src/environments/environment';
@@ -28,7 +29,10 @@ import { environment } from 'src/environments/environment';
 export class RaceAccordionComponent implements OnInit {
 
   constructor(readonly raceService: RaceService,
-              readonly bus: MessageBusService) { }
+              readonly bus: MessageBusService,
+              readonly alertService: AlertService) { 
+                this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this));
+              }
 
   @Input() race!: Race;
 
@@ -48,13 +52,37 @@ export class RaceAccordionComponent implements OnInit {
     this.detailsToggle = !this.detailsToggle;
     if(!this.raceDetail && this.race){
       this.raceDetail = await this.raceService.getRaceDetail(this.race.Id);
-      console.log(this.raceDetail);
     }
   }
 
   featuresClick(){
     if(this.raceDetail)
-      this.bus.publish(new FeaturesPopupEvent(this.raceDetail.RaceId.toString(),this.raceDetail.Features));
+      this.bus.publish(new FeaturesPopupEvent('raceId:'+this.raceDetail.RaceId.toString(),this.raceDetail.Features));
+  }
+
+  featuresPopupSaved(featuresClosePopupEvent: FeaturesClosePopupEvent){
+    if(this.raceDetail && featuresClosePopupEvent.to == 'raceId:' + this.raceDetail.RaceId.toString()){
+      this.raceDetail.Features = JSON.parse(JSON.stringify(featuresClosePopupEvent.features));
+    }
+  }
+
+  async save(){
+    if(!this.raceDetail)
+      return;
+    const request = {
+      RaceId: this.raceDetail.RaceId,
+      Name: this.race.Name,
+      Description: this.raceDetail.Description,
+      Size: this.raceDetail.Size,
+      Speed: this.raceDetail.Speed,
+      Features: this.raceDetail.Features
+    } as RaceUpdateRequest;
+
+    const result = await this.raceService.updateRace(request);
+    if(result)
+      this.alertService.alert({alertInfo:{message:'Updated saved successfully',timeout:5000,type:'success'}})
+    else
+    this.alertService.alert({alertInfo:{message:'Something wrong have happend, please try again.',timeout:5000,type:'warning'}})
   }
 
 }

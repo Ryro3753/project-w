@@ -20,7 +20,7 @@
     <div class="row p-2 justify-content-center">
         <div class="col-sm-5">
             <div >
-                <label>Username</label>
+                <label>Race Name</label>
                 <input class="" style="width: 100%;" placeholder="Name"  required
                     [(ngModel)]="race.Name">
             </div>
@@ -44,4 +44,5 @@
             <textarea class="form-control mbr2" [(ngModel)]="raceDetail.Description" rows="10"></textarea>
         </div>
     </div>
+    <button class="btn btn-success mtr1" (click)="save()">Save</button>
 </div>

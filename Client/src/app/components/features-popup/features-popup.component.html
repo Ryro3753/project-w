@@ -1,7 +1,7 @@
 <ngx-smart-modal #featureModal identifier="featureModal" (onAnyCloseEvent)="onClose()" [customClass]="'modalCustom'">
     <div class="featureModal">
         <div class="row justify-content-start ">
-            <button class="btn btn-light" style="width:20%" (click)="newFeature()">+ Feature</button>
+            <button class="btn btn-block btn-success"  (click)="newFeature()">+ Feature</button>
         </div>
         <div *ngFor="let item of features; let i = index">
             <div class="row">
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="row justify-content-start mtr1">
-            <button class="btn btn-success" style="width:20%" (click)="save()">Save</button>
+            <button class="btn btn-success" (click)="save()">Save</button>
         </div>
     </div>
 </ngx-smart-modal>

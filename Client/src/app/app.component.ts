@@ -20,7 +20,6 @@ export class AppComponent{
               readonly authService: AuthenticationService,
               readonly router: Router,
               readonly bus:MessageBusService){
-                this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupEvent.bind(this));
               }
 
   ngOnInit(){
@@ -41,8 +40,4 @@ export class AppComponent{
     this.bus.publish(new FeaturesPopupEvent("main",this.www));
   }
 
-  featuresPopupEvent(asd:FeaturesClosePopupEvent){
-    console.log(this.www);
-
-  }
 }
