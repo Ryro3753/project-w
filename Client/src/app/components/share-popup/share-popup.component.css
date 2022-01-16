@@ -1,0 +1,4 @@
+::ng-deep .shareModalCustom{
+    max-width: none !important;
+    width: 25% !important;
+    }

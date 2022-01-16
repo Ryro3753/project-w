@@ -14,6 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { FeaturesPopupComponent } from './components/features-popup/features-popup.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { SharePopupComponent } from './components/share-popup/share-popup.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     HeaderComponent,
     AlertComponent,
     FeaturesPopupComponent,
+    SharePopupComponent,
   ],
   imports: [
     BrowserModule,

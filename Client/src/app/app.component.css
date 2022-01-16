@@ -48,6 +48,10 @@ font-size: xx-large;
 font-weight: bold;
 }
 
+::ng-deep .bold{
+    font-weight: bold;
+}
+
 ::ng-deep .customBlockButton{
     width: 100%;
     padding: 0;
