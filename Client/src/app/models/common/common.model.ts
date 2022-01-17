@@ -6,3 +6,8 @@ export interface pageEmit{
 export interface OnlyUserId{
     UserId: string;
 }
+
+export interface ShareRequest{
+    ObjectId: number;
+    Username: string;
+}

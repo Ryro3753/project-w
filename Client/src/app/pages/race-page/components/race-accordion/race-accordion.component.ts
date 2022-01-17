@@ -3,7 +3,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/features.popup.event';
-import { SharePopupEvent } from 'src/app/events/share.popup.event';
+import { SharePopupCloseEvent, SharePopupEvent, SharePopupUsernameEvent } from 'src/app/events/share.popup.event';
+import { ShareRequest } from 'src/app/models/common/common.model';
 import { Race, RaceDetail, RaceUpdateRequest } from 'src/app/models/races.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { UploadService } from 'src/app/services/common/upload.service';
@@ -38,6 +39,7 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
     readonly alertService: AlertService,
     readonly uploadService: UploadService) {
     this.subscribes.push(this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this)));
+    this.subscribes.push(this.bus.of(SharePopupUsernameEvent).subscribe(this.sharePopupResponse.bind(this)));
   }
 
   @Input() race!: Race;
@@ -64,7 +66,6 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
 
 
   async detailsClick() {
-    console.log(this.race);
     this.detailsToggle = !this.detailsToggle;
     if (!this.raceDetail && this.race) {
       this.raceDetail = await this.raceService.getRaceDetail(this.race.Id);
@@ -76,9 +77,9 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
       this.bus.publish(new FeaturesPopupEvent('raceId:' + this.raceDetail.RaceId.toString(), this.raceDetail.Features));
   }
 
-  featuresPopupSaved(featuresClosePopupEvent: FeaturesClosePopupEvent) {
-    if (this.raceDetail && featuresClosePopupEvent.to == 'raceId:' + this.raceDetail.RaceId.toString()) {
-      this.raceDetail.Features = JSON.parse(JSON.stringify(featuresClosePopupEvent.features));
+  featuresPopupSaved(event: FeaturesClosePopupEvent) {
+    if (this.raceDetail && event.to == 'raceId:' + this.raceDetail.RaceId.toString()) {
+      this.raceDetail.Features = JSON.parse(JSON.stringify(event.features));
     }
   }
 
@@ -112,6 +113,25 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
   share() {
     if (this.raceDetail)
       this.bus.publish(new SharePopupEvent('raceId:' + this.raceDetail.RaceId.toString()));
+  }
+
+  async sharePopupResponse(event: SharePopupUsernameEvent){
+    if(!this.raceDetail || event.to !== 'raceId:' + this.raceDetail.RaceId.toString())
+      return;
+    const request = {
+      ObjectId: this.raceDetail.RaceId,
+      Username: event.username
+    } as ShareRequest;
+    const result = await this.raceService.shareRace(request);
+    if(result == true){
+      this.bus.publish(new SharePopupCloseEvent());
+      this.alertService.alert({alertInfo:{message:'This race successfully shared with ' + event.username, type:'success', timeout:5000}});
+    }
+    else {
+      const error = result as any;
+      this.alertService.alert({alertInfo:{message:error.error, type:'warning',timeout:5000}})
+    }
+
   }
 
 

@@ -1,6 +1,7 @@
 ﻿using API.Models.Race;
 using Dapper;
 using Microsoft.AspNetCore.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -16,6 +17,7 @@ namespace API.Services
         Task<Race> InsertRace(OnlyUserId request);
         Task<bool> UpdateHasImage(int raceId);
         string GetImageFolderPath();
+        Task<bool> ShareRace(ShareRequest request);
     }
 
     public class RaceService : IRaceService
@@ -79,5 +81,23 @@ namespace API.Services
         {
             return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_updateracehasimage(@raceid, @hasimage)", new { raceid = raceId, hasimage = true });
         }
+
+        public async Task<bool> ShareRace(ShareRequest request)
+        {
+            var isValidUsername = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_checkvalidusername(@username)", new { username = request.Username });
+            if (!isValidUsername)
+                throw new Exception("Invalid Username");
+
+            var userId = await _connection.QueryFirstOrDefaultAsync<string>("Select * from public.fn_getuseridbyusername(@username)", new { username = request.Username });
+            if(userId == null)
+                throw new Exception("Invalid Username");
+
+            var shareRace = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_sharerace(@raceid, @userid)", new { raceid = request.ObjectId, userid = userId });
+            if (!shareRace)
+                throw new Exception(String.Format("This race already shared with {0}", request.Username));
+
+            return shareRace;
+        }
+
     }
 }

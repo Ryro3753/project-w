@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { SubscriptionLike } from 'rxjs';
-import { SharePopupCloseEvent, SharePopupEvent } from 'src/app/events/share.popup.event';
+import { SharePopupCloseEvent, SharePopupEvent, SharePopupUsernameEvent } from 'src/app/events/share.popup.event';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { MessageBusService } from 'src/app/services/common/messagebus.service';
   templateUrl: './share-popup.component.html',
   styleUrls: ['./share-popup.component.css']
 })
-export class SharePopupComponent implements OnInit,OnDestroy {
+export class SharePopupComponent implements OnInit, OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -17,7 +17,7 @@ export class SharePopupComponent implements OnInit,OnDestroy {
     readonly ngxSmartModalService: NgxSmartModalService,) {
     this.subscribes.push(this.bus.of(SharePopupEvent).subscribe(this.sharePopupEvent.bind(this)));
     this.subscribes.push(this.bus.of(SharePopupCloseEvent).subscribe(this.sharePopupCloseEvent.bind(this)));
-     }
+  }
 
   from !: string;
   username !: string;
@@ -31,13 +31,18 @@ export class SharePopupComponent implements OnInit,OnDestroy {
     }
   }
 
-  sharePopupEvent(event: SharePopupEvent){
+  sharePopupEvent(event: SharePopupEvent) {
     this.from = event.from;
     this.ngxSmartModalService.getModal('shareModal').open();
   }
 
-  sharePopupCloseEvent(event: SharePopupCloseEvent){
+  share(){
+    this.bus.publish(new SharePopupUsernameEvent(this.from,this.username));
+  }
+
+  sharePopupCloseEvent(event: SharePopupCloseEvent) {
     this.ngxSmartModalService.getModal('shareModal').close();
+    this.username = '';
   }
 
 }

@@ -55,5 +55,11 @@ namespace API.Controllers
 
             return await _raceService.UpdateHasImage(raceId);
         }
+
+        [HttpPost("ShareRace")]
+        public async Task<bool> ShareRace(ShareRequest request)
+        {
+            return await _raceService.ShareRace(request);
+        }
     }
 }
