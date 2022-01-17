@@ -14,8 +14,6 @@ export class ConfirmationComponent
     super();
   }
   confirm() {
-    // on click on confirm button we set dialog result as true,
-    // ten we can get dialog result from caller code
     this.result = true;
     this.close();
   }
@@ -25,8 +23,6 @@ export class ConfirmationComponent
   }
 
 }
-
-
 export interface ConfirmModel {
   title: string;
   message: string;

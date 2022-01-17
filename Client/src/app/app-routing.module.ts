@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/race-page/race-page.module').then(m => m.RacePageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'Traits',
+    loadChildren: () => import('./pages/trait-page/trait-page.module').then(m => m.TraitPageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({
