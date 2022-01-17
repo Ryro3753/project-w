@@ -28,7 +28,7 @@ export class PaginationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() set data(data: Race[]){
+  @Input() set data(data: any[]){
     if(!data  || data == null) 
       return;
     this.pageCount = Math.ceil(data.length / this.pageSize);

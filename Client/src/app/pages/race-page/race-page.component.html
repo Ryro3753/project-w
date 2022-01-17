@@ -4,7 +4,7 @@
             <app-pagination [pageSize]="5" [data]="filteredRaces" (pageClicked)="pageChange($event)"></app-pagination>
         </div>
         <div class="col-sm-3">
-            <button class="btn btn-block raceAddButton" title="Add New Race" (click)="addNewRace()" >+</button>
+            <button class="btn btn-block customAddButton" title="Add New Race" (click)="addNewRace()" >+</button>
         </div>
         <div class="col-sm-2">
             <input [(ngModel)]="search" placeholder="Search" class="widthFull  form-control" type="text">

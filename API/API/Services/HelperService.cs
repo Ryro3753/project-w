@@ -12,11 +12,11 @@ namespace API.Services
         Task<string> CheckUsernameReturnUserId(string username);
     }
 
-    public class HelpterService : IHelperService
+    public class HelperService : IHelperService
     {
         private readonly IDbConnection _connection;
 
-        public HelpterService(IDbConnection connection)
+        public HelperService(IDbConnection connection)
         {
             _connection = connection;
         }

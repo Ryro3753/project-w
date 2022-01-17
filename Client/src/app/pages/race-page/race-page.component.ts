@@ -32,7 +32,7 @@ export class RacePageComponent implements OnInit, OnDestroy {
     const sub = this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
       if (i.user) {
-        await this.refreshData(i.user.Id);
+        await this.readData(i.user.Id);
       }
     });
     this.subscribes.push(sub);
@@ -49,7 +49,7 @@ export class RacePageComponent implements OnInit, OnDestroy {
     this.shownRaces = this.filteredRaces.slice(page.firstIndex, page.lastIndex + 1);
   }
 
-  async refreshData(userId: string) {
+  async readData(userId: string) {
     this.allRaces = await this.raceService.getAllRacesByUserId(userId);
     this.filteredRaces = JSON.parse(JSON.stringify(this.allRaces));
     this.shownRaces = JSON.parse(JSON.stringify(this.filteredRaces));
@@ -81,7 +81,6 @@ export class RacePageComponent implements OnInit, OnDestroy {
       this.filteredRaces = JSON.parse(JSON.stringify(this.filteredRaces));
     }
     else {
-      console.log('tttt')
       const error = result as any;
       this.alertService.alert({ alertInfo: { message: error.error, type: 'warning', timeout: 5000 } })
     }

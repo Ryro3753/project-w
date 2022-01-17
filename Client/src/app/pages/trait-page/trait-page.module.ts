@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TraitPageComponent } from './trait-page.component';
+import { TraitCardComponent } from './components/trait-card/trait-card.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
-    TraitPageComponent
+    TraitPageComponent,
+    TraitCardComponent
   ],
   imports: [
     RouterModule.forChild([{
@@ -16,7 +19,8 @@ import { TraitPageComponent } from './trait-page.component';
 
     }]),
     CommonModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
   ],

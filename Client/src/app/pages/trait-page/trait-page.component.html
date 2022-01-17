@@ -1,5 +1,24 @@
-<div class="container trait-page mtr5">
-    <div class="justify-content-between">
-        
+<div class="container trait-page mtr3" *ngIf="currentUser">
+    <div *ngIf="selectedTraitId">
+
     </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-5">
+                <app-pagination [pageSize]="20" [data]="filteredTraits" (pageClicked)="pageChange($event)" ></app-pagination>
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-block customAddButton" title="Add New Trait">+</button>
+            </div>
+            <div class="col-sm-2">
+                <input  placeholder="Search" class="widthFull  form-control" type="text">
+            </div>
+            <div class="col-sm-2">
+            <button class="btn btn-block   customBlockButton" >Search</button>
+        </div>
+        <div class="justify-content-between">
+        
+        </div>
+    </div>
+
 </div>
