@@ -1,4 +1,5 @@
-﻿using API.Models.Race;
+﻿using API.Models.Common;
+using API.Models.Race;
 using Dapper;
 using Microsoft.AspNetCore.Hosting;
 using System;
@@ -26,12 +27,14 @@ namespace API.Services
         private readonly IDbConnection _connection;
         private readonly IFeatureService _featureService;
         private readonly IWebHostEnvironment _env;
+        private readonly IHelperService _helperService;
 
-        public RaceService(IDbConnection connection, IFeatureService featureService, IWebHostEnvironment env)
+        public RaceService(IDbConnection connection, IFeatureService featureService, IWebHostEnvironment env, IHelperService helperService)
         {
             _connection = connection;
             _featureService = featureService;
             _env = env;
+            _helperService = helperService;
         }
 
         public string GetImageFolderPath()
@@ -85,13 +88,7 @@ namespace API.Services
 
         public async Task<bool> ShareRace(ShareRequest request)
         {
-            var isValidUsername = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_checkvalidusername(@username)", new { username = request.Username });
-            if (!isValidUsername)
-                throw new Exception("Invalid Username");
-
-            var userId = await _connection.QueryFirstOrDefaultAsync<string>("Select * from public.fn_getuseridbyusername(@username)", new { username = request.Username });
-            if(userId == null)
-                throw new Exception("Invalid Username");
+            var userId = await _helperService.CheckUsernameReturnUserId(request.Username);
 
             var shareRace = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_sharerace(@raceid, @userid)", new { raceid = request.ObjectId, userid = userId });
             if (!shareRace)

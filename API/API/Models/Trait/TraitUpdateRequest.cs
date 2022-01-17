@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace API.Models.Trait
 {
-    public class TraitWithFeature
+    public class TraitUpdateRequest
     {
-        public int Id { get; set; }
+        public int TraitId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Username { get; set; }
-        public IEnumerable<Feature> Features { get; set; }
+        public List<Feature> Features { get; set; }
     }
 }

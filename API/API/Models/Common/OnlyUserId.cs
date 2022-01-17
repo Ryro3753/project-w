@@ -1,4 +1,4 @@
-﻿namespace API.Models.Race
+﻿namespace API.Models.Common
 {
     public class OnlyUserId
     {

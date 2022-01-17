@@ -1,14 +1,12 @@
-﻿using API.Models.Features;
-using System.Collections.Generic;
-
-namespace API.Models.Trait
+﻿namespace API.Models.Trait
 {
-    public class TraitWithFeature
+    public class TraitQuery
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Username { get; set; }
-        public IEnumerable<Feature> Features { get; set; }
+        public string Features { get; set; }
+
     }
 }
