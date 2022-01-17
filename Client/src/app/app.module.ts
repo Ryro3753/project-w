@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { FeaturesPopupComponent } from './components/features-popup/features-popup.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { SharePopupComponent } from './components/share-popup/share-popup.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { SimpleModalModule } from 'ngx-simple-modal';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { SharePopupComponent } from './components/share-popup/share-popup.compon
     AlertComponent,
     FeaturesPopupComponent,
     SharePopupComponent,
+    ConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { SharePopupComponent } from './components/share-popup/share-popup.compon
     StoreModule.forRoot({ state : storeReducer }),
     NgSelectModule,
     FormsModule,
-    NgxSmartModalModule.forRoot()
+    NgxSmartModalModule.forRoot(),
+    SimpleModalModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

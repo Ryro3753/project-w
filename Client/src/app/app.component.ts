@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ConfirmationService } from './components/confirmation/confirmation.service';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from './events/features.popup.event';
 import { Feature } from './models/feature.model';
 import { AuthenticationService } from './services/common/authentication.service';
@@ -19,7 +20,8 @@ export class AppComponent{
   constructor(readonly cookieService: CookieService,
               readonly authService: AuthenticationService,
               readonly router: Router,
-              readonly bus:MessageBusService){
+              readonly bus:MessageBusService,
+              readonly confirmationService: ConfirmationService){
               }
 
   ngOnInit(){
@@ -35,4 +37,5 @@ export class AppComponent{
       localStorage.removeItem('currentUser');
     }
   }
+
 }

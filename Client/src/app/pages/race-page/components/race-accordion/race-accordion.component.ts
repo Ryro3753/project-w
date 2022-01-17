@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
+import { ConfirmationService } from 'src/app/components/confirmation/confirmation.service';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/features.popup.event';
 import { SharePopupCloseEvent, SharePopupEvent, SharePopupUsernameEvent } from 'src/app/events/share.popup.event';
 import { ShareRequest } from 'src/app/models/common/common.model';
@@ -38,13 +39,14 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
   constructor(readonly raceService: RaceService,
     readonly bus: MessageBusService,
     readonly alertService: AlertService,
-    readonly uploadService: UploadService) {
+    readonly uploadService: UploadService,
+    readonly confirmationService: ConfirmationService) {
     this.subscribes.push(this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this)));
     this.subscribes.push(this.bus.of(SharePopupUsernameEvent).subscribe(this.sharePopupResponse.bind(this)));
   }
 
   @Input() race!: Race;
-  @Output() deleteClicked : EventEmitter<number> = new EventEmitter<number>();
+  @Output() deleteClicked: EventEmitter<number> = new EventEmitter<number>();
 
 
   detailsToggle: boolean = false;
@@ -117,29 +119,32 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
       this.bus.publish(new SharePopupEvent('raceId:' + this.raceDetail.RaceId.toString()));
   }
 
-  async sharePopupResponse(event: SharePopupUsernameEvent){
-    if(!this.raceDetail || event.to !== 'raceId:' + this.raceDetail.RaceId.toString())
+  async sharePopupResponse(event: SharePopupUsernameEvent) {
+    if (!this.raceDetail || event.to !== 'raceId:' + this.raceDetail.RaceId.toString())
       return;
     const request = {
       ObjectId: this.raceDetail.RaceId,
       Username: event.username
     } as ShareRequest;
     const result = await this.raceService.shareRace(request);
-    if(result == true){
+    if (result == true) {
       this.bus.publish(new SharePopupCloseEvent());
-      this.alertService.alert({alertInfo:{message:'This race successfully shared with ' + event.username, type:'success', timeout:5000}});
+      this.alertService.alert({ alertInfo: { message: 'This race successfully shared with ' + event.username, type: 'success', timeout: 5000 } });
     }
     else {
       const error = result as any;
-      this.alertService.alert({alertInfo:{message:error.error, type:'warning',timeout:5000}})
+      this.alertService.alert({ alertInfo: { message: error.error, type: 'warning', timeout: 5000 } })
     }
 
   }
 
-  async deleteRace(){
-    if(!this.raceDetail)
+  async deleteRace() {
+    if (!this.raceDetail)
       return;
-    this.deleteClicked.emit(this.raceDetail.RaceId);
+    await this.confirmationService.confirm('Confirm', 'Do you confirm to delete this Race').toPromise().then(res => {
+      if (res && this.raceDetail)
+        this.deleteClicked.emit(this.raceDetail.RaceId);
+    })
   }
 
 
