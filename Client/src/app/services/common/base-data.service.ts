@@ -16,8 +16,8 @@ export class BaseDataService {
   readonly apiTemplate: string = '/{{controller}}/{{method}}';
   readonly apiTemplateVersion: string = '/v{{version}}/{{controller}}/{{method}}';
 
-  constructor(public readonly httpClient: HttpClient , @Inject('') controller: string
-    ) {
+  constructor(public readonly httpClient: HttpClient, @Inject('') controller: string
+  ) {
     this.controller = controller;
   }
 
@@ -74,16 +74,16 @@ export class BaseDataService {
       observable.subscribe(data => {
         resolve(data as T);
       }, err => {
-        if(!errorReturn || err.error instanceof Array)
+        if (!errorReturn || err.error instanceof Array)
           reject(err);
-        else{
+        else {
           resolve(err as T)
         }
       });
     });
   }
 
-  protected post<T = any>(method: string, data: any,errorReturn: boolean = false, responseType: any = 'json', headers: any = {}, useFormData: boolean = false): Promise<T> {
+  protected post<T = any>(method: string, data: any, errorReturn: boolean = false, responseType: any = 'json', headers: any = {}, useFormData: boolean = false): Promise<T> {
     // prepare data
     let body = data;
     if (!useFormData) {
@@ -106,7 +106,7 @@ export class BaseDataService {
     return this.toPromise(action);
   }
 
-  protected delete<T = any>(method: string, data: any, queryString: boolean = false): Promise<T> {
+  protected delete<T = any>(method: string, data: any, errorReturn: boolean = false, queryString: boolean = false): Promise<T> {
     const url = this.buildUrl(method);
     let action: Observable<T>;
 
@@ -115,7 +115,7 @@ export class BaseDataService {
     } else {
       action = this.httpClient.delete<T>(url, { params: data });
     }
-    return this.toPromise(action);
+    return this.toPromise(action,errorReturn);
   }
 
 }

@@ -18,6 +18,7 @@ namespace API.Services
         Task<bool> UpdateHasImage(int raceId);
         string GetImageFolderPath();
         Task<bool> ShareRace(ShareRequest request);
+        Task<bool> DeleteRace(int RaceId, string UserId);
     }
 
     public class RaceService : IRaceService
@@ -97,6 +98,14 @@ namespace API.Services
                 throw new Exception(String.Format("This race already shared with {0}", request.Username));
 
             return shareRace;
+        }
+
+        public async Task<bool> DeleteRace(int RaceId, string UserId)
+        {
+            var result = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_deleterace(@raceid, @userid)", new { raceid = RaceId, userid = UserId });
+            if (!result)
+                throw new Exception("You do not have permission to delete this race");
+            return result;
         }
 
     }

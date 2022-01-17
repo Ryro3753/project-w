@@ -1,11 +1,12 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/features.popup.event';
 import { SharePopupCloseEvent, SharePopupEvent, SharePopupUsernameEvent } from 'src/app/events/share.popup.event';
 import { ShareRequest } from 'src/app/models/common/common.model';
-import { Race, RaceDetail, RaceUpdateRequest } from 'src/app/models/races.model';
+import { User } from 'src/app/models/common/user.model';
+import { Race, RaceDeleteRequest, RaceDetail, RaceUpdateRequest } from 'src/app/models/races.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { UploadService } from 'src/app/services/common/upload.service';
 import { RaceService } from 'src/app/services/races.service';
@@ -43,9 +44,10 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
   }
 
   @Input() race!: Race;
+  @Output() deleteClicked : EventEmitter<number> = new EventEmitter<number>();
+
 
   detailsToggle: boolean = false;
-
   raceDetail: RaceDetail | undefined;
 
 
@@ -132,6 +134,12 @@ export class RaceAccordionComponent implements OnInit, OnDestroy {
       this.alertService.alert({alertInfo:{message:error.error, type:'warning',timeout:5000}})
     }
 
+  }
+
+  async deleteRace(){
+    if(!this.raceDetail)
+      return;
+    this.deleteClicked.emit(this.raceDetail.RaceId);
   }
 
 

@@ -23,3 +23,8 @@ export interface RaceUpdateRequest{
     Description: string;
     Features: Feature[];
 }
+
+export interface RaceDeleteRequest{
+    RaceId: number;
+    UserId: string;
+}

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { OnlyUserId, ShareRequest } from "../models/common/common.model"
-import { Race, RaceDetail, RaceUpdateRequest } from "../models/races.model"
+import { Race, RaceDeleteRequest, RaceDetail, RaceUpdateRequest } from "../models/races.model"
 import { BaseDataService } from "./common/base-data.service"
 
 
@@ -32,6 +32,10 @@ export class RaceService extends BaseDataService {
 
   shareRace(request: ShareRequest): Promise<boolean>{
     return this.post<boolean>("ShareRace",request,true);
+  }
+
+  deleteRace(RaceId: number, UserId: string): Promise<boolean>{
+    return this.delete<boolean>("DeleteRace",{RaceId:RaceId, UserId: UserId},true);
   }
 
 }

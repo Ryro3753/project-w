@@ -57,9 +57,16 @@ namespace API.Controllers
         }
 
         [HttpPost("ShareRace")]
-        public async Task<bool> ShareRace(ShareRequest request)
+        public async Task<bool> ShareRace([FromBody] ShareRequest request)
         {
             return await _raceService.ShareRace(request);
         }
+
+        [HttpDelete("DeleteRace")]
+        public async Task<bool> DeleteRace(int RaceId, string UserId)
+        {
+            return await _raceService.DeleteRace(RaceId,  UserId );
+        }
+        
     }
 }

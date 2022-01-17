@@ -5,12 +5,12 @@
             <img [src]="race.HasImage ? raceImageBasePath + race.Id + '.png' : noImagePath "
             class="responsiveIcon" (dblclick)="imageUpload.click()"/>
         </div>
-        <div class="col-sm-2 raceName">
+        <div class="col-sm-6 raceName">
             <span class="header4" [innerText]="race.Name"></span>
         </div>
-        <div class="col-sm-2 offset-6 ">
-            <p class="centerlize"><strong>Created By:</strong></p>
-            <p class="centerlize" [innerText]="race.Username"></p>
+        <div class="col-sm-2 offset-2 ">
+            <p class="centerlize bold">Created By:</p>
+            <p class="centerlize bold" style="color: white;" [innerText]="race.Username"></p>
         </div>
         <div class="col-sm-1 centerlize header4 click"  (click)="detailsClick()">
             <i [class]=" detailsToggle ? 'bi bi-arrow-up-circle' : 'bi bi-arrow-down-circle'"></i>
@@ -50,9 +50,14 @@
             <button class="btn btn-block mtr1 customBlockButton" (click)="save()">Save</button>
         </div>
     </div>
+    <div class="row justify-content-center mr-2">
+        <div class="col-sm-10">
+            <button class="btn btn-primary mtr1 widthFull bold p-0" (click)="share()">Share</button>
+        </div>
+    </div>
     <div class="row justify-content-center mr-2 mbr2">
         <div class="col-sm-10">
-            <button class="btn btn-primary mtr1 widthFull bold" (click)="share()">Share</button>
+            <button class="btn btn-danger mtr1 widthFull bold p-0" (click)="deleteRace()">Delete</button>
         </div>
     </div>
 </div>
