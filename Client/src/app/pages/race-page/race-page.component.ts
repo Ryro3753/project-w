@@ -79,6 +79,7 @@ export class RacePageComponent implements OnInit, OnDestroy {
       this.allRaces = this.allRaces.filter(i => i.Id != raceId);
       this.filteredRaces = this.filteredRaces.filter(i => i.Id != raceId);
       this.filteredRaces = JSON.parse(JSON.stringify(this.filteredRaces));
+      this.alertService.alert({ alertInfo: { message: 'Race successfully deleted', type: 'success', timeout: 5000 } })
     }
     else {
       const error = result as any;

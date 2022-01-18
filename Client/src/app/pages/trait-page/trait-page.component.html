@@ -1,6 +1,6 @@
 <div class="container trait-page mtr3" *ngIf="currentUser">
     <div *ngIf="selectedTraitId">
-        <app-trait-sheet></app-trait-sheet>
+        <app-trait-sheet [selectedTrait]="selectedTraitId" (deleteClicked)="deleteTrait($event)" (saveClicked)="saveTrait($event)" ></app-trait-sheet>
     </div>
     <div>
         <div class="row">

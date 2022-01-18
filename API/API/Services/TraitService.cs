@@ -68,8 +68,8 @@ namespace API.Services
 
         public async Task<TraitWithFeature> UpdateTrait(TraitUpdateRequest request)
         {
-            var data = await _connection.QueryFirstOrDefaultAsync<TraitQuery>("Select * from public.fn_updatetrait(@traitid,@name,@description,@features)",
-                new { traitid = request.TraitId, name = request.Name, description = request.Description, features = _featureService.UnreadFeatures(request.Features) });
+            var data = await _connection.QueryFirstOrDefaultAsync<TraitQuery>("Select * from public.fn_updatetrait(@traitid,@newname,@newdescription,@newfeatures)",
+                new { traitid = request.TraitId, newname = request.Name, newdescription = request.Description, newfeatures = _featureService.UnreadFeatures(request.Features) });
             return new TraitWithFeature
             {
                 Id = data.Id,
@@ -82,11 +82,11 @@ namespace API.Services
 
         public async Task<bool> ShareTrait(ShareRequest request)
         {
-            var userId = _helperService.CheckUsernameReturnUserId(request.Username);
+            var userId = await _helperService.CheckUsernameReturnUserId(request.Username);
 
-            var shareTrait = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_sharerace(@raceid, @userid)", new { raceid = request.ObjectId, userid = userId });
+            var shareTrait = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_sharetrait(@traitid, @userid)", new { traitid = request.ObjectId, userid = userId });
             if (!shareTrait)
-                throw new Exception(String.Format("This race already shared with {0}", request.Username));
+                throw new Exception(String.Format("This trait already shared with {0}", request.Username));
 
             return shareTrait;
         }

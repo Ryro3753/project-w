@@ -23,7 +23,6 @@ export class FeaturesListComponent implements OnInit {
   }
 
   showRequirements(feature: Feature, index: number) {
-    console.log(feature);
     if (feature.Requirements == null || !feature.Requirements || feature.Requirements.length == 0)
       return;
     this.showRequirementsToggle[index] = !this.showRequirementsToggle[index];

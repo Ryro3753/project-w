@@ -22,7 +22,7 @@
         <div class="col-sm-5">
             <div >
                 <label>Race Name</label>
-                <input class="widthFull "  placeholder="Name"  required
+                <input class="widthFull" [maxlength]="30"  placeholder="Name"  required
                     [(ngModel)]="race.Name">
             </div>
             <div class="mt-2">

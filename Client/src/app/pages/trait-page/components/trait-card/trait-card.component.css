@@ -1,8 +1,10 @@
 .traitName{
     text-decoration: underline;
     font-size: larger;
-    width: fit-content;
     color:white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .traitCard{
