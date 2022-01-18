@@ -29,7 +29,7 @@ namespace API.Models.Features
             {"Skill", new List<string> { "Athletics", "Acrobatics", "Sleight of Hand", "Stealth", "Arcana", "History", "Investigation", "Nature", "Religion", "Animal Handling", "Insight", "Medicine", "Perception", "Survival","Deception", "Intimidation", "Performance", "Persuasion" } },
             {"Sense", new List<string> {"Passive Perception", "Passive Investigation", "Passive Insight"} },
             {"Condition", new List<string> {"Gain", "Lose"} },
-            {"Defense", new List<string> {"Gain", "Lose" } },
+            {"Defense", new List<string> {"Resistance", "Immunity", "Vulnerability" } },
         };
 
         public readonly static Dictionary<string, List<string>> TypesForRequirements = new Dictionary<string, List<string>>()
@@ -43,7 +43,7 @@ namespace API.Models.Features
             {"Skill", new List<string> { "Athletics", "Acrobatics", "Sleight of Hand", "Stealth", "Arcana", "History", "Investigation", "Nature", "Religion", "Animal Handling", "Insight", "Medicine", "Perception", "Survival","Deception", "Intimidation", "Performance", "Persuasion" } },
             {"Sense", new List<string> {"Passive Perception", "Passive Investigation", "Passive Insight"} },
             {"Condition", new List<string> {"Check"} },
-            {"Defense", new List<string> {"Check" } },
+            {"Defense", new List<string> {"Resistance", "Immunity", "Vulnerability" } },
         };
     }
 }
