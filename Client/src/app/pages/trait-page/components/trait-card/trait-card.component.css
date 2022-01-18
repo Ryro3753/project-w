@@ -1,0 +1,35 @@
+.traitName{
+    text-decoration: underline;
+    font-size: larger;
+    width: fit-content;
+    color:white;
+}
+
+.traitCard{
+    height: 9rem;
+    background-color: #7b2cbf;
+    border-style: solid;
+    border-width: 0.2rem;
+    border-color: #10002b;
+    user-select: none;
+}
+
+.traitCard:hover{
+    box-shadow: 1px 1px 7px #10002b;
+}    
+
+.traitDescription{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:white;
+}
+
+.traitUsername{
+    color: white;
+    font-size: small;
+    text-align: end;
+    text-decoration: underline;
+}

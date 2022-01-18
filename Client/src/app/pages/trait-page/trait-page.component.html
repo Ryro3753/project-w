@@ -1,24 +1,27 @@
 <div class="container trait-page mtr3" *ngIf="currentUser">
     <div *ngIf="selectedTraitId">
-
+        <app-trait-sheet></app-trait-sheet>
     </div>
     <div>
         <div class="row">
             <div class="col-sm-5">
-                <app-pagination [pageSize]="20" [data]="filteredTraits" (pageClicked)="pageChange($event)" ></app-pagination>
+                <app-pagination [pageSize]="18" [data]="filteredTraits" (pageClicked)="pageChange($event)">
+                </app-pagination>
             </div>
             <div class="col-sm-3">
-                <button class="btn btn-block customAddButton" title="Add New Trait">+</button>
+                <button class="btn btn-block customAddButton" title="Add New Trait" (click)="addNewTrait()">+</button>
             </div>
             <div class="col-sm-2">
-                <input  placeholder="Search" class="widthFull  form-control" type="text">
+                <input [(ngModel)]="search" placeholder="Search" class="widthFull  form-control" type="text">
             </div>
             <div class="col-sm-2">
-            <button class="btn btn-block   customBlockButton" >Search</button>
-        </div>
-        <div class="justify-content-between">
-        
+                <button class="btn btn-block   customBlockButton" (click)="searchClicked()">Search</button>
+            </div>
         </div>
     </div>
-
+    <div class="row mtr2">
+        <div *ngFor="let item of shownTraits" class="col-sm-2">
+                <app-trait-card [Trait]="item"  (dblclick)="traitClicked(item)"></app-trait-card>
+        </div>
+    </div>
 </div>

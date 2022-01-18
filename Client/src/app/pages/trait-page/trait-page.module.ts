@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { TraitPageComponent } from './trait-page.component';
 import { TraitCardComponent } from './components/trait-card/trait-card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TraitSheetComponent } from './components/trait-sheet/trait-sheet.component';
 
 @NgModule({
   declarations: [
     TraitPageComponent,
-    TraitCardComponent
+    TraitCardComponent,
+    TraitSheetComponent
   ],
   imports: [
     RouterModule.forChild([{

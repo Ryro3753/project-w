@@ -26,7 +26,7 @@ export class TraitPageComponent implements OnInit {
   shownTraits!: Trait[];
   currentPageIndexes!: pageEmit;
 
-
+  search!: string;
   selectedTraitId: number | undefined;
 
   ngOnInit(): void {
@@ -57,6 +57,17 @@ export class TraitPageComponent implements OnInit {
       this.filteredTraits.unshift(newTrait);
       this.filteredTraits = JSON.parse(JSON.stringify(this.filteredTraits));
     }
+  }
+
+  searchClicked() {
+    if (this.allTraits) {
+      this.filteredTraits = this.allTraits.filter(i => i.Name.includes(this.search));
+    }
+  }
+
+  traitClicked(trait: Trait){
+    console.log(trait);
+    this.selectedTraitId = trait.Id;
   }
 
 }

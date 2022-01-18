@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Trait } from 'src/app/models/traits.model';
 
 @Component({
   selector: 'app-trait-card',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class TraitCardComponent implements OnInit {
 
   constructor() { }
+
+  @Input() Trait !: Trait;
 
   ngOnInit(): void {
   }
