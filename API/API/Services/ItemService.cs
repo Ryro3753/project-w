@@ -17,7 +17,7 @@ namespace API.Services
         Task<bool> ShareItemType(ShareRequest request);
         Task<bool> DeleteItemType(int ItemTypeId, string UserId);
         Task<ItemTypeDetail> UpdateItemType(ItemTypeUpdateRequest request);
-        Task<ItemTypeDetail> InsertTrait(OnlyUserId request);
+        Task<ItemTypeDetail> InsertItemType(OnlyUserId request);
         Task<ItemTypeDetail> GetItemType(int itemTypeId);
         Task<bool> UpdateHasImage(int itemTypeId);
     }
@@ -88,7 +88,7 @@ namespace API.Services
             };
         }
 
-        public async Task<ItemTypeDetail> InsertTrait(OnlyUserId request)
+        public async Task<ItemTypeDetail> InsertItemType(OnlyUserId request)
         {
             var data = await _connection.QueryFirstOrDefaultAsync<ItemTypeDetailQuery>("Select * from public.fn_insertitemtype(@userid)", new { userid = request.UserId });
             return new ItemTypeDetail

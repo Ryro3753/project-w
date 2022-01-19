@@ -12,7 +12,6 @@ namespace API.Models.Item
         public string Type { get; set; }
         public bool Equippable { get; set; }
         public string Tags { get; set; }
-        public bool HasIamge { get; set; }
         public List<Feature> Features { get; set; }
         public List<ItemAttribute> Attributes { get; set; }
     }

@@ -37,10 +37,10 @@ namespace API.Controllers
         {
             return await _itemService.UpdateItemType(request);
         }
-        [HttpPost("InsertTrait")]
-        public async Task<ItemTypeDetail> InsertTrait(OnlyUserId request)
+        [HttpPost("InsertItemType")]
+        public async Task<ItemTypeDetail> InsertItemType(OnlyUserId request)
         {
-            return await _itemService.InsertTrait(request);
+            return await _itemService.InsertItemType(request);
         }
         [HttpGet("GetItemType")]
         public async Task<ItemTypeDetail> GetItemType(int itemTypeId)
