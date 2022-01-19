@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace API.Models.Features
+namespace API.Models
 {
-    public static class FeatureConstants
+    public static class Constants
     {
-        public readonly static List<string> Sections = new List<string>()
+        public readonly static List<string> Feature_Sections = new List<string>()
         {
             "Character",
             "Saving Throw",
@@ -18,7 +18,7 @@ namespace API.Models.Features
             "Item"
         };
 
-        public readonly static Dictionary<string, List<string>> Types = new Dictionary<string, List<string>>()
+        public readonly static Dictionary<string, List<string>> Feature_Types = new Dictionary<string, List<string>>()
         {
             {"Character", new List<string> {"Level", "Max Health", "Max Mana", "Armor Class", "Initiative", "Proficiency", "Speed", "Armor Proficiency", "Weapon Proficiency", "Language", "Tool" } },
             {"Saving Throw", new List<string> {"Strength", "Dexterity", "Constitution", "Wisdom", "Charisma", "Intelligence", "Advantage", "Disadvantage" } },
@@ -32,7 +32,7 @@ namespace API.Models.Features
             {"Defense", new List<string> {"Resistance", "Immunity", "Vulnerability" } },
         };
 
-        public readonly static Dictionary<string, List<string>> TypesForRequirements = new Dictionary<string, List<string>>()
+        public readonly static Dictionary<string, List<string>> Feature_TypesForRequirements = new Dictionary<string, List<string>>()
         {
             {"Character", new List<string> {"Level", "Max Health", "Max Mana", "Armor Class", "Initiative", "Proficiency", "Speed", "Armor Proficiency", "Weapon Proficiency", "Language", "Tool" } },
             {"Saving Throw", new List<string> {"Strength", "Dexterity", "Constitution", "Wisdom", "Charisma", "Intelligence", "Advantage", "Disadvantage" } },
@@ -44,6 +44,12 @@ namespace API.Models.Features
             {"Sense", new List<string> {"Passive Perception", "Passive Investigation", "Passive Insight"} },
             {"Condition", new List<string> {"Check"} },
             {"Defense", new List<string> {"Resistance", "Immunity", "Vulnerability" } },
+        };
+
+        public readonly static List<string> Item_Attirutes = new List<string>()
+        {
+            "Weapon",
+            "Armor",
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using API.Models.Features;
+﻿using API.Models;
+using API.Models.Features;
 using System;
 using System.Collections.Generic;
 
@@ -92,17 +93,17 @@ namespace API.Services
 
         public IEnumerable<string> GetSections()
         {
-            return FeatureConstants.Sections;
+            return Constants.Feature_Sections;
         }
 
         public Dictionary<string, List<string>> GetTypes()
         {
-            return FeatureConstants.Types;
+            return Constants.Feature_Types;
         }
 
         public Dictionary<string, List<string>> GetTypesForRequirements()
         {
-            return FeatureConstants.TypesForRequirements;
+            return Constants.Feature_TypesForRequirements;
         }
 
     }
