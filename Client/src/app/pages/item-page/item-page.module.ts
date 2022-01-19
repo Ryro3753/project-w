@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ItemPageComponent } from './item-page.component';
+import { ItemSidebarComponent } from './components/item-sidebar/item-sidebar.component';
 
 @NgModule({
   declarations: [
     ItemPageComponent,
+    ItemSidebarComponent,
   ],
   imports: [
     RouterModule.forChild([{

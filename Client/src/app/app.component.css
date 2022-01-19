@@ -74,6 +74,13 @@ font-weight: bold;
     width: 100%;
 }
 
+::ng-deep .underBorder{
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    margin: 0;
+}
+
 ::ng-deep .mlr1{
 margin-left: 1rem;
 }

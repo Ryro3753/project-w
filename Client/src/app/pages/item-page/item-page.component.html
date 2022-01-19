@@ -10,7 +10,8 @@
     </div>
     <div class="row mtr2">
         <div *ngFor="let item of shownItems" class="col-sm-3 mbr2">
-            <button class="btn btn-block itemButton">
+            <button class="btn btn-block itemButton" (click)="itemSelect(item,$event)"
+                (auxclick)="itemSelect(item,$event)">
                 <img [src]="item.HasImage ? itemImageBasePath + item.Id + '.png' : noImagePath "
                     class="responsiveIcon" />
                 <span [innerText]="item.Name" class="itemButtonName"> </span>
@@ -19,3 +20,5 @@
         </div>
     </div>
 </div>
+
+<app-item-sidebar *ngIf="sidebar" [item]="selectedItem" (closeClicked)="sideBarClosed()"></app-item-sidebar>

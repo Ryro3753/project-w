@@ -1,0 +1,33 @@
+<div class="itemSideBar card" *ngIf="item">
+    <div class="row">
+        <div class="col-sm-2 offset-10">
+            <button class="btn-block closeButton" (click)="close()" title="Close">X</button>
+        </div>
+    </div>
+    <p class="header4 underBorder mbr1 "> <img
+            [src]="item.HasImage ? itemImageBasePath + item.Id + '.png' : noImagePath " class="responsiveIcon mlr1" />
+        {{item.Name}}</p>
+    <div *ngIf="item.Description != ''">
+        <label class="smallLabel ">Description:</label>
+        <p class="underBorder descriptionLimit" [innerText]="item.Description"></p>
+    </div>
+    <div *ngIf="item.Category != ''">
+        <label class="smallLabel">Category:</label>
+        <p class="underBorder" [innerText]="item.Category"></p>
+    </div>
+    <div *ngIf="item.Type != ''">
+        <label class="smallLabel">Type:</label>
+        <p class="underBorder" [innerText]="item.Type"></p>
+    </div>
+    <div *ngIf="item.Equippable">
+        <p class="underBorder">This item is equippable</p>
+    </div>
+    <div *ngIf="item.Tags != ''">
+        <label class="smallLabel">Tags:</label>
+        <p class="underBorder" [innerText]="item.Tags"></p>
+    </div>
+    <div *ngIf="item.Username != ''">
+        <label class="smallLabel">Created By:</label>
+        <p class="underBorder" [innerText]="item.Username"></p>
+    </div>
+</div>

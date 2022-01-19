@@ -31,6 +31,9 @@ export class ItemPageComponent implements OnInit, OnDestroy {
   apiURL = environment.apiURL;
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
   itemImageBasePath = this.apiURL + '/images/ItemImages/';
+
+  sidebar: boolean = true;
+  selectedItem!: ItemType;
   
   ngOnInit(): void {
     const sub = this.store.select('state').subscribe(async i => {
@@ -66,6 +69,20 @@ export class ItemPageComponent implements OnInit, OnDestroy {
   pageChange(page: pageEmit) {
     this.currentPageIndexes = page;
     this.shownItems = this.filteredItems.slice(page.firstIndex, page.lastIndex + 1);
+  }
+
+  itemSelect(itemType: ItemType, event: any){
+    if(event.which == 2){
+      window.open('/Items/' + itemType.Id, '_blank');
+    }
+    else {
+      this.sidebar = true;
+      this.selectedItem = itemType;
+    }
+  }
+
+  sideBarClosed(){
+    this.sidebar = false;
   }
 
 }

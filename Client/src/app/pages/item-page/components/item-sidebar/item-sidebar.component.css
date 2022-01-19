@@ -1,0 +1,28 @@
+.itemSideBar{
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    width: 20%;
+    background-color: #10002b;
+    color: white;
+    white-space: pre-wrap;
+}
+
+.closeButton{
+    color: white;
+    background-color: inherit;
+    font-size: xx-large;
+    padding:1rem;
+    border-style: none;
+}
+
+.descriptionLimit{
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:white;
+}
