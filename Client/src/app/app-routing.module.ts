@@ -26,6 +26,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/trait-page/trait-page.module').then(m => m.TraitPageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'Items',
+    loadChildren: () => import('./pages/item-page/item-page.module').then(m => m.ItemPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'Items/:itemId',
+    loadChildren: () => import('./pages/item-detail-page/item-detail-page.module').then(m => m.ItemDetailPageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({

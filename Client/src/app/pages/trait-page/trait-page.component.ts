@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
@@ -14,7 +14,7 @@ import { State } from 'src/app/store/reducer/reducer';
   templateUrl: './trait-page.component.html',
   styleUrls: ['./trait-page.component.css']
 })
-export class TraitPageComponent implements OnInit {
+export class TraitPageComponent implements OnInit,OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -46,6 +46,12 @@ export class TraitPageComponent implements OnInit {
         sub.unsubscribe();
       }
     }));
+  }
+
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
   async readData(userId: string) {

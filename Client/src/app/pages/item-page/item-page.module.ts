@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ItemPageComponent } from './item-page.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ItemPageComponent } from './item-page.component';
       component: ItemPageComponent
 
     }]),
+    SharedModule
   ],
   providers: [
   ],
