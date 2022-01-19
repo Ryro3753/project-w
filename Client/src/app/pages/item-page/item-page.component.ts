@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs/internal/types';
+import { pageEmit } from 'src/app/models/common/common.model';
 import { User } from 'src/app/models/common/user.model';
 import { ItemType } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
 import { State } from 'src/app/store/reducer/reducer';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-page',
@@ -23,6 +25,12 @@ export class ItemPageComponent implements OnInit, OnDestroy {
   allItems!: ItemType[];
   filteredItems!: ItemType[];
   shownItems!: ItemType[];
+
+  currentPageIndexes!: pageEmit;
+
+  apiURL = environment.apiURL;
+  noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
+  itemImageBasePath = this.apiURL + '/images/ItemImages/';
   
   ngOnInit(): void {
     const sub = this.store.select('state').subscribe(async i => {
@@ -46,4 +54,20 @@ export class ItemPageComponent implements OnInit, OnDestroy {
     this.shownItems = JSON.parse(JSON.stringify(this.filteredItems));
   }
 
+  async addNewItem(){
+    if(this.currentUser){
+      const newItem = await this.itemService.insertItemType({UserId:this.currentUser.Id});
+      this.allItems.unshift(newItem);
+      this.filteredItems.unshift(newItem);
+      this.filteredItems = JSON.parse(JSON.stringify(this.filteredItems));
+    }
+  }
+
+  pageChange(page: pageEmit) {
+    this.currentPageIndexes = page;
+    this.shownItems = this.filteredItems.slice(page.firstIndex, page.lastIndex + 1);
+  }
+
 }
+
+

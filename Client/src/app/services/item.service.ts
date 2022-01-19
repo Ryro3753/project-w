@@ -23,8 +23,8 @@ export class ItemService extends BaseDataService {
     return this.get<ItemTypeDetail>("GetItemType", {itemTypeId});
   }
 
-  insertItemType(request: OnlyUserId): Promise<ItemTypeDetail>{
-    return this.post<ItemTypeDetail>("InsertItemType", request);
+  insertItemType(request: OnlyUserId): Promise<ItemType>{
+    return this.post<ItemType>("InsertItemType", request);
   }
 
   updateItemType(request: ItemTypeUpdateRequest): Promise<ItemTypeDetail>{

@@ -1,0 +1,32 @@
+.addNewItemButton{
+    color:white;
+    background-color: #7b2cbf;
+    font-size: X-large;
+    display: block;
+    border-radius: 0%;
+    padding:0.4rem
+}
+
+.itemButton{
+    color:white;
+    background-color: #7b2cbf;
+}
+
+.itemButton:hover{
+    background-color: #10002b;
+}
+
+.itemButtonName{
+    font-size: large;
+    width: 100%;
+    display: block;
+    font-weight: bold;
+    text-decoration: underline;
+    border-radius: 0%;
+}
+
+.itemButtonUsername{
+    width: 100%;
+    display: block;
+    padding:0;
+}

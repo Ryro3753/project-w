@@ -1,2 +1,21 @@
-<p>item-page works!</p>
-<app-pagination [pageSize]="5" [data]="filteredItems" ></app-pagination>
+<div class="container item-page">
+    <div class="row justify-content-between">
+        <div class="col-sm-6">
+            <app-pagination [pageSize]="20" [data]="filteredItems" (pageClicked)="pageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-3 offset-3">
+            <button class="btn btn-block addNewItemButton" title="Add New Item" (click)="addNewItem()">+ Add New
+                Item</button>
+        </div>
+    </div>
+    <div class="row mtr2">
+        <div *ngFor="let item of shownItems" class="col-sm-3 mbr2">
+            <button class="btn btn-block itemButton">
+                <img [src]="item.HasImage ? itemImageBasePath + item.Id + '.png' : noImagePath "
+                    class="responsiveIcon" />
+                <span [innerText]="item.Name" class="itemButtonName"> </span>
+                <span [innerText]="'Created By:' + item.Username" class="itemButtonUsername"></span>
+            </button>
+        </div>
+    </div>
+</div>

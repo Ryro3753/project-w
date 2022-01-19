@@ -17,7 +17,7 @@ namespace API.Services
         Task<bool> ShareItemType(ShareRequest request);
         Task<bool> DeleteItemType(int ItemTypeId, string UserId);
         Task<ItemTypeDetail> UpdateItemType(ItemTypeUpdateRequest request);
-        Task<ItemTypeDetail> InsertItemType(OnlyUserId request);
+        Task<ItemType> InsertItemType(OnlyUserId request);
         Task<ItemTypeDetail> GetItemType(int itemTypeId);
         Task<bool> UpdateHasImage(int itemTypeId);
     }
@@ -88,23 +88,9 @@ namespace API.Services
             };
         }
 
-        public async Task<ItemTypeDetail> InsertItemType(OnlyUserId request)
+        public async Task<ItemType> InsertItemType(OnlyUserId request)
         {
-            var data = await _connection.QueryFirstOrDefaultAsync<ItemTypeDetailQuery>("Select * from public.fn_insertitemtype(@userid)", new { userid = request.UserId });
-            return new ItemTypeDetail
-            {
-                Id = data.Id,
-                Name = data.Name,
-                Description = data.Description,
-                Category = data.Category,
-                Tags = data.Tags,
-                Type = data.Type,
-                Equippable = data.Equippable,
-                HasImage = data.HasImage,
-                Username = data.Username,
-                Features = _featureService.ReadFeatures(data.Features),
-                Attributes = ReadAttributes(data.Attributes)
-            };
+            return await _connection.QueryFirstOrDefaultAsync<ItemType>("Select * from public.fn_insertitemtype(@userid)", new { userid = request.UserId });
         }
 
         public async Task<ItemTypeDetail> GetItemType(int itemTypeId)
@@ -134,6 +120,9 @@ namespace API.Services
 
         public IEnumerable<ItemAttribute> ReadAttributes(string attributes)
         {
+            if (string.IsNullOrEmpty(attributes))
+                return null;
+
             var list = new List<ItemAttribute>();
             var attributesSplitted = attributes.Split(';');
             for (int i = 0; i < attributesSplitted.Length; i++)

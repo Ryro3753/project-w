@@ -38,7 +38,7 @@ namespace API.Controllers
             return await _itemService.UpdateItemType(request);
         }
         [HttpPost("InsertItemType")]
-        public async Task<ItemTypeDetail> InsertItemType(OnlyUserId request)
+        public async Task<ItemType> InsertItemType(OnlyUserId request)
         {
             return await _itemService.InsertItemType(request);
         }
