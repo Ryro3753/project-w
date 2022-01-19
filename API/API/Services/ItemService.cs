@@ -52,7 +52,7 @@ namespace API.Services
         {
             var userId = await _helperService.CheckUsernameReturnUserId(request.Username);
 
-            var shareItem = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_shareitemtype(@itemtypeid, @userid)", new { raceid = request.ObjectId, userid = userId });
+            var shareItem = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.fn_shareitemtype(@itemtypeid, @userid)", new { itemtypeid = request.ObjectId, userid = userId });
             if (!shareItem)
                 throw new Exception(String.Format("This item already shared with {0}", request.Username));
 
