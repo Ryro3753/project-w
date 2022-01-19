@@ -43,7 +43,7 @@ export class ItemSidebarComponent implements OnInit {
     if(event.which == 2){
     window.open('/Items/' + this.item.Id, '_blank');
     }
-    else {
+    else if(event.which == 1) {
       this.router.navigateByUrl('Items/' + this.item.Id);
     }
   }

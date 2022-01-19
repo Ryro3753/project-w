@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs/internal/types';
@@ -11,14 +12,28 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-item-page',
   templateUrl: './item-page.component.html',
-  styleUrls: ['./item-page.component.css']
+  styleUrls: ['./item-page.component.css'],
+  animations: [
+    trigger(
+      'filterToggle', [
+      transition(':enter', [
+        style({ height: 0 }),
+        animate('500ms', style({ height: 300 }))
+      ]),
+      transition(':leave', [
+        style({ height: 300 }),
+        animate('500ms', style({ height: 0 }))
+      ])
+    ],
+    ),
+  ]
 })
 export class ItemPageComponent implements OnInit, OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
-  
+
   constructor(readonly store: Store<{ state: State }>,
-              readonly itemService: ItemService) { }
+    readonly itemService: ItemService) { }
 
   currentUser: User | undefined;
 
@@ -34,7 +49,15 @@ export class ItemPageComponent implements OnInit, OnDestroy {
 
   sidebar: boolean = true;
   selectedItem!: ItemType;
-  
+
+  filterToggle: boolean = false;
+
+  filterName: string = '';
+  filterCategory: string = '';
+  filterType: string = '';
+  filterTags: string = '';
+  filterUsername: string = '';
+
   ngOnInit(): void {
     const sub = this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
@@ -51,15 +74,15 @@ export class ItemPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  async readData(userId: string){
+  async readData(userId: string) {
     this.allItems = await this.itemService.getAllTraitsByUserId(userId);
     this.filteredItems = JSON.parse(JSON.stringify(this.allItems));
     this.shownItems = JSON.parse(JSON.stringify(this.filteredItems));
   }
 
-  async addNewItem(){
-    if(this.currentUser){
-      const newItem = await this.itemService.insertItemType({UserId:this.currentUser.Id});
+  async addNewItem() {
+    if (this.currentUser) {
+      const newItem = await this.itemService.insertItemType({ UserId: this.currentUser.Id });
       this.allItems.unshift(newItem);
       this.filteredItems.unshift(newItem);
       this.filteredItems = JSON.parse(JSON.stringify(this.filteredItems));
@@ -71,18 +94,27 @@ export class ItemPageComponent implements OnInit, OnDestroy {
     this.shownItems = this.filteredItems.slice(page.firstIndex, page.lastIndex + 1);
   }
 
-  itemSelect(itemType: ItemType, event: any){
-    if(event.which == 2){
+  itemSelect(itemType: ItemType, event: any) {
+    if (event.which == 2) {
       window.open('/Items/' + itemType.Id, '_blank');
     }
-    else {
+    else if(event.which == 1) {
       this.sidebar = true;
       this.selectedItem = itemType;
     }
   }
 
-  sideBarClosed(){
+  sideBarClosed() {
     this.sidebar = false;
+  }
+
+  filterToggleClick() {
+    this.filterToggle = !this.filterToggle;
+  }
+
+  search() {
+    this.filteredItems = this.allItems.filter(el => el.Name.includes(this.filterName) && el.Category.includes(this.filterCategory) && 
+                    el.Type.includes(this.filterType) && el.Tags.includes(this.filterTags) && el.Username.includes(this.filterUsername));
   }
 
 }

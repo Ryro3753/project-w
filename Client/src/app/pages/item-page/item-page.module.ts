@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ItemPageComponent } from './item-page.component';
 import { ItemSidebarComponent } from './components/item-sidebar/item-sidebar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ItemSidebarComponent } from './components/item-sidebar/item-sidebar.com
 
     }]),
     SharedModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [
   ],
