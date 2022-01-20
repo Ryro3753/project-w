@@ -63,5 +63,12 @@ namespace API.Controllers
             return await _itemService.UpdateHasImage(itemTypeId);
         }
 
+        [HttpGet("GetItemAttributes")]
+        public IEnumerable<string> GetItemAttributes()
+        {
+            return _itemService.GetItemAttributes();
+        }
+
+
     }
 }

@@ -1,16 +1,13 @@
 <div class="card" [style]="'height: ' + height + 'px;overflow-y:auto;'">
     <div *ngFor="let item of attributes; let i = index;">
         <div class="row itemAttribute">
-            <div class="col-sm-1">
+            <div class="col-sm-1 my-auto">
                 <button class="btn-block removeButton" title="Remove" (click)="removeAttribute(i)">X</button>
             </div>
-            <div class="col-sm-6">
-                <ng-select [(ngModel)]="item.Attribute" class="widthFull"></ng-select>
+            <div class="col-sm-11">
+                <ng-select [items]="itemAttributes" [(ngModel)]="item.Attribute" class="widthFull mbr1" [title]="item.Attribute" placeholder="Attribute"></ng-select>
+                <input type="text" [(ngModel)]="item.Value" class="widthFull" placeholder="Value">
             </div>
-            <div class="col-sm-5">
-                <input type="text" [(ngModel)]="item.Value" class="widthFull">
-            </div>
-
         </div>
     </div>
 </div>

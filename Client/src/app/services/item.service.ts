@@ -38,4 +38,8 @@ export class ItemService extends BaseDataService {
   deleteItemType(itemTypeId: number, UserId: string): Promise<boolean>{
     return this.delete<boolean>("DeleteItemType",{ItemTypeId:itemTypeId, UserId: UserId},true);
   }
+
+  getItemAttributes(): Promise<string[]>{
+    return this.get<string[]>("GetItemAttributes");
+  }
 }

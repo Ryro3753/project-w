@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ItemAttribute } from 'src/app/models/item.model';
+import { ItemService } from 'src/app/services/item.service';
 
 @Component({
   selector: 'app-item-attribute-list',
@@ -8,13 +9,16 @@ import { ItemAttribute } from 'src/app/models/item.model';
 })
 export class ItemAttributeListComponent implements OnInit {
 
-  constructor() { }
+  constructor(readonly itemService: ItemService) { }
 
   @Input() height: number = 150;
   @Input() attributes!: ItemAttribute[];
   @Output() attributesChange: EventEmitter<ItemAttribute[]> = new EventEmitter<ItemAttribute[]>();
 
-  ngOnInit(): void {
+  itemAttributes!: string[];
+
+  async ngOnInit(): Promise<void> {
+    this.itemAttributes = await this.itemService.getItemAttributes();
   }
 
   removeAttribute(index: number){

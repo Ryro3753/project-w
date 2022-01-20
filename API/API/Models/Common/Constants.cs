@@ -46,10 +46,21 @@ namespace API.Models
             {"Defense", new List<string> {"Resistance", "Immunity", "Vulnerability" } },
         };
 
-        public readonly static List<string> Item_Attirutes = new List<string>()
+        public readonly static List<string> Item_Attributes = new List<string>()
         {
-            "Weapon",
-            "Armor",
+            "Cost",
+            "Weight",
+            "Range",
+            "Rarity",
+            "Damage-Type",
+            "Damage-Modifier",
+            "Damage-Modifier-Ability",
+            "Attack-Modifier",
+            "Attack-Modifier-Ability",
+            "Versatile-Damage-Modifier",
+            "Versatile-Damage-Modifier-Ability",
+            "Versatile-Attack-Modifier",
+            "Versatile-Attack-Modifier-Ability",
         };
     }
 }

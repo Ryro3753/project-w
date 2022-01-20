@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;
+using API.Models;
 using API.Models.Common;
 using API.Models.Item;
 using Dapper;
@@ -20,6 +21,7 @@ namespace API.Services
         Task<ItemType> InsertItemType(OnlyUserId request);
         Task<ItemTypeDetail> GetItemType(int itemTypeId, string userId);
         Task<bool> UpdateHasImage(int itemTypeId);
+        IEnumerable<string> GetItemAttributes();
     }
 
     public class ItemService : IItemService
@@ -117,6 +119,11 @@ namespace API.Services
         public async Task<bool> UpdateHasImage(int itemTypeId)
         {
             return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_updateitemtypehasimage(@itemtypeid, @hasimage)", new { itemtypeid = itemTypeId, hasimage = true });
+        }
+
+        public IEnumerable<string> GetItemAttributes()
+        {
+            return Constants.Item_Attributes;
         }
 
 

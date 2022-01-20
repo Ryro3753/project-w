@@ -8,7 +8,7 @@ import { FeaturesClosePopupEvent, FeaturesPopupEvent } from 'src/app/events/feat
 import { SharePopupCloseEvent, SharePopupEvent, SharePopupUsernameEvent } from 'src/app/events/share.popup.event';
 import { ShareRequest } from 'src/app/models/common/common.model';
 import { User } from 'src/app/models/common/user.model';
-import { ItemTypeDetail, ItemTypeUpdateRequest } from 'src/app/models/item.model';
+import { ItemAttribute, ItemTypeDetail, ItemTypeUpdateRequest } from 'src/app/models/item.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { UploadService } from 'src/app/services/common/upload.service';
 import { ItemService } from 'src/app/services/item.service';
@@ -85,7 +85,7 @@ export class ItemDetailPageComponent implements OnInit, OnDestroy {
   addAttribute() {
     if (this.itemTypeDetail.Attributes == undefined)
       this.itemTypeDetail.Attributes = [];
-    this.itemTypeDetail.Attributes.push({ Attribute: '', Value: '' });
+    this.itemTypeDetail.Attributes.push({} as ItemAttribute);
   }
 
   featuresPopupSaved(event: FeaturesClosePopupEvent) {
