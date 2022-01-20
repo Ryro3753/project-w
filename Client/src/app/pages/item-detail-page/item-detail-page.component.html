@@ -10,7 +10,7 @@
     <div class="row ">
         <div class="col-sm-5 my-auto" style="vertical-align: middle;">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="activeEdit" [(ngModel)]="edit">
+                <input class="form-check-input" type="checkbox" id="activeEdit" [(ngModel)]="edit">
                 <label class="form-check-label" for="activeEdit">
                     Active Edit
                 </label>
@@ -25,24 +25,53 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingName" placeholder="Name"
-                    [(ngModel)]="itemTypeDetail.Name">
-                <label for="floatingName">Name</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingName" placeholder="Name"
-                    [(ngModel)]="itemTypeDetail.Name">
-                <label for="floatingName">Name</label>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <button class="btn btn-block  customBlockButton" (click)="featuresClick()">Features</button>
+            <button class="btn btn-block  customBlockButton" (click)="featuresClick()" [disabled]="!edit">Features</button>
             <app-features-list [features]="itemTypeDetail.Features" [height]="400"></app-features-list>
         </div>
         <div class="col-sm-4">
-            <button class="btn btn-block  customBlockButton" (click)="addAttribute()">Add Attribute</button>
-            <app-item-attribute-list [(attributes)]="itemTypeDetail.Attributes" [height]="400"></app-item-attribute-list>
+            <button class="btn btn-block  customBlockButton" (click)="addAttribute()" [disabled]="!edit">Add Attribute</button>
+            <app-item-attribute-list [(attributes)]="itemTypeDetail.Attributes" [height]="400">
+            </app-item-attribute-list>
         </div>
+        <div class="col-sm-4">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingName" placeholder="Name"
+                    [(ngModel)]="itemTypeDetail.Name"[disabled]="!edit">
+                <label for="floatingName">Name</label>
+            </div>
+            <div class="form-floating mtr1">
+                <input type="text" class="form-control" id="floatingCategory" placeholder="Category"
+                    [(ngModel)]="itemTypeDetail.Category" [disabled]="!edit">
+                <label for="floatingCategory">Category</label>
+            </div>
+            <div class="form-floating mtr1">
+                <input type="text" class="form-control" id="floatingType" placeholder="Type"
+                    [(ngModel)]="itemTypeDetail.Type" [disabled]="!edit">
+                <label for="floatingType">Type</label>
+            </div>
+            <div class="form-floating mtr1">
+                <input type="text" class="form-control" id="floatingTags" placeholder="Tags"
+                    [(ngModel)]="itemTypeDetail.Tags" [disabled]="!edit">
+                <label for="floatingTags">Tags</label>
+            </div>
+            <div class="form-check  mtr1">
+                <input class="form-check-input" type="checkbox"  id="isEquippable" [(ngModel)]="itemTypeDetail.Equippable" [disabled]="!edit">
+                <label class="form-check-label" for="isEquippable">
+                    Is Equippable
+                </label>
+            </div>
+            <div class="mtr1">
+                <textarea class="widthFull" type="text" [(ngModel)]="itemTypeDetail.Description" rows="4" placeholder="Description" [disabled]="!edit"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row  mr-2">
+            <button class="btn btn-block mtr1 customBlockButton" (click)="save()" [disabled]="!edit">Save</button>
+    </div>
+    <div class="row  mr-2">
+            <button class="btn btn-primary mtr1 widthFull bold p-0" (click)="share()" [disabled]="!edit">Share</button>
+    </div>
+    <div class="row mr-2 mbr2">
+            <button class="btn btn-danger mtr1 widthFull bold p-0" (click)="deleteItem()" [disabled]="!edit">Delete</button>
     </div>
 </div>
