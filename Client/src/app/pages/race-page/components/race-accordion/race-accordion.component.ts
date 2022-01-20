@@ -22,11 +22,11 @@ import { environment } from 'src/environments/environment';
       'detailsToggle', [
       transition(':enter', [
         style({ height: 0 }),
-        animate('200ms', style({ height: 100 }))
+        animate('400ms', style({ height: 800 }))
       ]),
       transition(':leave', [
-        style({ height: 300 }),
-        animate('200ms', style({ height: 0 }))
+        style({ height: 800 }),
+        animate('400ms', style({ height: 0 }))
       ])
     ],
     ),

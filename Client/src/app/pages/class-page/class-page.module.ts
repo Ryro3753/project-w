@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClassPageComponent } from './class-page.component';
@@ -13,6 +14,7 @@ import { ClassPageComponent } from './class-page.component';
       component: ClassPageComponent
 
     }]),
+    CommonModule
   ],
   providers: [
   ],
