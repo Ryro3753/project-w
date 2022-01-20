@@ -1,1 +1,48 @@
-<p>item-detail-page works!</p>
+<div class="container item-detail-page" *ngIf="itemTypeDetail">
+    <div class="row itemDetailHeader">
+        <div class="col-sm-6">
+            <span class="header4" [innerText]="itemTypeDetail.Name"></span>
+        </div>
+        <div class="col-sm-6 textAlignEnd">
+            <span class="header4" [innerText]="'Created By:' + itemTypeDetail.Username"></span>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-sm-5 my-auto" style="vertical-align: middle;">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="activeEdit" [(ngModel)]="edit">
+                <label class="form-check-label" for="activeEdit">
+                    Active Edit
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2 offset-5">
+            <input type="file" #imageUpload id="imageUpload" (change)="addImage($event)" style="display: none;"
+                accept="image/png, image/gif, image/jpeg">
+            <img [src]="itemTypeDetail.HasImage ? itemImageBasePath + itemTypeDetail.Id + '.png' : noImagePath "
+                class="responsiveMediumIcon" title="Double click to upload photo" (dblclick)="imageUpload.click()" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingName" placeholder="Name"
+                    [(ngModel)]="itemTypeDetail.Name">
+                <label for="floatingName">Name</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingName" placeholder="Name"
+                    [(ngModel)]="itemTypeDetail.Name">
+                <label for="floatingName">Name</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn btn-block  customBlockButton" (click)="featuresClick()">Features</button>
+            <app-features-list [features]="itemTypeDetail.Features" [height]="400"></app-features-list>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn btn-block  customBlockButton" (click)="addAttribute()">Add Attribute</button>
+            <app-item-attribute-list [(attributes)]="itemTypeDetail.Attributes" [height]="400"></app-item-attribute-list>
+        </div>
+    </div>
+</div>

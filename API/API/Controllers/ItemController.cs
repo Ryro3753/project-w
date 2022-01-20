@@ -43,9 +43,9 @@ namespace API.Controllers
             return await _itemService.InsertItemType(request);
         }
         [HttpGet("GetItemType")]
-        public async Task<ItemTypeDetail> GetItemType(int itemTypeId)
+        public async Task<ItemTypeDetail> GetItemType(int itemTypeId, string userId)
         {
-            return await _itemService.GetItemType(itemTypeId);
+            return await _itemService.GetItemType(itemTypeId, userId);
         }
         [HttpPost("ItemTypeUploadImage")]
         public async Task<bool> ItemTypeUploadImage(int itemTypeId)

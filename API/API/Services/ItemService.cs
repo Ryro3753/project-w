@@ -18,7 +18,7 @@ namespace API.Services
         Task<bool> DeleteItemType(int ItemTypeId, string UserId);
         Task<ItemTypeDetail> UpdateItemType(ItemTypeUpdateRequest request);
         Task<ItemType> InsertItemType(OnlyUserId request);
-        Task<ItemTypeDetail> GetItemType(int itemTypeId);
+        Task<ItemTypeDetail> GetItemType(int itemTypeId, string userId);
         Task<bool> UpdateHasImage(int itemTypeId);
     }
 
@@ -93,9 +93,11 @@ namespace API.Services
             return await _connection.QueryFirstOrDefaultAsync<ItemType>("Select * from public.fn_insertitemtype(@userid)", new { userid = request.UserId });
         }
 
-        public async Task<ItemTypeDetail> GetItemType(int itemTypeId)
+        public async Task<ItemTypeDetail> GetItemType(int itemTypeId, string userId)
         {
-            var data = await _connection.QueryFirstOrDefaultAsync<ItemTypeDetailQuery>("Select * from public.fn_getitemtype(@itemtypeid)", new { itemtypeid = itemTypeId });
+            var data = await _connection.QueryFirstOrDefaultAsync<ItemTypeDetailQuery>("Select * from public.fn_getitemtype(@itemtypeid, @userId)", new { itemtypeid = itemTypeId, userid = userId });
+            if (data == null)
+                throw new Exception("No item found");
             return new ItemTypeDetail
             {
                 Id = data.Id,
@@ -114,7 +116,7 @@ namespace API.Services
 
         public async Task<bool> UpdateHasImage(int itemTypeId)
         {
-            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_updateitemtypehasimage(@raceid, @hasimage)", new { itemtypeid = itemTypeId, hasimage = true });
+            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.fn_updateitemtypehasimage(@itemtypeid, @hasimage)", new { itemtypeid = itemTypeId, hasimage = true });
         }
 
 

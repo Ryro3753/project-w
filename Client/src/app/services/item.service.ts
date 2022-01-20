@@ -19,8 +19,8 @@ export class ItemService extends BaseDataService {
     return this.get<ItemType[]>("GetItemsByUserId", {userId});
   }
 
-  getItemType(itemTypeId: number): Promise<ItemTypeDetail>{
-    return this.get<ItemTypeDetail>("GetItemType", {itemTypeId});
+  getItemType(itemTypeId: number, userId: string): Promise<ItemTypeDetail>{
+    return this.get<ItemTypeDetail>("GetItemType", {itemTypeId, userId}, true);
   }
 
   insertItemType(request: OnlyUserId): Promise<ItemType>{
@@ -35,7 +35,7 @@ export class ItemService extends BaseDataService {
     return this.post<boolean>("ShareItemType",request,true);
   }
 
-  deleteItemType(ItemTypeId: number, UserId: string): Promise<boolean>{
-    return this.delete<boolean>("DeleteItemType",{ItemTypeId:ItemTypeId, UserId: UserId},true);
+  deleteItemType(itemTypeId: number, UserId: string): Promise<boolean>{
+    return this.delete<boolean>("DeleteItemType",{ItemTypeId:itemTypeId, UserId: UserId},true);
   }
 }

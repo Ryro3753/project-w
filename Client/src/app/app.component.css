@@ -36,6 +36,13 @@ height: auto;
 max-height: 56px;
 }
 
+::ng-deep  .responsiveMediumIcon {
+    width: 100%;
+    max-width: 128px;
+    height: auto;
+    max-height: 128px;
+    }
+
 ::ng-deep .smallLabel {
 color:gray;
 text-decoration: underline;
@@ -79,6 +86,10 @@ font-weight: bold;
     border-bottom-style: solid;
     border-bottom-color: white;
     margin: 0;
+}
+
+::ng-deep .textAlignEnd{
+    text-align: end;
 }
 
 ::ng-deep .mlr1{

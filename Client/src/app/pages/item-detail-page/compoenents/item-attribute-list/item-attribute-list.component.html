@@ -1,0 +1,16 @@
+<div class="card" [style]="'height: ' + height + 'px;overflow-y:auto;'">
+    <div *ngFor="let item of attributes; let i = index;">
+        <div class="row itemAttribute">
+            <div class="col-sm-1">
+                <button class="btn-block removeButton" title="Remove" (click)="removeAttribute(i)">X</button>
+            </div>
+            <div class="col-sm-6">
+                <ng-select [(ngModel)]="item.Attribute" class="widthFull"></ng-select>
+            </div>
+            <div class="col-sm-5">
+                <input type="text" [(ngModel)]="item.Value" class="widthFull">
+            </div>
+
+        </div>
+    </div>
+</div>

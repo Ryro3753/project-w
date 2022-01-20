@@ -95,7 +95,7 @@ export class BaseDataService {
     return this.toPromise(action, errorReturn);
   }
 
-  protected get<T = any>(method: string, data: any = undefined, responseType: any = 'json', headers?: HttpHeaders | { [header: string]: string | string[]; }): Promise<T> {
+  protected get<T = any>(method: string, data: any = undefined, errorReturn: boolean = false, responseType: any = 'json', headers?: HttpHeaders | { [header: string]: string | string[]; }): Promise<T> {
     const url = this.buildUrl(method);
     const options = {
       params: new HttpParams({ fromObject: data }),
@@ -103,7 +103,7 @@ export class BaseDataService {
       headers
     };
     const action = this.httpClient.get<T>(url, options);
-    return this.toPromise(action);
+    return this.toPromise(action,errorReturn);
   }
 
   protected delete<T = any>(method: string, data: any, errorReturn: boolean = false, queryString: boolean = false): Promise<T> {
