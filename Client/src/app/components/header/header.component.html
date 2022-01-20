@@ -4,20 +4,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link click" (click)="home()">Home</a>
+                    <a class="nav-link click" (mousedown)="home($event)">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link click" (click)="races()">Races</a>
+                    <a class="nav-link click" (mousedown)="races($event)">Races</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link click" (click)="traits()">Traits</a>
+                    <a class="nav-link click" (mousedown)="classes($event)">Classes</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link click" (click)="items()">Items</a>
+                    <a class="nav-link click" (mousedown)="traits($event)">Traits</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link click" (mousedown)="items($event)">Items</a>
                 </li>
             </ul>
         </div>
-        <div class="nav-login row click" (click)="login()">
+        <div class="nav-login row click" (mousedown)="login($event)">
             <div>
                 <a class="bi bi-person personIcon mr-5"></a>
                 <span  [innerText]="currentUser ? currentUser.Username : 'Login'" class="loggedName underline"></span>

@@ -11,52 +11,92 @@ import { environment } from 'src/environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit,OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
   constructor(readonly store: Store<{ state: State }>,
-              readonly route: Router) { }
+    readonly route: Router) { }
 
   diceIconPath = environment.apiURL + '/images/miscimages/dice.svg';
-  currentUser : User | undefined;
+  currentUser: User | undefined;
 
   ngOnInit(): void {
     this.refreshUserInformation();
   }
 
   ngOnDestroy(): void {
-    while(this.subscribes.length > 0) {
+    while (this.subscribes.length > 0) {
       this.subscribes.pop()?.unsubscribe();
     }
   }
 
-  login(){
-    if(!this.currentUser)
-      this.route.navigateByUrl('/Login');
-    else
-      this.route.navigateByUrl('/Profile');
-  }
 
-  refreshUserInformation(){
+  refreshUserInformation() {
     const sub = this.store.select('state').subscribe(i => this.currentUser = i.user);
     this.subscribes.push(sub);
   }
 
-  home(){
-    this.route.navigateByUrl('');
+  login(event: any) {
+    if (event.which == 2) {
+      if (!this.currentUser)
+        window.open('/Login', '_blank');
+      else
+        window.open('/Profile', '_blank');
+    }
+    else if (event.which == 1) {
+      if (!this.currentUser)
+        this.route.navigateByUrl('/Login');
+      else
+        this.route.navigateByUrl('/Profile');
+    }
   }
 
-  races(){
-    this.route.navigateByUrl('/Races');
+
+  home(event: any) {
+    if (event.which == 2) {
+      window.open('/', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/');
+    }
   }
 
-  traits(){
-    this.route.navigateByUrl('/Traits');
+  races(event: any) {
+    if (event.which == 2) {
+      window.open('/Races', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/Races');
+    }
   }
 
-  items(){
-    this.route.navigateByUrl('/Items');
+  classes(event: any) {
+    if (event.which == 2) {
+      window.open('/Classes', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/Classes');
+    }
   }
+
+  traits(event: any) {
+    if (event.which == 2) {
+      window.open('/Traits', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/Traits');
+    }
+  }
+
+  items(event: any) {
+    if (event.which == 2) {
+      window.open('/Items', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/Items');
+    }
+  }
+
 
 }

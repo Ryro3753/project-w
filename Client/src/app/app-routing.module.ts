@@ -22,6 +22,11 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path: 'Classes',
+    loadChildren: () => import('./pages/class-page/class-page.module').then(m => m.ClassPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
     path: 'Traits',
     loadChildren: () => import('./pages/trait-page/trait-page.module').then(m => m.TraitPageModule),
     canActivate:[AuthGuard]
