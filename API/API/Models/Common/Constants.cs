@@ -62,5 +62,15 @@ namespace API.Models
             "Versatile-Attack-Modifier",
             "Versatile-Attack-Modifier-Ability",
         };
+
+        public readonly static List<string> Abilities = new List<string>()
+        {
+            "Strength",
+            "Dexterity",
+            "Constitution",
+            "Intelligence",
+            "Wisdom",
+            "Charisma"
+        };
     }
 }

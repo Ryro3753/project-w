@@ -51,7 +51,7 @@ namespace API.Services
 
         public async Task<ClassDetail> GetClassDetail(int classId)
         {
-            var data = await _connection.QueryFirstOrDefaultAsync<ClassDetailQuery>("SELECT * from public.fn_getclassdetails(@Id)", new { Id = classId });
+            var data = await _connection.QueryFirstOrDefaultAsync<ClassDetailQuery>("SELECT * from public.fn_getclass(@Id)", new { Id = classId });
             if (data == null)
                 return null;
             var result = new ClassDetail

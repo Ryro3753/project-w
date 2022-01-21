@@ -1,0 +1,72 @@
+<div class="classAccordion widthFull mtr2" *ngIf="class" [ngStyle]="{'background-color': class.Color}">
+    <div class="row">
+        <div class="col-sm-1">
+            <input type="file" #imageUpload id="imageUpload" (change)="addImage($event)" style="display: none;"
+                accept="image/png, image/gif, image/jpeg">
+            <img [src]="class.HasImage ? classImageBasePath + class.Id + '.png' : noImagePath " class="responsiveIcon"
+                (dblclick)="imageUpload.click()" />
+        </div>
+        <div class="col-sm-6 raceName">
+            <span class="header4" [innerText]="class.Name"></span>
+        </div>
+        <div class="col-sm-2 offset-2 ">
+            <p class="centerlize bold">Created By:</p>
+            <p class="centerlize bold" style="color: white;" [innerText]="class.Username"></p>
+        </div>
+        <div class="col-sm-1 centerlize header4 click" (click)="detailsClick()">
+            <i [class]=" detailsToggle ? 'bi bi-arrow-up-circle' : 'bi bi-arrow-down-circle'"></i>
+        </div>
+    </div>
+</div>
+<div [@detailsToggle] *ngIf="detailsToggle && classDetail" class="classDetailBox"
+    [ngStyle]="{'border-color': class.Color}">
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-7">
+            <label for="className">Class Name</label>
+            <input type="text" class="form-control" id="className" placeholder="Class Name" [(ngModel)]="class.Name">
+        </div>
+        <div class="col-sm-2 offset-1">
+            <label for="classColor">Class Color</label>
+            <input type="color" class="form-control form-control-color" id="classColor" [(ngModel)]="class.Color"
+                title="Choose class color">
+        </div>
+    </div>
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-5">
+            <label for="classSaves">Class Saves</label>
+            <input type="text" class="form-control" id="classSaves" placeholder="Class Saves" [(ngModel)]="classDetail.Saves">
+        </div>
+        <div class="col-sm-5">
+            <label for="classPrimaryAbility">Class Primary Ability</label>
+            <input type="text" class="form-control" id="classPrimaryAbility" placeholder="Class Primary Ability" [(ngModel)]="classDetail.PrimaryAbility">
+        </div>
+    </div>
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-5">
+            <label for="classHitDie">Class Hit Die</label>
+            <input type="text" class="form-control" id="classHitDie" placeholder="Class Hit Die" [(ngModel)]="classDetail.HitDie">
+            <button class="btn btn-block  customBlockButton mtr1" (click)="featuresClick()">Features</button>
+            <app-features-list [features]="classDetail.Features"></app-features-list>
+        </div>
+        <div class="col-sm-5">
+            <label for="classDescription">Class Description</label>
+            <textarea class="form-control" [(ngModel)]="classDetail.Description" rows="9"></textarea>
+
+        </div>
+    </div>
+    <div class="row justify-content-center mr-2">
+        <div class="col-sm-10">
+            <button class="btn btn-block mtr1 customBlockButton" (click)="save()">Save</button>
+        </div>
+    </div>
+    <div class="row justify-content-center mr-2">
+        <div class="col-sm-10">
+            <button class="btn btn-primary mtr1 widthFull bold p-0" (click)="share()">Share</button>
+        </div>
+    </div>
+    <div class="row justify-content-center mr-2 mbr2">
+        <div class="col-sm-10">
+            <button class="btn btn-danger mtr1 widthFull bold p-0" (click)="deleteClass()">Delete</button>
+        </div>
+    </div>
+</div>

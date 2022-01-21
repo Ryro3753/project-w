@@ -1,0 +1,8 @@
+<ul>
+    <div *ngFor="let item of list">
+        <li class="list-group-item">
+            <input class="form-check-input me-1" type="checkbox" (change)="change($event)" [id]="item">
+            {{item}}
+        </li>
+    </div>
+</ul>

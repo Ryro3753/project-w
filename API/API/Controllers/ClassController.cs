@@ -1,4 +1,5 @@
-﻿using API.Models.Class;
+﻿using API.Models;
+using API.Models.Class;
 using API.Models.Common;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -24,9 +25,9 @@ namespace API.Controllers
         }
 
         [HttpGet("GetClassDetail")]
-        public async Task<ClassDetail> GetClassDetail(int raceId)
+        public async Task<ClassDetail> GetClassDetail(int classId)
         {
-            return await _classService.GetClassDetail(raceId);
+            return await _classService.GetClassDetail(classId);
         }
 
         [HttpPost("UpdateClass")]
@@ -35,14 +36,14 @@ namespace API.Controllers
             return await _classService.UpdateClass(request);
         }
 
-        [HttpPost("InsertRace")]
+        [HttpPost("InsertClass")]
         public async Task<CharacterClass> InsertClass(OnlyUserId request)
         {
             return await _classService.InsertClass(request);
         }
 
-        [HttpPost("RaceUploadImage")]
-        public async Task<bool> RaceUploadImage(int classId)
+        [HttpPost("ClassUploadImage")]
+        public async Task<bool> ClassUploadImage(int classId)
         {
             var imageFilePath = classId.ToString() + ".png";
             imageFilePath = Path.Combine(_classService.GetImageFolderPath(), imageFilePath);
@@ -67,6 +68,12 @@ namespace API.Controllers
         public async Task<bool> DeleteClass(int ClassId, string UserId)
         {
             return await _classService.DeleteClass(ClassId,  UserId );
+        }
+
+        [HttpGet("GetAbilities")]
+        public IEnumerable<string> GetAbilities()
+        {
+            return Constants.Abilities;
         }
         
     }

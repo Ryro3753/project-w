@@ -81,6 +81,12 @@ font-weight: bold;
     width: 100%;
 }
 
+::ng-deep .centerlize{
+    display: block;
+    text-align: center;
+    margin: 0;
+}
+
 ::ng-deep .underBorder{
     width: 100%;
     border-bottom-style: solid;

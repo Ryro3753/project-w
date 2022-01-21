@@ -29,4 +29,11 @@ export class UploadService{
         const url = environment.apiURL+"/Item/ItemTypeUploadImage?itemTypeId=" + Id;
         return this.httpClient.post(url, formData, {responseType: 'text', observe: 'events'})
     }
+
+    uploadClassImage(File: File,Id: number){
+        const formData = new FormData();
+        formData.append('file',File);
+        const url = environment.apiURL+"/Class/ClassUploadImage?classId=" + Id;
+        return this.httpClient.post(url, formData, {responseType: 'text', observe: 'events'})
+    }
 }

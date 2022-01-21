@@ -1,3 +1,10 @@
 <div class="container class-page">
-    
+    <div class="row justify-content-end mtr1">
+        <div class="col-sm-2">
+            <button class="btn btn-primary" (click)="addNewClass()"><i class="bi bi-plus"></i> Add Class</button>
+        </div>
+    </div>
+    <div *ngFor="let item of classes">
+        <app-class-accordion [class]="item" (deleteClicked)="deleteClass($event)" ></app-class-accordion>
+    </div>
 </div>
