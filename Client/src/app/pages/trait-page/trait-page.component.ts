@@ -76,7 +76,7 @@ export class TraitPageComponent implements OnInit,OnDestroy {
 
   searchClicked() {
     if (this.allTraits) {
-      this.filteredTraits = this.allTraits.filter(i => i.Name.includes(this.search));
+      this.filteredTraits = this.allTraits.filter(i => i.Name.toLowerCase().includes(this.search.toLowerCase()));
     }
   }
 

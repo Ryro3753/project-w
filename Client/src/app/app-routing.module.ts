@@ -41,6 +41,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/item-detail-page/item-detail-page.module').then(m => m.ItemDetailPageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'Spells',
+    loadChildren: () => import('./pages/spell-page/spell-page.module').then(m => m.SpellPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'Spells/:spellId',
+    loadChildren: () => import('./pages/spell-detail-page/spell-detail-page.module').then(m => m.SpellDetailPageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({

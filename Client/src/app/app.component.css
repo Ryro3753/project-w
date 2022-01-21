@@ -81,6 +81,11 @@ font-weight: bold;
     width: 100%;
 }
 
+::ng-deep .mediumCheckbox{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 ::ng-deep .centerlize{
     display: block;
     text-align: center;

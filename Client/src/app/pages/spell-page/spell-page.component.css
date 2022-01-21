@@ -1,0 +1,9 @@
+.spellTableRow{
+    border-color: #7b2cbf;
+    border-bottom-width: 0.2rem;
+}
+
+.spellTableRow:hover{
+    background-color: #7b2cbf;
+    color: white;
+}

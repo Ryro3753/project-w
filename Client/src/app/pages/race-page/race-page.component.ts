@@ -57,7 +57,7 @@ export class RacePageComponent implements OnInit, OnDestroy {
 
   searchClicked() {
     if (this.allRaces) {
-      this.filteredRaces = this.allRaces.filter(i => i.Name.includes(this.search));
+      this.filteredRaces = this.allRaces.filter(i => i.Name.toLowerCase().includes(this.search.toLowerCase()));
     }
   }
 

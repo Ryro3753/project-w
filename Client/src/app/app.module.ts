@@ -17,7 +17,6 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { SharePopupComponent } from './components/share-popup/share-popup.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { SimpleModalModule } from 'ngx-simple-modal';
-import { SpellPageComponent } from './pages/spell-page/spell-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { SpellPageComponent } from './pages/spell-page/spell-page.component';
     FeaturesPopupComponent,
     SharePopupComponent,
     ConfirmationComponent,
-    SpellPageComponent,
   ],
   imports: [
     BrowserModule,

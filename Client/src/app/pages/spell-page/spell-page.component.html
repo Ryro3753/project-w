@@ -1,1 +1,37 @@
-<p>spell-page works!</p>
+<div class="container spell-page">
+    <div class="row  mtr2">
+        <div class="col-sm-2">
+            <button class="btn btn-primary" (click)="addNewSpell()"><i class="bi bi-plus"></i> Add Spell</button>
+        </div>
+        <div class="col-sm-2 offset-6">
+            <input [(ngModel)]="search" placeholder="Search" class="widthFull  form-control" type="text">
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-block   customBlockButton" (click)="searchClicked()">Search</button>
+        </div>
+    </div>
+    <table class="table mtr2">
+        <thead>
+            <th scope="col">Name</th>
+            <th scope="col">Level</th>
+            <th scope="col">School</th>
+            <th scope="col">Casting Time</th>
+            <th scope="col">Ritual</th>
+            <th scope="col">Concentration</th>
+            <th scope="col">Created By</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of filteredSpells" class="spellTableRow">
+                <td [innerText]="item.Name" (mousedown)="seeDetails(item.Id,$event)" class="click underline"></td>
+                <td [innerText]="item.Level"></td>
+                <td [innerText]="item.School"></td>
+                <td [innerText]="item.CastingTime"></td>
+                <td> <input type="checkbox" [ngModel]="item.Ritual" disabled="true" class="mediumCheckbox"></td>
+                <td ><input type="checkbox" [ngModel]="item.Concentration" disabled="true" class="mediumCheckbox"></td>
+                <td [innerText]="item.Username" class="bold"></td>
+                <td (click)="deleteSpell(item.Id)" class="click"><i class="bi bi-trash"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

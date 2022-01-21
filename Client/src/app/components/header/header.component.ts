@@ -98,5 +98,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  spells(event: any) {
+    if (event.which == 2) {
+      window.open('/Spells', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/Spells');
+    }
+  }
 
 }
