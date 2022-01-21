@@ -55,10 +55,7 @@ export class ClassAccordionComponent implements OnInit,OnDestroy {
   noImagePath = this.apiURL + '/images/miscimages/no-image.svg';
   classImageBasePath = this.apiURL + '/images/classImages/';
 
-  abilities!: string[];
-
   async ngOnInit(): Promise<void> {
-    this.abilities = await this.classService.getAbilities();
   }
 
   ngOnDestroy(): void {
