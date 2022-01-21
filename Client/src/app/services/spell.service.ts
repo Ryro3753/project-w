@@ -19,7 +19,7 @@ export class SpellService extends BaseDataService {
   }
 
   getSpell(spellId: number, userId: string): Promise<SpellDetail>{
-    return this.get<SpellDetail>("GetSpell", {spellId, userId});
+    return this.get<SpellDetail>("GetSpell", {spellId, userId},true);
   }
 
   insertSpell(request: OnlyUserId): Promise<Spell>{
@@ -36,5 +36,55 @@ export class SpellService extends BaseDataService {
 
   deleteSpell(SpellId: number, UserId: string): Promise<boolean>{
     return this.delete<boolean>("DeleteSpell",{SpellId:SpellId, UserId: UserId},true);
+  }
+
+  getSpellLevels(){
+    return [
+      {id: 0, value:'Cantrip'},
+      {id: 1, value:'1st Level'}, 
+      {id: 2, value:'2nd Level'},
+      {id: 3, value:'3rd Level'}, 
+      {id: 4, value:'4th Level'}, 
+      {id: 5, value:'5th Level'}, 
+      {id: 6, value:'6th Level'},
+      {id: 7, value:'7th Level'}, 
+      {id: 8, value:'8th Level'}, 
+      {id: 9, value:'9th Level'}, 
+      {id: 10, value:'10th Level'}];
+  }
+
+  getSpellComponents(): string[]{
+    return ['V','S','M'];
+  }
+
+  getSpellSchools(): string[] {
+    return [
+      'Abjuration',
+      'Transmutation',
+      'Conjuration',
+      'Divination',
+      'Enchantment',
+      'Evocation',
+      'Illusion',
+      'Necromancy'
+    ]
+  }
+
+  getSpellRanges(): string[] {
+    return [
+      'Touch',
+      'Sight',
+      'Self',
+      'Unlimited'
+    ]
+  }
+
+  getSpellCastingType(): string[] {
+    return [
+      'Action',
+      'Bonus Action',
+      'Reaction',
+      'Special'
+    ]
   }
 }

@@ -29,6 +29,7 @@ export class SpellPageComponent implements OnInit {
   allSpells!: Spell[];
   filteredSpells!: Spell[];
   search!: string;
+  spellLevels!: any;
 
   ngOnInit(): void {
     this.subscribes.push(this.store.select('state').subscribe(async i => {
@@ -37,6 +38,7 @@ export class SpellPageComponent implements OnInit {
         await this.readData(i.user.Id);
       }
     }));
+    this.spellLevels = this.spellService.getSpellLevels();
   }
 
   async addNewSpell() {

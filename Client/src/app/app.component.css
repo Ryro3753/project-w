@@ -55,6 +55,16 @@ font-size: xx-large;
 font-weight: bold;
 }
 
+::ng-deep .header5{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+::ng-deep .header6{
+    font-size: large;
+    font-weight: bold;
+}
+
 ::ng-deep .bold{
     font-weight: bold;
 }
@@ -96,6 +106,13 @@ font-weight: bold;
     width: 100%;
     border-bottom-style: solid;
     border-bottom-color: white;
+    margin: 0;
+}
+
+::ng-deep .underBorderColored{
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-color: #7b2cbf;
     margin: 0;
 }
 

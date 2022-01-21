@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { SpellDetailPageComponent } from './spell-detail-page.component';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SpellDetailPageComponent } from './spell-detail-page.component';
       component: SpellDetailPageComponent
     }]),
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   providers: [
   ],

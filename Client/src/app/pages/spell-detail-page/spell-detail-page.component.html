@@ -1,1 +1,114 @@
-<p>spell-detail-page works!</p>
+<div class="container spell-detail-page mtr2" *ngIf="spellDetail">
+    <div class="row underBorderColored justify-content-center ">
+        <div class="col-sm-6">
+            <span class="header5" [innerText]="spellDetail.Name"></span>
+        </div>
+        <div class="col-sm-6 textAlignEnd">
+            <span class="header5" [innerText]="'Created By:' + spellDetail.Username"></span>
+        </div>
+    </div>
+    <div class="form-check mbr2">
+        <input type="checkbox" [(ngModel)]="edit" class="form-check-input" id="activeEdit">
+        <label class="form-check-label" for="activeEdit">
+            Active Edit
+        </label>
+    </div>
+    <div *ngIf="!edit">
+        <p *ngIf="spellDetail.Ritual"> This spell needs a ritual </p>
+        <p *ngIf="spellDetail.Concentration"> This spell needs a concentration </p>
+        <p [innerText]="'Level: ' + spellLevels[spellDetail.Level].value" class="header6"></p>
+        <p [innerText]="'School: ' + spellDetail.School" class="header6"></p>
+        <p [innerText]="'Casting Time: ' + spellDetail.CastingTime + (spellDetail.CastingDescription != '' ? '(' + spellDetail.CastingDescription + ')' : '')"
+            class="header6"></p>
+        <p [innerText]="'Range: ' + spellDetail.Range" class="header6"></p>
+        <p [innerText]="'Components: ' + spellDetail.Components+ (spellDetail.ComponentsDescription != '' ? '(' + spellDetail.ComponentsDescription + ')' : '')"
+            class="header6"></p>
+        <p [innerText]="'Duration: ' + spellDetail.Duration" class="header6"></p>
+        <p [innerText]="'Mana: ' + spellDetail.Mana" class="header6"></p>
+        <p [innerText]="spellDetail.Description" class="header6"></p>
+    </div>
+    <div *ngIf="edit">
+        <div class="row mbr2">
+            <div class="col-sm-3">
+                <label>Name</label>
+                <input type="text" class="form-control"placeholder="Name" [(ngModel)]="spellDetail.Name">
+            </div>
+            <div class="col-sm-3">
+                <label>Level</label>
+                <ng-select [items]="spellLevels" bindLabel="value" bindValue="id" [(ngModel)]="spellDetail.Level">
+                </ng-select>
+            </div>
+            <div class="col-sm-4">
+                <label>School</label>
+                <ng-select [items]="spellSchools" [(ngModel)]="spellDetail.School" placeholder="Select School"
+                    [addTag]="true">
+                </ng-select>
+            </div>
+
+        </div>
+        <div class="row mbr2">
+            <div class="col-sm-3">
+                <label>Casting Type</label>
+                <ng-select [items]="spellCastingTypes" [(ngModel)]="spellDetail.CastingType" placeholder="Select Casting Type"></ng-select>
+            </div>
+            <div class="col-sm-3">
+                <label>Casting Time</label>
+                <input type="text" class="form-control"placeholder="Casting Time" [(ngModel)]="spellDetail.CastingTime">
+            </div>
+            <div class="col-sm-5" *ngIf="spellDetail.CastingType == 'Reaction' || spellDetail.CastingType == 'Special'">
+                <label>Casting Description</label>
+                <input type="text" class="form-control"placeholder="Casting Description" [(ngModel)]="spellDetail.CastingDescription">
+            </div>
+        </div>
+        <div class="row mbr2">
+            <div class="col-sm-3">
+                <label>Duration</label>
+                <input type="text" class="form-control"placeholder="Duration" [(ngModel)]="spellDetail.Duration">
+            </div>
+            <div class="col-sm-3">
+                <label>Components</label>
+                <ng-select [items]="spellComponents" [multiple]="true" [(ngModel)]="selectedComponents" [hideSelected]="true"
+                placeholder="Select Components"></ng-select>
+            </div>
+            <div class="col-sm-5">
+                <label>Components Description</label>
+                <input type="text" class="form-control"placeholder="Component Description" [(ngModel)]="spellDetail.ComponentsDescription">
+            </div>
+        </div>
+        <div class="row mbr2">
+            <div class="col-sm-3">
+                <label>Range</label>
+                <ng-select [items]="spellRanges" [(ngModel)]="spellDetail.Range" placeholder="Select Range" [addTag]="true">
+                </ng-select>
+            </div>
+            <div class="col-sm-3">
+                <label>Mana</label>
+                <input type="text" class="form-control"placeholder="Mana" [(ngModel)]="spellDetail.Mana">
+            </div>
+            <div class="col-sm-3 my-auto">
+                <input type="checkbox" [(ngModel)]="spellDetail.Concentration" class="form-check-input">
+                <label class="form-check-label">
+                    This Spell Requires Concentration
+                </label>
+            </div>
+            <div class="col-sm-3 form-check my-auto">
+                <input type="checkbox" [(ngModel)]="spellDetail.Ritual" class="form-check-input">
+                <label class="form-check-label">
+                    This Spell Requires Ritual
+                </label>
+            </div>
+        </div>
+        <div class="row mbr2">
+            <textarea class="form-control" [(ngModel)]="spellDetail.Description" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="row  mr-2" *ngIf="edit">
+        <button class="btn btn-block mtr1 customBlockButton" (click)="save()">Save</button>
+    </div>
+    <div class="row  mr-2">
+        <button class="btn btn-primary mtr1 widthFull bold p-0" (click)="share()">Share</button>
+    </div>
+    <div class="row mr-2 mbr2" *ngIf="edit">
+        <button class="btn btn-danger mtr1 widthFull bold p-0" (click)="deleteSpell()">Delete</button>
+    </div>
+</div>

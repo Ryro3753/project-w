@@ -47,7 +47,7 @@ export class ItemDetailPageComponent implements OnInit, OnDestroy {
   edit: boolean = false;
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(i => this.itemTypeId = i['itemId']);
+    this.subscribes.push(this.activatedRoute.params.subscribe(i => this.itemTypeId = i['itemId']));
     const sub = this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
       if (i.user) {
