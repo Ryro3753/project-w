@@ -52,6 +52,11 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path: 'Character-Creation',
+    loadChildren: () => import('./pages/character-creation-page/character-creation-page.module').then(m => m.CharacterCreationPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
     path: 'Character-Creation/:CharacterId',
     loadChildren: () => import('./pages/character-creation-page/character-creation-page.module').then(m => m.CharacterCreationPageModule),
     canActivate:[AuthGuard]

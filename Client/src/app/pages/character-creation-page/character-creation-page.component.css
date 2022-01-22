@@ -1,0 +1,20 @@
+.creationTab{
+    border-bottom-color: #7b2cbf;
+    border-bottom-width: 0.25rem;
+}
+
+.creationTabButton{
+    background-color: #7b2cbf;
+    border-radius: 0;
+    color: white;
+    font-size: x-large;
+    border-style: none;
+}
+
+.selectedTabButton{
+    background-color: #10002b;
+}
+
+.creationTabButton:hover{
+    background-color: #10002b;
+}

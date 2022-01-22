@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CharacterCreationPageComponent } from './character-creation-page.component';
@@ -15,6 +16,7 @@ import { CharacterBasicComponent } from './components/character-basic/character-
       component: CharacterCreationPageComponent
 
     }]),
+    CommonModule
   ],
   providers: [
   ],

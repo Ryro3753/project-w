@@ -1,1 +1,11 @@
-<p>character-creation-page works!</p>
+<div class="container character-creation-page ">
+    <nav class="mtr2">
+        <div class="nav nav-tabs creationTab">
+            <button class="btn btn-block creationTabButton"
+                [ngClass]="clickedTab == 0 ? 'selectedTabButton' : ''">Basics</button>
+            <button class="btn btn-block creationTabButton" [disabled]="!characterId">Profile</button>
+            <button class="btn btn-block creationTabButton" [disabled]="!characterId">Contact</button>
+        </div>
+    </nav>
+    <app-character-basic *ngIf="clickedTab == 0"></app-character-basic>
+</div>

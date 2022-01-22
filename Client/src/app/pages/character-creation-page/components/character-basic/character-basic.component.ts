@@ -12,4 +12,6 @@ export class CharacterBasicComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
 }
