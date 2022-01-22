@@ -51,6 +51,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/spell-detail-page/spell-detail-page.module').then(m => m.SpellDetailPageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'Character-Creation/:CharacterId',
+    loadChildren: () => import('./pages/character-creation-page/character-creation-page.module').then(m => m.CharacterCreationPageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({

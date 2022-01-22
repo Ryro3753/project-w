@@ -13,6 +13,7 @@ export class ItemAttributeListComponent implements OnInit {
 
   @Input() height: number = 150;
   @Input() attributes!: ItemAttribute[];
+  @Input() edit!: boolean;
   @Output() attributesChange: EventEmitter<ItemAttribute[]> = new EventEmitter<ItemAttribute[]>();
 
   itemAttributes!: string[];

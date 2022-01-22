@@ -16,21 +16,21 @@
                 </label>
             </div>
         </div>
-        <div class="col-sm-2 offset-5">
+        <div class="col-sm-2 offset-5 mtr1">
             <input type="file" #imageUpload id="imageUpload" (change)="addImage($event)" style="display: none;"
                 accept="image/png, image/gif, image/jpeg">
             <img [src]="itemTypeDetail.HasImage ? itemImageBasePath + itemTypeDetail.Id + '.png' : noImagePath "
-                class="responsiveMediumIcon" title="Double click to upload photo" (dblclick)="imageUpload.click()" />
+                class="responsiveIcon" title="Double click to upload photo" (dblclick)="imageUpload.click()" />
         </div>
     </div>
-    <div class="row">
+    <div class="row mtr1">
         <div class="col-sm-4">
             <button class="btn btn-block  customBlockButton" (click)="featuresClick()" [disabled]="!edit">Features</button>
             <app-features-list [features]="itemTypeDetail.Features" [height]="400"></app-features-list>
         </div>
         <div class="col-sm-4">
             <button class="btn btn-block  customBlockButton" (click)="addAttribute()" [disabled]="!edit">Add Attribute</button>
-            <app-item-attribute-list [(attributes)]="itemTypeDetail.Attributes" [height]="400">
+            <app-item-attribute-list [(attributes)]="itemTypeDetail.Attributes" [height]="400" [edit]="edit">
             </app-item-attribute-list>
         </div>
         <div class="col-sm-4">

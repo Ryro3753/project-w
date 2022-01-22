@@ -2,11 +2,11 @@
     <div *ngFor="let item of attributes; let i = index;">
         <div class="row itemAttribute">
             <div class="col-sm-1 my-auto">
-                <button class="btn-block removeButton" title="Remove" (click)="removeAttribute(i)">X</button>
+                <button class="btn-block removeButton" title="Remove" (click)="removeAttribute(i)" [disabled]="!edit">X</button>
             </div>
             <div class="col-sm-11">
-                <ng-select [items]="itemAttributes" [(ngModel)]="item.Attribute" class="widthFull mbr1" [title]="item.Attribute" placeholder="Attribute"></ng-select>
-                <input type="text" [(ngModel)]="item.Value" class="widthFull" placeholder="Value">
+                <ng-select [items]="itemAttributes" [(ngModel)]="item.Attribute" class="widthFull mbr1" [title]="item.Attribute" [disabled]="!edit" placeholder="Attribute"></ng-select>
+                <input type="text" [(ngModel)]="item.Value" class="widthFull  form-control" placeholder="Value" [disabled]="!edit">
             </div>
         </div>
     </div>

@@ -150,6 +150,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
     this.section[index] = '';
     this.type[index] = '';
     this.value[index] = '';
+    this.note[index] = '';
     this.requirements[index] = [];
     this.currentCollapse = this.features.length;
   }

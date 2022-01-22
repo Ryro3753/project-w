@@ -73,7 +73,7 @@ namespace API.Services
             var data = await _connection.QueryFirstOrDefaultAsync<ItemTypeDetailQuery>("Select * from public.fn_updateitemtype(@itemtypeid,@newname,@newdescription,@newcategory, @newtype, @newequippable, @newtags,@newfeatures, @newattributes)",
                 new { itemtypeid = request.ItemTypeId, newname = request.Name, newdescription = request.Description,
                     newcategory = request.Category, newtype = request.Type, newequippable = request.Equippable, 
-                    newtags = request.Tags, newfeatures = _featureService.UnreadFeatures(request.Features), newattributes = "" });
+                    newtags = request.Tags, newfeatures = _featureService.UnreadFeatures(request.Features), newattributes = UnreadAttributes(request.Attributes) });
             return new ItemTypeDetail
             {
                 Id = data.Id,
