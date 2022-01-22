@@ -4,7 +4,7 @@
       <li
         [class]="item.Requirements !== null && item.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement"
         (click)="showRequirements(item,i)" [innerText]="item.Section + ' - ' + item.Type + ' - ' + item.Value"
-        [title]="item.Requirements !== null && item.Requirements.length > 0 ? 'Click here to show requirements for this feature' : '' ">
+        [title]="item.Note !== null && item.Note !== '' ? item.Note : '' ">
       </li>
       <ul *ngIf="showRequirementsToggle[i]" class="list-group">
         <div *ngFor="let item of item.Requirements">

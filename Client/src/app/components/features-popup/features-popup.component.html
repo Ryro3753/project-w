@@ -24,6 +24,10 @@
                         <ng-select bindValue="label" [(ngModel)]="value[i]" placeholder="value" [addTag]="true"
                             [disabled]="!type[i]"></ng-select>
                     </div>
+                    <div class="col-sm-12">
+                        <label>Note</label>
+                        <input type="text" class="form-control widthFull" placeholder="Note" [(ngModel)]="note[i]">
+                    </div>
                     <div class="row mtr1">
                         <div class="col-sm-3">
                             <strong class="requirementsHeader">Requirements</strong>

@@ -7,15 +7,7 @@ namespace API.Models.Features
         public string Section { get; set; }
         public string Type { get; set; }
         public string Value { get; set; }
+        public string Note { get; set; }
         public List<Requirement> Requirements { get; set; }
-
-    }
-
-    public class  Requirement
-    {
-        public string Section { get; set; }
-        public string Type { get; set; }
-        public string Value { get; set; }
-
     }
 }

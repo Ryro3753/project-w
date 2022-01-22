@@ -39,12 +39,13 @@ namespace API.Services
                 newFeature.Section = itemSplitted[0];
                 newFeature.Type = itemSplitted[1];
                 newFeature.Value = itemSplitted[2];
+                newFeature.Note = itemSplitted[3];
 
                 //split requirements
-                    newFeature.Requirements = new List<Requirement>();
-                if (!string.IsNullOrEmpty(itemSplitted[3]))
+                newFeature.Requirements = new List<Requirement>();
+                if (!string.IsNullOrEmpty(itemSplitted[4]))
                 {
-                    var requirementsSplitted = itemSplitted[3].Split(':');
+                    var requirementsSplitted = itemSplitted[4].Split(':');
                     for (int q = 0; q < requirementsSplitted.Length; q++)
                     {
                         var requirementSplitted = requirementsSplitted[q].Split(';');
@@ -72,7 +73,7 @@ namespace API.Services
             var listString = new List<string>();
             for (int i = 0; i < features.Count; i++)
             {
-                var str = features[i].Section + "!" + features[i].Type + "!" + features[i].Value + "!";
+                var str = features[i].Section + "!" + features[i].Type + "!" + features[i].Value + "!" + features[i].Note + "!";
                 if (features[i].Requirements != null)
                 {
                     var requirementsListString = new List<string>();

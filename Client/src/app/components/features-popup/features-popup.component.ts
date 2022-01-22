@@ -23,6 +23,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
   section: string[] = [];
   type: string[] = [];
   value: string[] = [];
+  note: string[] = [];
   requirements: Requirement[][] = [[], []];
 
   sectionOptions!: string[];
@@ -64,6 +65,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       this.section[i] = e.Section;
       this.type[i] = e.Type;
       this.value[i] = e.Value;
+      this.note[i] = e.Note;
       if (e.Requirements != null && e.Requirements)
         this.requirements[i] = e.Requirements;
       else
@@ -81,6 +83,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
         Section: this.section[i],
         Type: this.type[i],
         Value: this.value[i],
+        Note: this.note[i],
         Requirements: this.requirements[i] ? this.requirements[i] : []
       }
     }
@@ -129,6 +132,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
     this.section.splice(index, 1);
     this.type.splice(index, 1);
     this.value.splice(index, 1);
+    this.note.splice(index, 1);
     this.requirements.splice(index, 1);
     this.features.splice(index, 1);
     this.currentCollapse -= 1;
@@ -139,6 +143,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       Section: '',
       Type: '',
       Value: '',
+      Note: '',
       Requirements: []
     });
     const index = this.features.length - 1;
