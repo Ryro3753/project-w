@@ -1,4 +1,4 @@
-# Project-W (I haven't name the project yed)
+# Project-W (I haven't name the project yet)
 This is a project for table RPG games, main object is to make user create a quick and adaptable table RPG campaings. It is still under development, you can't really play with it right now but it will get there in no time.
 
 ## Technologies
