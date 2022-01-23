@@ -41,7 +41,6 @@ export class TraitSheetComponent implements OnInit {
 
   async readTraitDetail(id: number) {
     this.traitDetail = await this.traitService.getTrait(id);
-    console.log(this.traitDetail);
   }
 
   featuresClick() {

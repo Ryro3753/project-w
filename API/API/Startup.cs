@@ -72,6 +72,7 @@ namespace API
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IClassService, ClassService>();
             services.AddTransient<ISpellService, SpellService>();
+            services.AddTransient<ICharacterService, CharacterService>();
 
             services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(Configuration.GetConnectionString("postgresql")));
 

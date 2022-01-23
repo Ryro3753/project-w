@@ -84,7 +84,6 @@ export class ClassAccordionComponent implements OnInit,OnDestroy {
   }
 
   async detailsClick() {
-    console.log(this.class.Color)
     this.detailsToggle = !this.detailsToggle;
     if (!this.classDetail && this.class) {
       this.classDetail = await this.classService.getClassDetail(this.class.Id);

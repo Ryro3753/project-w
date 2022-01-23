@@ -52,6 +52,7 @@ namespace API.Models
             "Weight",
             "Range",
             "Rarity",
+            "AttackDice",
             "Damage-Type",
             "Damage-Modifier",
             "Damage-Modifier-Ability",

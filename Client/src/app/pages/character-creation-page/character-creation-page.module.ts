@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { CharacterCreationPageComponent } from './character-creation-page.component';
 import { CharacterBasicComponent } from './components/character-basic/character-basic.component';
 
@@ -16,7 +17,8 @@ import { CharacterBasicComponent } from './components/character-basic/character-
       component: CharacterCreationPageComponent
 
     }]),
-    CommonModule
+    CommonModule,
+    NgSelectModule
   ],
   providers: [
   ],

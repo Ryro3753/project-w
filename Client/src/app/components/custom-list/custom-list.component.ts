@@ -19,7 +19,6 @@ export class CustomListComponent implements OnInit {
   }
 
   change(e:any){
-    console.log(e);
   }
 
 

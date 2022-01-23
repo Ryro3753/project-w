@@ -7,5 +7,5 @@
             <button class="btn btn-block creationTabButton" [disabled]="!characterId">Contact</button>
         </div>
     </nav>
-    <app-character-basic *ngIf="clickedTab == 0"></app-character-basic>
+    <app-character-basic [allClasses]="allClasses" [allRaces]="allRaces" [characterId]="characterId" *ngIf="clickedTab == 0"></app-character-basic>
 </div>

@@ -35,8 +35,13 @@ export class CharacterCreationPageComponent implements OnInit, OnDestroy {
   allClasses!: CharacterClass[];
 
   ngOnInit(): void {
+    this.subscribes.push(this.activatedRoute.params.subscribe(i => {
+      this.characterId = i['CharacterId'];
+        }));
     this.subscribes.push(this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
+      if(i.user)
+        await this.readData(i.user.Id)
     }));
   }
 
