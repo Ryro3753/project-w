@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CharacterCreationPageComponent } from './character-creation-page.component';
@@ -18,7 +19,8 @@ import { CharacterBasicComponent } from './components/character-basic/character-
 
     }]),
     CommonModule,
-    NgSelectModule
+    NgSelectModule,
+    FormsModule
   ],
   providers: [
   ],

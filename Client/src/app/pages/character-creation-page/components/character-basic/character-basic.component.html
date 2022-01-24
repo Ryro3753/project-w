@@ -1,4 +1,26 @@
 <div class="row">
-    <ng-select [items]="allClasses" bindLabel="Name" bindValue="Id" placeholder="Select Class" [addTag]="true"></ng-select>
-    <ng-select [items]="allRaces" bindLabel="Name" bindValue="Id" placeholder="Select Race" [addTag]="true"></ng-select>
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-8">
+            <label>Character Name</label>
+            <input type="text" class="form-control" [(ngModel)]="name" placeholder="Character Name">
+        </div>
+    </div>
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-4">
+            <label>Class</label>
+            <ng-select [items]="allClasses" bindLabel="Name" bindValue="Id" placeholder="Select Class"
+                [(ngModel)]="selectedClass"></ng-select>
+        </div>
+        <div class="col-sm-4">
+            <label>Race</label>
+            <ng-select [items]="allRaces" bindLabel="Name" bindValue="Id" placeholder="Select Race"
+                [(ngModel)]="selectedRace" class="widthFull"></ng-select>
+        </div>
+    </div>
+    <div class="row justify-content-center mtr2">
+        <div class="col-sm-8">
+            <button class="btn btn-block customBlockButton" (click)="save()"
+            [innerText]="currentcharacterId ? 'Save' : 'Create'"></button>
+        </div>
+    </div>
 </div>

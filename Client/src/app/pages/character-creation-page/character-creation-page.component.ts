@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { CharacterClass } from 'src/app/models/class.model';
 import { User } from 'src/app/models/common/user.model';
 import { Race } from 'src/app/models/races.model';
+import { CharacterService } from 'src/app/services/character.service';
 import { ClassService } from 'src/app/services/class.service';
 import { RaceService } from 'src/app/services/races.service';
 import { State } from 'src/app/store/reducer/reducer';
@@ -20,11 +21,12 @@ export class CharacterCreationPageComponent implements OnInit, OnDestroy {
   subscribes: SubscriptionLike[] = [];
 
   constructor(readonly store: Store<{ state: State }>,
-              readonly classService: ClassService,
-              readonly raceService: RaceService,
-              readonly alertService: AlertService,
-              readonly activatedRoute: ActivatedRoute,
-              readonly router: Router) { }
+    readonly classService: ClassService,
+    readonly raceService: RaceService,
+    readonly alertService: AlertService,
+    readonly activatedRoute: ActivatedRoute,
+    readonly router: Router,
+    readonly characterService: CharacterService) { }
 
   clickedTab: number = 0;
   characterId!: number;
@@ -35,14 +37,16 @@ export class CharacterCreationPageComponent implements OnInit, OnDestroy {
   allClasses!: CharacterClass[];
 
   ngOnInit(): void {
-    this.subscribes.push(this.activatedRoute.params.subscribe(i => {
+    this.subscribes.push(this.activatedRoute.params.subscribe((i: any) => {
       this.characterId = i['CharacterId'];
-        }));
+    }));
     this.subscribes.push(this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
-      if(i.user)
-        await this.readData(i.user.Id)
+      if (i.user) {
+        this.readData(i.user.Id)
+      }
     }));
+
   }
 
   ngOnDestroy(): void {
@@ -51,9 +55,13 @@ export class CharacterCreationPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  async readData(userId: string){
+  async readData(userId: string) {
     this.allRaces = await this.raceService.getAllRacesByUserId(userId);
     this.allClasses = await this.classService.getAllClassesByUserId(userId);
+  }
+
+  characterCreated(characterId: number) {
+    this.router.navigateByUrl('/Character-Creation/' + characterId);
   }
 
 }

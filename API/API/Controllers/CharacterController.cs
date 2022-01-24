@@ -21,6 +21,18 @@ namespace API.Controllers
             return await _characterService.GetCharacterCreationBasics(characterId, userId);
         }
 
+        [HttpPost("CreateCharacter")]
+        public async Task<CharacterBasics> CreateCharacter(CharacterCreationRequest request)
+        {
+            return await _characterService.CreateCharacter(request);
+        }
+
+        [HttpPost("UpdateCharacter")]
+        public async Task<bool> UpdateCharacter(UpdateCharacterRequest request)
+        {
+            return await _characterService.UpdateCharacter(request);
+        }
+
 
     }
 }
