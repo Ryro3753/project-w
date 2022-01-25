@@ -1,6 +1,8 @@
 ﻿using API.Models.Character;
 using Dapper;
+using Microsoft.AspNetCore.Hosting;
 using System.Data;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -11,15 +13,25 @@ namespace API.Services
         Task<CharacterBasics> CreateCharacter(CharacterCreationRequest request);
         Task<bool> UpdateCharacter(UpdateCharacterRequest request);
         Task<CharacterApperance> GetCharacterApperance(int characterId);
+        string GetImageFolderPath();
+        Task<bool> UpdateHasImage(int characterId);
+        Task<bool> UpdateCharacterApperance(UpdateCharacterApperanceRequest request);
     }
 
     public class CharacterService : ICharacterService
     {
         private readonly IDbConnection _connection;
+        private readonly IWebHostEnvironment _env;
 
-        public CharacterService(IDbConnection connection)
+        public CharacterService(IDbConnection connection, IWebHostEnvironment env)
         {
             _connection = connection;
+            _env = env;
+        }
+
+        public string GetImageFolderPath()
+        {
+            return Path.Combine(_env.WebRootPath, "images", "CharacterImages");
         }
 
         public async Task<CharacterBasics> GetCharacterCreationBasics(int characterId, string userId)
@@ -40,7 +52,7 @@ namespace API.Services
 
         public async Task<bool> UpdateCharacter(UpdateCharacterRequest request)
         {
-            return await _connection.QuerySingleOrDefaultAsync<bool>("Select * from public.\"[CC]fn_updatecharacter\"(@characterid,@name,@classid,@raceid)",
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CC]fn_updatecharacter\"(@characterid,@name,@classid,@raceid)",
                 new
                 {
                     characterid = request.CharacterId,
@@ -53,6 +65,28 @@ namespace API.Services
         public async Task<CharacterApperance> GetCharacterApperance(int characterId)
         {
             return await _connection.QueryFirstOrDefaultAsync<CharacterApperance>("Select * from public.\"[CC]fn_getcharacterapperance\"(@characterid) ", new { characterid = characterId });
+        }
+
+        public async Task<bool> UpdateCharacterApperance(UpdateCharacterApperanceRequest request)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CC]fn_updatecharacterapperance\"(@characterid,@weight,@height,@gender,@age,@hair,@eyes,@skin,@note)",
+                new
+                {
+                    characterid = request.CharacterId,
+                    weight = request.Weight,
+                    height = request.Height,
+                    gender = request.Gender,
+                    age = request.Age,
+                    hair = request.Hair,
+                    eyes = request.Eyes,
+                    skin = request.Skin,
+                    note = request.Note
+                });
+        }
+
+        public async Task<bool> UpdateHasImage(int characterId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.\"[CC]fn_updatecharacterhasimage\"(@characterid, @hasimage)", new { characterid = characterId, hasimage = true });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using API.Models.Character;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -37,6 +38,28 @@ namespace API.Controllers
         public async Task<CharacterApperance> GetCharacterApperance(int characterId)
         {
             return await _characterService.GetCharacterApperance(characterId);
+        }
+
+        [HttpPost("UpdateCharacterApperance")]
+        public async Task<bool> UpdateCharacterApperance(UpdateCharacterApperanceRequest request)
+        {
+            return await _characterService.UpdateCharacterApperance(request);
+        }
+
+        [HttpPost("CharacterUploadImage")]
+        public async Task<bool> CharacterUploadImage(int characterId)
+        {
+            var imageFilePath = characterId.ToString() + ".png";
+            imageFilePath = Path.Combine(_characterService.GetImageFolderPath(), imageFilePath);
+
+            using var stream = System.IO.File.Create(imageFilePath);
+
+            foreach (var item in Request.Form.Files)
+            {
+                await item.CopyToAsync(stream);
+            }
+
+            return await _characterService.UpdateHasImage(characterId);
         }
 
     }

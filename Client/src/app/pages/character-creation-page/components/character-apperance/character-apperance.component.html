@@ -4,9 +4,46 @@
             accept="image/png, image/gif, image/jpeg">
         <span *ngIf="!apperance.HasImage" class="textAlignEnd">Place Holder Image</span>
         <img [src]="apperance.HasImage ? characterImageBasePath + apperance.CharacterId + '.png' : noImagePath "
-            class="responsiveSmediumIcon mrr2" title="Double click to upload photo" (dblclick)="imageUpload.click()" [ngClass]="!apperance.HasImage ? 'emptyIcon' : ''" />
+            class="responsiveSmediumIcon mrr2" title="Double click to upload photo" (dblclick)="imageUpload.click()"
+            [ngClass]="!apperance.HasImage ? 'emptyIcon' : ''" />
     </div>
-    <div class="row">
-
+    <div class="row mtr1">
+        <div class="col-sm-3">
+            <label>Weight</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Weight" placeholder="Weight">
+        </div>
+        <div class="col-sm-3">
+            <label>Height</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Height" placeholder="Height">
+        </div>
+        <div class="col-sm-3">
+            <label>Gender</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Gender" placeholder="Gender">
+        </div>
+        <div class="col-sm-3">
+            <label>Age</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Age" placeholder="Age">
+        </div>
     </div>
+    <div class="row mtr1">
+        <div class="col-sm-4">
+            <label>Hair</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Hair" placeholder="Hair">
+        </div>
+        <div class="col-sm-4">
+            <label>Eyes</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Eyes" placeholder="Eyes">
+        </div>
+        <div class="col-sm-4">
+            <label>Skin</label>
+            <input type="text" class="form-control" [(ngModel)]="apperance.Skin" placeholder="Skin">
+        </div>
+    </div>
+    <div class="row mtr1">
+        <div class="col-sm-12">
+            <label>Note</label>
+            <textarea type="text" class="form-control" [(ngModel)]="apperance.Note" placeholder="Note" rows="1"></textarea>
+        </div>
+    </div>
+    <button class="btn btn-block customBlockButton mtr2" (click)="save()">Save</button>
 </div>

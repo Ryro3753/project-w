@@ -33,4 +33,15 @@ export interface CharacterApperance{
     HasImage: boolean;
 }
 
+export interface UpdateCharacterApperanceRequest{
+    CharacterId: number;
+    Gender: string;
+    Eyes: string;
+    Weight: string;
+    Height: string;
+    Hair: string;
+    Skin: string;
+    Age: string;
+    Note: string;
+}
 

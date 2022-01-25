@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { CharacterApperance, CharacterBasics, CharacterCreationRequest, UpdateCharacterRequest } from "../models/character.model"
+import { CharacterApperance, CharacterBasics, CharacterCreationRequest, UpdateCharacterApperanceRequest, UpdateCharacterRequest } from "../models/character.model"
 import { BaseDataService } from "./common/base-data.service"
 
 
@@ -27,5 +27,9 @@ export class CharacterService extends BaseDataService {
 
   getCharacterApperance(characterId: number): Promise<CharacterApperance>{
     return this.get<CharacterApperance>("GetCharacterApperance",{characterId});
+  }
+
+  updateCharacterApperance(request: UpdateCharacterApperanceRequest): Promise<boolean>{
+    return this.post<boolean>("UpdateCharacterApperance",request);
   }
 }
