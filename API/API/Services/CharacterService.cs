@@ -10,6 +10,7 @@ namespace API.Services
         Task<CharacterBasics> GetCharacterCreationBasics(int characterId, string userId);
         Task<CharacterBasics> CreateCharacter(CharacterCreationRequest request);
         Task<bool> UpdateCharacter(UpdateCharacterRequest request);
+        Task<CharacterApperance> GetCharacterApperance(int characterId);
     }
 
     public class CharacterService : ICharacterService
@@ -49,6 +50,9 @@ namespace API.Services
                 });
         }
 
-
+        public async Task<CharacterApperance> GetCharacterApperance(int characterId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<CharacterApperance>("Select * from public.\"[CC]fn_getcharacterapperance\"(@characterid) ", new { characterid = characterId });
+        }
     }
 }

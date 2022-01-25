@@ -64,4 +64,8 @@ export class CharacterCreationPageComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/Character-Creation/' + characterId);
   }
 
+  changeTab(tab: number){
+    this.clickedTab = tab;
+  }
+
 }

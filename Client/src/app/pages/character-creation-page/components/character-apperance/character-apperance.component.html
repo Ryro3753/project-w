@@ -1,0 +1,12 @@
+<div class="character-apperance">
+    <div class="row justify-content-end">
+        <input type="file" #imageUpload id="imageUpload" (change)="addImage($event)" style="display: none;"
+            accept="image/png, image/gif, image/jpeg">
+        <span *ngIf="!apperance.HasImage" class="textAlignEnd">Place Holder Image</span>
+        <img [src]="apperance.HasImage ? characterImageBasePath + apperance.CharacterId + '.png' : noImagePath "
+            class="responsiveSmediumIcon mrr2" title="Double click to upload photo" (dblclick)="imageUpload.click()" [ngClass]="!apperance.HasImage ? 'emptyIcon' : ''" />
+    </div>
+    <div class="row">
+
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
@@ -17,7 +17,7 @@ import { State } from 'src/app/store/reducer/reducer';
   templateUrl: './character-basic.component.html',
   styleUrls: ['./character-basic.component.css']
 })
-export class CharacterBasicComponent implements OnInit {
+export class CharacterBasicComponent implements OnInit, OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -36,7 +36,7 @@ export class CharacterBasicComponent implements OnInit {
   @Output() characterCreated: EventEmitter<number> = new EventEmitter<number>();
 
   characterBasics!: CharacterBasics;
-  currentcharacterId!: number;
+  characterId!: number;
 
   selectedClass!: number;
   selectedRace!: number;
@@ -44,17 +44,21 @@ export class CharacterBasicComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribes.push(this.activatedRoute.params.subscribe((i: any) => {
-      this.currentcharacterId = i['CharacterId'];
+      this.characterId = i['CharacterId'];
     }));
     this.subscribes.push(this.store.select('state').subscribe(async i => {
       this.currentUser = i.user;
-      if (i.user) {
-      this.readCharacter(this.currentcharacterId, i.user.Id);
+      if (i.user && this.characterId) {
+      this.readCharacter(this.characterId, i.user.Id);
       }
     }));
   }
 
-
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
+  }
 
   async readCharacter(characterId: number, userId: string){
     this.characterBasics = await this.characterService.getCharacterCreationBasics(characterId,userId);
@@ -68,9 +72,9 @@ export class CharacterBasicComponent implements OnInit {
   async save(){
     if(!this.currentUser)
       return;
-    if(this.currentcharacterId){
+    if(this.characterId){
       const request = {
-        CharacterId: this.currentcharacterId,
+        CharacterId: this.characterId,
         ClassId: this.selectedClass,
         RaceId: this.selectedRace,
         Name: this.name

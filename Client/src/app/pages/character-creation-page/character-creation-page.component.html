@@ -2,14 +2,15 @@
     <nav class="mtr2">
         <div class="nav nav-tabs creationTab">
             <button class="btn btn-block creationTabButton"
-                [ngClass]="clickedTab == 0 ? 'selectedTabButton' : ''">Basics</button>
+                [ngClass]="clickedTab == 0 ? 'selectedTabButton' : ''" (click)="changeTab(0)">Basics</button>
             <button class="btn btn-block creationTabButton" [ngClass]="clickedTab == 1 ? 'selectedTabButton' : ''"
-                [disabled]="!characterId">Apperance</button>
+                [disabled]="!characterId" (click)="changeTab(1)">Apperance</button>
             <button class="btn btn-block creationTabButton" [ngClass]="clickedTab == 2 ? 'selectedTabButton' : ''"
-                [disabled]="!characterId">Details</button>
+                [disabled]="!characterId" (click)="changeTab(2)">Details</button>
                 
         </div>
     </nav>
     <app-character-basic [allClasses]="allClasses" [allRaces]="allRaces"
         *ngIf="clickedTab == 0" (characterCreated)="characterCreated($event)"></app-character-basic>
+    <app-character-apperance *ngIf="clickedTab == 1" [characterId]="characterId"></app-character-apperance>
 </div>

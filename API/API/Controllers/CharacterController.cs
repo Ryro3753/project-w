@@ -33,6 +33,11 @@ namespace API.Controllers
             return await _characterService.UpdateCharacter(request);
         }
 
+        [HttpGet("GetCharacterApperance")]
+        public async Task<CharacterApperance> GetCharacterApperance(int characterId)
+        {
+            return await _characterService.GetCharacterApperance(characterId);
+        }
 
     }
 }

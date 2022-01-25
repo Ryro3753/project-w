@@ -37,11 +37,18 @@ max-height: 56px;
 }
 
 ::ng-deep  .responsiveMediumIcon {
-    width: 100%;
-    max-width: 128px;
-    height: auto;
-    max-height: 128px;
-    }
+width: 100%;
+max-width: 128px;
+height: auto;
+max-height: 128px;
+}
+
+::ng-deep  .responsiveSmediumIcon {
+width: 100%;
+max-width: 96px;
+height: auto;
+max-height: 96px;
+}
 
 ::ng-deep .smallLabel {
 color:gray;
@@ -120,6 +127,12 @@ font-weight: bold;
     text-align: end;
 }
 
+::ng-deep .emptyIcon{
+    border-style: solid;
+    border-width: 0.25rem;
+    border-color: #7b2cbf;
+}
+
 ::ng-deep .mlr1{
 margin-left: 1rem;
 }
@@ -164,4 +177,19 @@ margin-bottom: 4rem;
 }
 ::ng-deep .mbr5{
 margin-bottom: 5rem;
+}
+::ng-deep .mrr1{
+margin-right: 1rem;
+}
+::ng-deep .mrr2{
+margin-right: 2rem;
+}
+::ng-deep .mrr3{
+margin-right: 3rem;
+}
+::ng-deep .mrr4{
+margin-right: 4rem;
+}
+::ng-deep .mrr5{
+margin-right: 5rem;
 }

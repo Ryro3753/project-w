@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CharacterCreationPageComponent } from './character-creation-page.component';
 import { CharacterBasicComponent } from './components/character-basic/character-basic.component';
+import { CharacterApperanceComponent } from './components/character-apperance/character-apperance.component';
 
 @NgModule({
   declarations: [
     CharacterCreationPageComponent,
-    CharacterBasicComponent
+    CharacterBasicComponent,
+    CharacterApperanceComponent
   ],
   imports: [
     RouterModule.forChild([{
