@@ -1,6 +1,7 @@
 ﻿using API.Models.Character;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -72,6 +73,18 @@ namespace API.Controllers
         public async Task<bool> UpdateCharacterDescription(CharacterDescription request)
         {
             return await _characterService.UpdateCharacterDescription(request);
+        }
+
+        [HttpGet("GetCharacterAbilities")]
+        public async Task<IEnumerable<CharacterAbilities>> GetCharacterAbilities(int characterId)
+        {
+            return await _characterService.GetCharacterAbilities(characterId);
+        }
+
+        [HttpPost("UpdateCharacterAbilities")]
+        public async Task<bool> UpdateCharacterAbilities(UpdateCharacterAbilitiesRequest request)
+        {
+            return await _characterService.UpdateCharacterAbilities(request);
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using API.Models.Character;
 using Dapper;
 using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,17 +19,21 @@ namespace API.Services
         Task<bool> UpdateCharacterApperance(UpdateCharacterApperanceRequest request);
         Task<CharacterDescription> GetCharacterDescription(int characterId);
         Task<bool> UpdateCharacterDescription(CharacterDescription request);
+        Task<IEnumerable<CharacterAbilities>> GetCharacterAbilities(int characterId);
+        Task<bool> UpdateCharacterAbilities(UpdateCharacterAbilitiesRequest request);
     }
 
     public class CharacterService : ICharacterService
     {
         private readonly IDbConnection _connection;
         private readonly IWebHostEnvironment _env;
+        private readonly IFeatureService _featureService;
 
-        public CharacterService(IDbConnection connection, IWebHostEnvironment env)
+        public CharacterService(IDbConnection connection, IWebHostEnvironment env, FeatureService featureService)
         {
             _connection = connection;
             _env = env;
+            _featureService = featureService;
         }
 
         public string GetImageFolderPath()
@@ -117,5 +122,37 @@ namespace API.Services
 
                 });
         }
+
+        public async Task<IEnumerable<CharacterAbilities>> GetCharacterAbilities(int characterId)
+        {
+            var data = await _connection.QueryAsync<CharacterAbilitiesQuery>("Select * from public.\"[CC]fn_getcharacterability\"(@characterid)");
+            var returnData = new List<CharacterAbilities>();
+            foreach (var item in data)
+            {
+                returnData.Add(new CharacterAbilities { CharacterId = item.CharacterId, Ability = _featureService.ReadFeature(item.Feature), Note = item.Note });
+            }
+            return returnData;
+        }
+        public async Task<bool> UpdateCharacterAbilities(UpdateCharacterAbilitiesRequest request)
+        {
+            var res = true;
+
+            foreach (var item in request.CharacterAbilities)
+            {
+                var result = await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CC]fn_updatecharacterability\"(@characterid, @feature, @note)",
+                    new
+                    {
+                        characterid = item.CharacterId,
+                        feature = _featureService.UnreadFeature(item.Ability),
+                        note = item.Note
+                    });
+                if (!result)
+                    res = false;
+            }
+
+            return res;
+        }
+
+
     }
 }

@@ -7,11 +7,13 @@
                 [disabled]="!characterId" (click)="changeTab(1)">Apperance</button>
             <button class="btn btn-block creationTabButton" [ngClass]="clickedTab == 2 ? 'selectedTabButton' : ''"
                 [disabled]="!characterId" (click)="changeTab(2)">Details</button>
-                
+            <button class="btn btn-block creationTabButton" [ngClass]="clickedTab == 2 ? 'selectedTabButton' : ''"
+                [disabled]="!characterId" (click)="changeTab(3)">Abilities</button>
         </div>
     </nav>
     <app-character-basic [allClasses]="allClasses" [allRaces]="allRaces"
         *ngIf="clickedTab == 0" (characterCreated)="characterCreated($event)"></app-character-basic>
     <app-character-apperance *ngIf="clickedTab == 1" [characterId]="characterId"></app-character-apperance>
     <app-character-details *ngIf="clickedTab == 2" [characterId]="characterId"></app-character-details>
+    <app-character-abilities *ngIf="clickedTab == 3" [characterId]="characterId"></app-character-abilities>
 </div>

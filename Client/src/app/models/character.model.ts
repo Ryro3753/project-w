@@ -1,3 +1,5 @@
+import { Feature } from "./feature.model";
+
 export interface CharacterBasics{
     Id: number;
     Name: string;
@@ -47,16 +49,26 @@ export interface UpdateCharacterApperanceRequest{
 
 export interface CharacterDescription{
     CharacterId: number;
-    Background: string; //
-    Alignment: string; //
-    Faith: string; //
-    PersonalityTraits: string;//
+    Background: string; 
+    Alignment: string; 
+    Faith: string; 
+    PersonalityTraits: string;
     Ideals: string;
     Bonds: string;
     Flaws: string;
-    Organization: string; //
+    Organization: string; 
     Allies: string;
     Enemies: string;
     Backstory: string;
     Note: string;
+}
+
+export interface CharacterAbilities{
+    CharacterId: number;
+    Ability: Feature;
+    Note: string;
+}
+
+export interface UpdateCharacterAbilitiesRequest{
+    CharacterAbilities: CharacterAbilities[];
 }
