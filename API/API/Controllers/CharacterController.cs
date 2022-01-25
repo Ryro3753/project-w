@@ -62,5 +62,17 @@ namespace API.Controllers
             return await _characterService.UpdateHasImage(characterId);
         }
 
+        [HttpGet("GetCharacterDescription")]
+        public async Task<CharacterDescription> GetCharacterDescription(int characterId)
+        {
+            return await _characterService.GetCharacterDescription(characterId);
+        }
+
+        [HttpPost("UpdateCharacterDescription")]
+        public async Task<bool> UpdateCharacterDescription(CharacterDescription request)
+        {
+            return await _characterService.UpdateCharacterDescription(request);
+        }
+
     }
 }

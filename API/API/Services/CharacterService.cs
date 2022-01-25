@@ -16,6 +16,8 @@ namespace API.Services
         string GetImageFolderPath();
         Task<bool> UpdateHasImage(int characterId);
         Task<bool> UpdateCharacterApperance(UpdateCharacterApperanceRequest request);
+        Task<CharacterDescription> GetCharacterDescription(int characterId);
+        Task<bool> UpdateCharacterDescription(CharacterDescription request);
     }
 
     public class CharacterService : ICharacterService
@@ -64,7 +66,7 @@ namespace API.Services
 
         public async Task<CharacterApperance> GetCharacterApperance(int characterId)
         {
-            return await _connection.QueryFirstOrDefaultAsync<CharacterApperance>("Select * from public.\"[CC]fn_getcharacterapperance\"(@characterid) ", new { characterid = characterId });
+            return await _connection.QueryFirstOrDefaultAsync<CharacterApperance>("Select * from public.\"[CC]fn_getcharacterapperance\"(@id) ", new { id = characterId });
         }
 
         public async Task<bool> UpdateCharacterApperance(UpdateCharacterApperanceRequest request)
@@ -87,6 +89,33 @@ namespace API.Services
         public async Task<bool> UpdateHasImage(int characterId)
         {
             return await _connection.QueryFirstOrDefaultAsync<bool>("SELECT * from public.\"[CC]fn_updatecharacterhasimage\"(@characterid, @hasimage)", new { characterid = characterId, hasimage = true });
+        }
+
+        public async Task<CharacterDescription> GetCharacterDescription(int characterId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<CharacterDescription>("Select * from public.\"[CC]fn_getcharacterdescription\"(@id) ", new { id = characterId });
+        }
+
+        public async Task<bool> UpdateCharacterDescription(CharacterDescription request)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CC]fn_updatecharacterdescription\"(@characterid,@background,@alignment,@faith,@personalitytraits,@ideals,@bonds,@flaws,@organization,@allies,@enemies,@backstory,@note)",
+                new
+                {
+                    characterid = request.CharacterId,
+                    background = request.Background,
+                    alignment = request.Alignment,
+                    faith = request.Faith,
+                    personalitytraits = request.PersonalityTraits,
+                    ideals = request.Ideals,
+                    bonds = request.Bonds,
+                    flaws = request.Flaws,
+                    organization = request.Organization,
+                    allies = request.Allies,
+                    enemies = request.Enemies,
+                    backstory = request.Backstory,
+                    note = request.Note
+
+                });
         }
     }
 }

@@ -13,4 +13,5 @@
     <app-character-basic [allClasses]="allClasses" [allRaces]="allRaces"
         *ngIf="clickedTab == 0" (characterCreated)="characterCreated($event)"></app-character-basic>
     <app-character-apperance *ngIf="clickedTab == 1" [characterId]="characterId"></app-character-apperance>
+    <app-character-details *ngIf="clickedTab == 2" [characterId]="characterId"></app-character-details>
 </div>

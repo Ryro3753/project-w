@@ -45,3 +45,18 @@ export interface UpdateCharacterApperanceRequest{
     Note: string;
 }
 
+export interface CharacterDescription{
+    CharacterId: number;
+    Background: string;
+    Alignment: string;
+    Faith: string;
+    PersonalityTraits: string;
+    Ideals: string;
+    Bonds: string;
+    Flaws: string;
+    Organization: string;
+    Allies: string;
+    Enemies: string;
+    Backstory: string;
+    Note: string;
+}
