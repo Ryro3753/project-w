@@ -47,14 +47,14 @@ export interface UpdateCharacterApperanceRequest{
 
 export interface CharacterDescription{
     CharacterId: number;
-    Background: string;
-    Alignment: string;
-    Faith: string;
-    PersonalityTraits: string;
+    Background: string; //
+    Alignment: string; //
+    Faith: string; //
+    PersonalityTraits: string;//
     Ideals: string;
     Bonds: string;
     Flaws: string;
-    Organization: string;
+    Organization: string; //
     Allies: string;
     Enemies: string;
     Backstory: string;

@@ -1,1 +1,55 @@
-<p>character-details works!</p>
+<div class="character-details">
+    <div class="row mtr1">
+        <label>Background</label>
+        <textarea type="text" class="form-control" [(ngModel)]="description.Background" placeholder="Background" rows="1"></textarea>
+    </div>
+    <div class="row mtr1">
+        <div class="col-sm-3">
+            <label>Alignment</label>
+            <input type="text" class="form-control" [(ngModel)]="description.Alignment" placeholder="Alignment">
+        </div>
+        <div class="col-sm-3">
+            <label>Faith</label>
+            <input type="text" class="form-control" [(ngModel)]="description.Faith" placeholder="Faith">
+        </div>
+        <div class="col-sm-3">
+            <label>Organization</label>
+            <input type="text" class="form-control" [(ngModel)]="description.Organization" placeholder="Organization">
+        </div>
+        <div class="col-sm-3">
+            <label>Personality Traits</label>
+            <input type="text" class="form-control" [(ngModel)]="description.PersonalityTraits" placeholder="Personality Traits">
+        </div>
+    </div>
+    <div class="row mtr1">
+        <label>Ideals</label>
+        <textarea type="text" class="form-control" [(ngModel)]="description.Ideals" placeholder="Ideals" rows="1"></textarea>
+    </div>
+    <div class="row mtr1">
+        <label>Bonds</label>
+        <textarea type="text" class="form-control" [(ngModel)]="description.Bonds" placeholder="Bonds" rows="1"></textarea>
+    </div>
+    <div class="row mtr1">
+        <label>Flaws</label>
+        <textarea type="text" class="form-control" [(ngModel)]="description.Flaws" placeholder="Flaws" rows="1"></textarea>
+    </div>
+    <div class="row mtr1">
+        <div class="col-sm-6">
+            <label>Allies</label>
+            <textarea type="text" class="form-control" [(ngModel)]="description.Allies" placeholder="Allies" rows="1"></textarea>
+        </div>
+        <div class="col-sm-6">
+            <label>Enemies</label>
+            <textarea type="text" class="form-control" [(ngModel)]="description.Enemies" placeholder="Enemies" rows="1"></textarea>
+        </div>
+    </div>
+    <div class="row mtr1">
+        <label>Backstory</label>
+        <textarea type="text" class="form-control" [(ngModel)]="description.Backstory" placeholder="Backstory" rows="3"></textarea>
+    </div>
+    <div class="row mtr1">
+        <label>Note</label>
+        <textarea type="text" class="form-control" [(ngModel)]="description.Note" placeholder="Note" rows="1"></textarea>
+    </div>
+    <button class="btn btn-block customBlockButton mtr2" (click)="save()">Save</button>
+</div>
