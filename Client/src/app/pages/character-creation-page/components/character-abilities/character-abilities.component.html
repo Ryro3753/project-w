@@ -1,1 +1,49 @@
-<p>character-abilities works!</p>
+<div class="character-abilities" *ngIf="load">
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-2">
+            <label>Strength</label>
+            <input type="number" class="form-control abilityTextbox" [(ngModel)]="abilities['Strength'].Ability.Value"
+                placeholder="Strength" (change)="calculateModifier(abilities['Strength'].Ability.Value,'Strength')">
+                <span>Modifier: <p [innerText]="modifierValue['Strength']" class="modifierLabel"></p></span>
+        </div>
+        <div class=" col-sm-2">
+            <label>Dexterity</label>
+            <input type="number" class="form-control abilityTextbox" [(ngModel)]="abilities['Dexterity'].Ability.Value"
+                placeholder="Dexterity" (change)="calculateModifier(abilities['Dexterity'].Ability.Value,'Dexterity')">
+                <span>Modifier: <p [innerText]="modifierValue['Dexterity']" class="modifierLabel"></p></span>
+        </div>
+    </div>
+    <div class="row justify-content-center mtr2">
+        <div class="col-sm-2">
+            <label>Constitution</label>
+            <input type="number" class="form-control abilityTextbox" [(ngModel)]="abilities['Constitution'].Ability.Value"
+                placeholder="Constitution" (change)="calculateModifier(abilities['Constitution'].Ability.Value,'Constitution')">
+                <span>Modifier: <p [innerText]="modifierValue['Constitution']" class="modifierLabel"></p></span>
+        </div>
+        <div class="col-sm-2">
+            <label>Charisma</label>
+            <input type="number" class="form-control abilityTextbox" [(ngModel)]="abilities['Charisma'].Ability.Value"
+                placeholder="Charisma" (change)="calculateModifier(abilities['Charisma'].Ability.Value,'Charisma')">
+            <span>Modifier: <p [innerText]="modifierValue['Charisma']" class="modifierLabel"></p></span>
+        </div>
+    </div>
+    <div class="row justify-content-center mtr2">
+        <div class="col-sm-2">
+            <label>Intelligence</label>
+            <input type="number" class="form-control abilityTextbox" [(ngModel)]="abilities['Intelligence'].Ability.Value"
+                placeholder="Intelligence" (change)="calculateModifier(abilities['Intelligence'].Ability.Value,'Intelligence')">
+                <span>Modifier: <p [innerText]="modifierValue['Intelligence']" class="modifierLabel"></p></span>
+        </div>
+        <div class="col-sm-2">
+            <label>Wisdom</label>
+            <input type="number" class="form-control abilityTextbox" [(ngModel)]="abilities['Wisdom'].Ability.Value"
+                placeholder="Wisdom" (change)="calculateModifier(abilities['Wisdom'].Ability.Value,'Wisdom')">
+                <span>Modifier: <p [innerText]="modifierValue['Wisdom']" class="modifierLabel"></p></span>
+        </div>
+    </div>
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-4">
+            <button class="btn btn-block customBlockButton mtr2" (click)="save()">Save</button>
+        </div>
+    </div>
+</div>

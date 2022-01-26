@@ -1,0 +1,15 @@
+.modifierLabel{
+    font-weight: bold;
+    font-size: xx-large;
+    text-align: center;
+    margin: 0;
+    border-bottom-style: solid;
+    border-bottom-color: #7b2cbf;
+    border-bottom-width: 0.15rem;
+}
+
+.abilityTextbox{
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+}

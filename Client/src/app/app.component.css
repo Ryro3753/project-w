@@ -127,6 +127,10 @@ font-weight: bold;
     text-align: end;
 }
 
+::ng-deep .textAlignCenter{
+    text-align: center;
+}
+
 ::ng-deep .emptyIcon{
     border-style: solid;
     border-width: 0.25rem;

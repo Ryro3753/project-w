@@ -29,7 +29,7 @@ namespace API.Services
         private readonly IWebHostEnvironment _env;
         private readonly IFeatureService _featureService;
 
-        public CharacterService(IDbConnection connection, IWebHostEnvironment env, FeatureService featureService)
+        public CharacterService(IDbConnection connection, IWebHostEnvironment env, IFeatureService featureService)
         {
             _connection = connection;
             _env = env;
@@ -125,7 +125,7 @@ namespace API.Services
 
         public async Task<IEnumerable<CharacterAbilities>> GetCharacterAbilities(int characterId)
         {
-            var data = await _connection.QueryAsync<CharacterAbilitiesQuery>("Select * from public.\"[CC]fn_getcharacterability\"(@characterid)");
+            var data = await _connection.QueryAsync<CharacterAbilitiesQuery>("Select * from public.\"[CC]fn_getcharacterabilities\"(@id)", new { id = characterId });
             var returnData = new List<CharacterAbilities>();
             foreach (var item in data)
             {
