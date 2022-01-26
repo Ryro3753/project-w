@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/components/alert/alert.service';
-import { CharacterAbilities, UpdateCharacterAbilitiesRequest } from 'src/app/models/character.model';
+import { CharacterFeature, UpdateCharacterAbilitiesRequest } from 'src/app/models/character.model';
 import { CalculatorService } from 'src/app/services/calculator.service';
 import { CharacterService } from 'src/app/services/character.service';
 
@@ -19,7 +19,7 @@ export class CharacterAbilitiesComponent implements OnInit {
 
   abilityNames: string[] = ['Strength', 'Dexterity', 'Constitution', 'Charisma', 'Intelligence', 'Wisdom'];
   modifiers: { [ability: string]: number; } = {};
-  abilities: { [ability: string]: CharacterAbilities; } = {};
+  abilities: { [ability: string]: CharacterFeature; } = {};
   modifierValue: { [ability: string]: string; } = {};
   load: boolean = false;
 
@@ -27,8 +27,8 @@ export class CharacterAbilitiesComponent implements OnInit {
     const result = await this.characterService.getCharacterAbilities(this.characterId);
     this.abilityNames.forEach(e => {
       this.abilities[e] = result.filter(i => i.Note == e)[0];
-      this.modifiers[e] = this.calculatorService.calculateAbilityModifierRaw(Number(this.abilities[e].Ability.Value));
-      this.calculateModifier(this.abilities[e].Ability.Value,e);
+      this.modifiers[e] = this.calculatorService.calculateAbilityModifierRaw(Number(this.abilities[e].Feature.Value));
+      this.calculateModifier(this.abilities[e].Feature.Value,e);
     })
     this.load = true;
   }

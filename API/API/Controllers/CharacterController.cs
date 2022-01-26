@@ -76,7 +76,7 @@ namespace API.Controllers
         }
 
         [HttpGet("GetCharacterAbilities")]
-        public async Task<IEnumerable<CharacterAbilities>> GetCharacterAbilities(int characterId)
+        public async Task<IEnumerable<CharacterFeature>> GetCharacterAbilities(int characterId)
         {
             return await _characterService.GetCharacterAbilities(characterId);
         }

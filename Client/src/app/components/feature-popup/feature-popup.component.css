@@ -1,0 +1,8 @@
+.featureModal{
+    padding: 2rem;
+}
+::ng-deep .featureModalCustom{
+max-width: none !important;
+width: 50% !important;
+}
+

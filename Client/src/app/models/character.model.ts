@@ -63,12 +63,12 @@ export interface CharacterDescription{
     Note: string;
 }
 
-export interface CharacterAbilities{
+export interface CharacterFeature{
     CharacterId: number;
-    Ability: Feature;
+    Feature: Feature;
     Note: string;
 }
 
 export interface UpdateCharacterAbilitiesRequest{
-    CharacterAbilities: CharacterAbilities[];
+    CharacterAbilities: CharacterFeature[];
 }

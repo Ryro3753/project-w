@@ -17,7 +17,7 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { SharePopupComponent } from './components/share-popup/share-popup.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { SimpleModalModule } from 'ngx-simple-modal';
-import { CharacterCreationPageComponent } from './pages/character-creation-page/character-creation-page.component';
+import { FeaturePopupComponent } from './components/feature-popup/feature-popup.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { CharacterCreationPageComponent } from './pages/character-creation-page/
     HeaderComponent,
     AlertComponent,
     FeaturesPopupComponent,
+    FeaturePopupComponent,
     SharePopupComponent,
     ConfirmationComponent,
   ],

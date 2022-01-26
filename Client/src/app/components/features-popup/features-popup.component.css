@@ -1,7 +1,7 @@
-.featureModal{
+.featuresModal{
     padding: 2rem;
 }
-::ng-deep .featureModalCustom{
+::ng-deep .featuresModalCustom{
 max-width: none !important;
 width: 50% !important;
 }

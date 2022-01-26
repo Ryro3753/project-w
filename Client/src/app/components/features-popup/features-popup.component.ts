@@ -57,7 +57,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
       this.featuresToModels();
     else
       this.features = [];
-    this.ngxSmartModalService.getModal('featureModal').open();
+    this.ngxSmartModalService.getModal('featuresModal').open();
   }
 
   featuresToModels() {
@@ -92,7 +92,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
 
   controlModels(): boolean {
     for (let i = 0; i < this.features.length; i++) {
-      if (!this.section[i] || !this.type[i] || !this.value) {
+      if (!this.section[i] || !this.type[i] || !this.value[i]) {
         this.alertService.alert({ alertInfo: { message: 'There are invalid Features. Please check feature number:' + (i + 1), type: 'warning', timeout: 3000 } })
         return false;
       }
@@ -110,7 +110,7 @@ export class FeaturesPopupComponent implements OnInit, OnDestroy {
 
   onClose() {
     this.currentCollapse = 0;
-    this.ngxSmartModalService.getModal('featureModal').close();
+    this.ngxSmartModalService.getModal('featuresModal').close();
   }
 
   save() {
