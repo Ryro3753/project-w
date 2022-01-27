@@ -1,6 +1,54 @@
-<ngx-smart-modal #featureModal identifier="featureModal" (onAnyCloseEvent)="onClose()" [customClass]="'featureModalCustom'">
-    <div class="featureModal">
-       
+<ngx-smart-modal #featureModal identifier="featureModal" (onAnyCloseEvent)="onClose()"
+    [customClass]="'featureModalCustom'" >
+    <div class="featureModal" *ngIf="id">
+        <div class="row">
+            <div class="col-sm-4">
+                <ng-select bindValue="label" [items]="sectionOptions" [(ngModel)]="section" placeholder="section">
+                </ng-select>
+            </div>
+            <div class="col-sm-4">
+                <ng-select bindValue="label" [items]="typeOptions[section]" [(ngModel)]="type" placeholder="type"
+                    [disabled]="!section"></ng-select>
+            </div>
+            <div class="col-sm-4">
+                <ng-select bindValue="label" [(ngModel)]="value" placeholder="value" [addTag]="true"
+                    [disabled]="!type"></ng-select>
+            </div>
+            <div class="col-sm-12">
+                <label>Note</label>
+                <input type="text" class="form-control widthFull" placeholder="Note" [(ngModel)]="note">
+            </div>
+            <div class="row mtr1">
+                <div class="col-sm-3">
+                    <strong class="requirementsHeader">Requirements</strong>
+                </div>
+                <div class="col-sm-3 offset-6">
+                    <button class="btn btn-success" (click)="addRequirement()">Add Requirement</button>
+                </div>
+            </div>
+            <div *ngFor="let item of requirements; let i = index">
+                <div class="row mtr1">
+                    <div class="col-sm-3">
+                        <ng-select bindValue="label" [items]="sectionOptions" [(ngModel)]="requirements[i].Section"
+                            placeholder="section">
+                        </ng-select>
+                    </div>
+                    <div class="col-sm-4">
+                        <ng-select bindValue="label" [items]="typeOptionsForRequirements[requirements[i].Section]"
+                            [(ngModel)]="requirements[i].Type" placeholder="type" [disabled]="!requirements[i].Section">
+                        </ng-select>
+                    </div>
+                    <div class="col-sm-4">
+                        <ng-select bindValue="label" [(ngModel)]="requirements[i].Value" placeholder="value"
+                            [addTag]="true" [disabled]="!requirements[i].Type"></ng-select>
+                    </div>
+                    <div class="col-sm-1">
+                        <button class="btn btn-light" title="Delete This Requirement"
+                            (click)="deleteRequirement(i)">X</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-start mtr1">
             <button class="btn btn-success" (click)="save()">Save</button>
         </div>

@@ -27,7 +27,6 @@ export class CharacterApperanceComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.apperance = await this.characterService.getCharacterApperance(this.characterId);
-    console.log(this.apperance);
   }
 
   async addImage(e: any) {

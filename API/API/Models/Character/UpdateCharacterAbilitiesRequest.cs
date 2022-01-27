@@ -4,6 +4,6 @@ namespace API.Models.Character
 {
     public class UpdateCharacterAbilitiesRequest
     {
-        public List<CharacterAbilities> CharacterAbilities { get; set; }
+        public List<CharacterFeature> CharacterAbilities { get; set; }
     }
 }

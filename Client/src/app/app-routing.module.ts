@@ -61,6 +61,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/character-creation-page/character-creation-page.module').then(m => m.CharacterCreationPageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'Characters',
+    loadChildren: () => import('./pages/character-creation-page/character-creation-page.module').then(m => m.CharacterCreationPageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({

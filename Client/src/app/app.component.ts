@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfirmationService } from './components/confirmation/confirmation.service';
+import { FeaturePopupEvent } from './events/feature.popup.event';
 import { FeaturesClosePopupEvent, FeaturesPopupEvent } from './events/features.popup.event';
 import { Feature } from './models/feature.model';
 import { AuthenticationService } from './services/common/authentication.service';
@@ -13,29 +14,31 @@ import { FeatureService } from './services/feature.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'Project-w';
 
-  www: Feature[] = [];
 
   constructor(readonly cookieService: CookieService,
-              readonly authService: AuthenticationService,
-              readonly f: FeatureService){
-              }
-
-  async ngOnInit(){
-    this.loginWithCookies();
-    await this.f.readValidFeatures([]);
+    readonly authService: AuthenticationService,
+    readonly bus: MessageBusService) {
   }
 
-  loginWithCookies(){
-    if(this.cookieService.get('rememberMe') == 'true'){
-      this.authService.login(this.cookieService.get('username'),this.cookieService.get('password'),true);
+  async ngOnInit() {
+    this.loginWithCookies();
+  }
+
+  loginWithCookies() {
+    if (this.cookieService.get('rememberMe') == 'true') {
+      this.authService.login(this.cookieService.get('username'), this.cookieService.get('password'), true);
     }
     else {
       localStorage.removeItem('token');
       localStorage.removeItem('currentUser');
     }
+  }
+
+  asd(){
+      this.bus.publish(new FeaturePopupEvent('asd', 2, {} as Feature));
   }
 
 }

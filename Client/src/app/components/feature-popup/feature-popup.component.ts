@@ -19,7 +19,7 @@ export class FeaturePopupComponent implements OnInit, OnDestroy {
 
   feature!: Feature;
   from!: string;
-  id!: number;
+  id: number | undefined;
 
   section!: string;
   type!: string;
@@ -27,7 +27,7 @@ export class FeaturePopupComponent implements OnInit, OnDestroy {
   note!: string;
   requirements!: Requirement[];
 
-  sectionOptions!: string[];
+  sectionOptions: string[] = [];
 
   typeOptions!: any;
   typeOptionsForRequirements!: any;
@@ -107,13 +107,13 @@ export class FeaturePopupComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    if (this.modelsToFeatures()) {
+    if (this.modelsToFeatures() && this.id) {
       this.bus.publish(new FeatureClosePopupEvent(this.from, this.id, this.feature));
       this.onClose();
     }
 
   }
-  addRequirement(index: number) {
+  addRequirement() {
     this.requirements.push({
       Section: "",
       Type: "",

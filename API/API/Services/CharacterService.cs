@@ -143,7 +143,7 @@ namespace API.Services
                     new
                     {
                         characterid = item.CharacterId,
-                        feature = _featureService.UnreadFeature(item.Ability),
+                        feature = _featureService.UnreadFeature(item.Feature),
                         note = item.Note
                     });
                 if (!result)
