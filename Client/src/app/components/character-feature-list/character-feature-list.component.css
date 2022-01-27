@@ -1,0 +1,25 @@
+.listItem{
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+.listItemWithRequirements{
+    background-color: wheat;
+}
+
+
+.requirementListItem{
+    background-color: cornsilk;
+    font-weight: bold;
+    text-align: center;
+}
+
+.newFeatureButton{
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    background-color: darkgreen;
+    color: white;
+    padding: 0.25rem;
+}

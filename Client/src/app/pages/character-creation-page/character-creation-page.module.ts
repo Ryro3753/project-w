@@ -8,6 +8,7 @@ import { CharacterBasicComponent } from './components/character-basic/character-
 import { CharacterApperanceComponent } from './components/character-apperance/character-apperance.component';
 import { CharacterDetailsComponent } from './components/character-details/character-details.component';
 import { CharacterAbilitiesComponent } from './components/character-abilities/character-abilities.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CharacterAbilitiesComponent } from './components/character-abilities/ch
     }]),
     CommonModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
   ],

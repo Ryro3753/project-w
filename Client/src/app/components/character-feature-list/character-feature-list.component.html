@@ -1,0 +1,28 @@
+<div class="card" [style]="'height: ' + height + 'px;overflow-y: scroll'">
+    <ul class="list-group feature-list">
+      <div *ngFor="let item of characterFeatures; let i = index;">
+        <li
+          [ngClass]="item.Feature.Requirements !== null && item.Feature.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement"
+          [title]="item.Note !== null && item.Note !== '' ? item.Note : '' ">
+          <div class="row">
+              <div class="col-sm-10">
+                <div (click)="showRequirements(item,i)" [innerText]="item.Feature.Section + ' - ' + item.Feature.Type + ' - ' + item.Feature.Value"></div>
+              </div>
+              <div class="col-sm-1">
+                <span title="Delete" class="click" (click)="deleteFeature(i)"><i class="bi bi-trash"></i></span>
+              </div>
+              <div class="col-sm-1">
+                <span title="Edit" class="click"><i class="bi bi-box-arrow-up"></i></span>
+              </div>
+          </div>
+        </li>
+        <ul *ngIf="showRequirementsToggle[i] == true" class="list-group">
+          <div *ngFor="let item of item.Feature.Requirements">
+            <li class="list-group-item requirementListItem" [innerText]="'Requirement: ' + item.Section + ' - ' + item.Type + ' - ' + item.Value"></li>
+          </div>
+        </ul>
+      </div>
+      <li class="newFeatureButton click" (click)="addFeature()"><i class="bi bi-plus"></i> Add Feature</li>
+    </ul>
+  
+  </div>

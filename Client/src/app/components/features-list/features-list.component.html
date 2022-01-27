@@ -2,7 +2,7 @@
   <ul class="list-group feature-list">
     <div *ngFor="let item of featureItems; let i = index;">
       <li
-        [class]="item.Requirements !== null && item.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement"
+        [ngClass]="item.Requirements !== null && item.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement"
         (click)="showRequirements(item,i)" [innerText]="item.Section + ' - ' + item.Type + ' - ' + item.Value"
         [title]="item.Note !== null && item.Note !== '' ? item.Note : '' ">
       </li>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CharacterFeatureListComponent } from '../components/character-feature-list/character-feature-list.component';
 import { CustomListComponent } from '../components/custom-list/custom-list.component';
 import { FeaturesListComponent } from '../components/features-list/features-list.component';
 import { PaginationComponent } from '../components/pagination/pagination.component';
@@ -8,7 +9,8 @@ import { PaginationComponent } from '../components/pagination/pagination.compone
   declarations: [
     FeaturesListComponent,
     PaginationComponent,
-    CustomListComponent
+    CustomListComponent,
+    CharacterFeatureListComponent
   ],
   imports: [
       CommonModule
@@ -16,7 +18,8 @@ import { PaginationComponent } from '../components/pagination/pagination.compone
   exports: [
     FeaturesListComponent,
     PaginationComponent,
-    CustomListComponent
+    CustomListComponent,
+    CharacterFeatureListComponent
   ]
 })
 export class SharedModule { }
