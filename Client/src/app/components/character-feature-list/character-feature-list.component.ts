@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
+import { FeatureClosePopupEvent, FeaturePopupEvent } from 'src/app/events/feature.popup.event';
 import { CharacterFeature } from 'src/app/models/character.model';
+import { Feature } from 'src/app/models/feature.model';
+import { CharacterService } from 'src/app/services/character.service';
+import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { ConfirmationService } from '../confirmation/confirmation.service';
 
 @Component({
@@ -9,11 +14,20 @@ import { ConfirmationService } from '../confirmation/confirmation.service';
 })
 export class CharacterFeatureListComponent implements OnInit {
 
-  constructor(readonly confirmationService: ConfirmationService) { }
+  subscribes: SubscriptionLike[] = [];
+
+  constructor(readonly confirmationService: ConfirmationService,
+    readonly bus: MessageBusService,
+    readonly characterService: CharacterService) {
+    this.subscribes.push(this.bus.of(FeatureClosePopupEvent).subscribe(this.featurePopupClose.bind(this)));
+  }
 
   @Output() characterFeaturesChange = new EventEmitter<CharacterFeature[]>();
   @Input() characterFeatures!: CharacterFeature[];
   @Input() height: number = 150;
+  @Input() from!: string;
+  @Input() characterId!: number;
+  @Input() note: string = '';
 
   showRequirementsToggle: boolean[] = [];
 
@@ -30,14 +44,37 @@ export class CharacterFeatureListComponent implements OnInit {
   }
 
   addFeature() {
-    this.characterFeatures.push({} as CharacterFeature);
+    this.bus.publish(new FeaturePopupEvent(this.from, 0, {} as Feature))
   }
 
-  async deleteFeature(index: number) {
+  async deleteFeature(id: number) {
     await this.confirmationService.confirm('Confirm', 'Do you confirm to delete this Feature').toPromise().then(async res => {
-      this.characterFeatures.splice(index, 1);
+      this.characterFeatures = this.characterFeatures.filter(i => i.Id != id);
     });
   }
 
+  editFeature(id: number) {
+    const feature = this.characterFeatures.filter(i => i.Id == id)[0].Feature;
+    this.bus.publish(new FeaturePopupEvent(this.from, id, feature));
+  }
 
+  async featurePopupClose(event: FeatureClosePopupEvent){
+    //new inserted
+    if(event.id == 0){
+      const result = await this.characterService.insertCharacterFeature({
+        CharacterId: this.characterId,
+        Feature: event.feature,
+        Note: this.note
+      });
+      this.characterFeatures.push(result);
+    }
+    else {
+      const result = await this.characterService.updateCharacterFeature({
+        Id: event.id,
+        CharacterId: this.characterId,
+        Feature: event.feature,
+        Note: this.note
+      });
+    }
+  }
 }

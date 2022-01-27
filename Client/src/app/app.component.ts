@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { ConfirmationService } from './components/confirmation/confirmation.service';
-import { FeaturePopupEvent } from './events/feature.popup.event';
-import { FeaturesClosePopupEvent, FeaturesPopupEvent } from './events/features.popup.event';
-import { Feature } from './models/feature.model';
 import { AuthenticationService } from './services/common/authentication.service';
-import { MessageBusService } from './services/common/messagebus.service';
-import { FeatureService } from './services/feature.service';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +12,7 @@ export class AppComponent {
 
 
   constructor(readonly cookieService: CookieService,
-    readonly authService: AuthenticationService,
-    readonly bus: MessageBusService) {
+    readonly authService: AuthenticationService) {
   }
 
   async ngOnInit() {
@@ -36,9 +28,4 @@ export class AppComponent {
       localStorage.removeItem('currentUser');
     }
   }
-
-  asd(){
-      this.bus.publish(new FeaturePopupEvent('asd', 2, {} as Feature));
-  }
-
 }

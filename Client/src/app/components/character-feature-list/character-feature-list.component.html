@@ -9,10 +9,10 @@
                 <div (click)="showRequirements(item,i)" [innerText]="item.Feature.Section + ' - ' + item.Feature.Type + ' - ' + item.Feature.Value"></div>
               </div>
               <div class="col-sm-1">
-                <span title="Delete" class="click" (click)="deleteFeature(i)"><i class="bi bi-trash"></i></span>
+                <span title="Delete" class="click" (click)="deleteFeature(item.Id)"><i class="bi bi-trash"></i></span>
               </div>
               <div class="col-sm-1">
-                <span title="Edit" class="click"><i class="bi bi-box-arrow-up"></i></span>
+                <span title="Edit" class="click" (click)="editFeature(item.Id)"><i class="bi bi-box-arrow-up"></i></span>
               </div>
           </div>
         </li>

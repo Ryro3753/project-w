@@ -55,6 +55,7 @@ export class FeaturePopupComponent implements OnInit, OnDestroy {
     this.feature = JSON.parse(JSON.stringify(featureEvent.feature));
     this.from = featureEvent.from;
     this.id = featureEvent.id;
+    console.log(featureEvent);
     if (this.feature != null)
       this.featuresToModels();
     this.ngxSmartModalService.getModal('featureModal').open();
@@ -107,8 +108,10 @@ export class FeaturePopupComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    if (this.modelsToFeatures() && this.id) {
+    if (this.modelsToFeatures() && this.id != undefined) {
       this.bus.publish(new FeatureClosePopupEvent(this.from, this.id, this.feature));
+      const message = this.id == 0 ? 'Feature Successfully Created' : 'Feature Successfully Updated';
+      this.alertService.alert({alertInfo:{message:message,type:'success',timeout:5000}})
       this.onClose();
     }
 

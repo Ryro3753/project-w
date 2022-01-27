@@ -22,7 +22,6 @@ export class CharacterAbilitiesComponent implements OnInit {
   abilities: { [ability: string]: CharacterFeature; } = {};
   modifierValue: { [ability: string]: string; } = {};
   load: boolean = false;
-  asd: CharacterFeature[] = [];
 
   async ngOnInit(): Promise<void> {
     const result = await this.characterService.getCharacterAbilities(this.characterId);
@@ -30,7 +29,6 @@ export class CharacterAbilitiesComponent implements OnInit {
       this.abilities[e] = result.filter(i => i.Note == e)[0];
       this.modifiers[e] = this.calculatorService.calculateAbilityModifierRaw(Number(this.abilities[e].Feature.Value));
       this.calculateModifier(this.abilities[e].Feature.Value,e);
-      this.asd.push(this.abilities[e]);
     })
     this.load = true;
   }
@@ -63,7 +61,4 @@ export class CharacterAbilitiesComponent implements OnInit {
 
   }
 
-  zzz(){
-    console.log(this.asd);
-  }
 }

@@ -64,6 +64,7 @@ export interface CharacterDescription{
 }
 
 export interface CharacterFeature{
+    Id: number;
     CharacterId: number;
     Feature: Feature;
     Note: string;
@@ -71,4 +72,10 @@ export interface CharacterFeature{
 
 export interface UpdateCharacterAbilitiesRequest{
     CharacterAbilities: CharacterFeature[];
+}
+
+export interface InsertCharacterFeatureRequest{
+    CharacterId: number;
+    Feature: Feature;
+    Note: string;
 }

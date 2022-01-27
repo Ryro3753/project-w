@@ -21,6 +21,8 @@ namespace API.Services
         Task<bool> UpdateCharacterDescription(CharacterDescription request);
         Task<IEnumerable<CharacterFeature>> GetCharacterAbilities(int characterId);
         Task<bool> UpdateCharacterAbilities(UpdateCharacterAbilitiesRequest request);
+        Task<CharacterFeature> InsertCharacterFeature(InsertCharacterFeatureRequest request);
+        Task<CharacterFeature> UpdateCharacterFeature(CharacterFeature request);
     }
 
     public class CharacterService : ICharacterService
@@ -125,11 +127,11 @@ namespace API.Services
 
         public async Task<IEnumerable<CharacterFeature>> GetCharacterAbilities(int characterId)
         {
-            var data = await _connection.QueryAsync<CharacterAbilitiesQuery>("Select * from public.\"[CC]fn_getcharacterabilities\"(@id)", new { id = characterId });
+            var data = await _connection.QueryAsync<CharacterFeatureQuery>("Select * from public.\"[CC]fn_getcharacterabilities\"(@id)", new { id = characterId });
             var returnData = new List<CharacterFeature>();
             foreach (var item in data)
             {
-                returnData.Add(new CharacterFeature { CharacterId = item.CharacterId, Feature = _featureService.ReadFeature(item.Feature), Note = item.Note });
+                returnData.Add(new CharacterFeature { Id = item.Id ,CharacterId = item.CharacterId, Feature = _featureService.ReadFeature(item.Feature), Note = item.Note });
             }
             return returnData;
         }
@@ -151,6 +153,43 @@ namespace API.Services
             }
 
             return res;
+        }
+
+        public async Task<CharacterFeature> InsertCharacterFeature(InsertCharacterFeatureRequest request)
+        {
+            var data = await _connection.QueryFirstOrDefaultAsync<CharacterFeatureQuery>("Select * from public.\"[CC]fn_insertcharacterfeature\"(@newcharacterid, @newfeature, @newnote)",
+                new
+                {
+                    newcharacterid = request.CharacterId,
+                    newfeature = _featureService.UnreadFeature(request.Feature),
+                    newnote = request.Note
+                });
+            return new CharacterFeature
+            {
+                Id = data.Id,
+                CharacterId = data.CharacterId,
+                Feature = _featureService.ReadFeature(data.Feature),
+                Note = data.Note
+            };
+        }
+
+        public async Task<CharacterFeature> UpdateCharacterFeature(CharacterFeature request)
+        {
+            var data = await _connection.QueryFirstOrDefaultAsync<CharacterFeatureQuery>("Select * from public.\"[CC]fn_updatecharacterfeature\"(@existid, @newcharacterid, @newfeature, @newnote)",
+                new
+                {
+                    existid = request.Id,
+                    newcharacterid = request.CharacterId,
+                    newfeature = _featureService.UnreadFeature(request.Feature),
+                    newnote = request.Note
+                });
+            return new CharacterFeature
+            {
+                Id = data.Id,
+                CharacterId = data.CharacterId,
+                Feature = _featureService.ReadFeature(data.Feature),
+                Note = data.Note
+            };
         }
 
 

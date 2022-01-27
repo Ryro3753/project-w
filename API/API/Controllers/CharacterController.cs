@@ -87,5 +87,16 @@ namespace API.Controllers
             return await _characterService.UpdateCharacterAbilities(request);
         }
 
+        [HttpPost("InsertCharacterFeature")]
+        public async Task<CharacterFeature> InsertCharacterFeature(InsertCharacterFeatureRequest request)
+        {
+            return await _characterService.InsertCharacterFeature(request);
+        }
+
+        [HttpPost("UpdateCharacterFeature")]
+        public async Task<CharacterFeature> UpdateCharacterFeature(CharacterFeature request)
+        {
+            return await _characterService.UpdateCharacterFeature(request);
+        }
     }
 }
