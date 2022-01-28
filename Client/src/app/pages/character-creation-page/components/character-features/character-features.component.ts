@@ -13,7 +13,7 @@ export class CharacterFeaturesComponent implements OnInit {
 
   @Input() characterId!: number;
   @Input() note!: string;
-  
+
   from: string = 'CharacterCreationFeatures';
   characterFeatures!: CharacterFeature[];
 
@@ -21,6 +21,8 @@ export class CharacterFeaturesComponent implements OnInit {
     this.characterFeatures = await this.characterService.getCharacterFeatures(this.characterId,this.note);
   }
 
-
+asd(){
+  console.log(this.characterFeatures);
+}
 
 }

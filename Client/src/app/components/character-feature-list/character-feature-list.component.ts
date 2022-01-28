@@ -5,6 +5,7 @@ import { CharacterFeature } from 'src/app/models/character.model';
 import { Feature } from 'src/app/models/feature.model';
 import { CharacterService } from 'src/app/services/character.service';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
+import { AlertService } from '../alert/alert.service';
 import { ConfirmationService } from '../confirmation/confirmation.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class CharacterFeatureListComponent implements OnInit {
 
   constructor(readonly confirmationService: ConfirmationService,
     readonly bus: MessageBusService,
-    readonly characterService: CharacterService) {
+    readonly characterService: CharacterService,
+    readonly alertService: AlertService) {
     this.subscribes.push(this.bus.of(FeatureClosePopupEvent).subscribe(this.featurePopupClose.bind(this)));
   }
 
@@ -49,8 +51,17 @@ export class CharacterFeatureListComponent implements OnInit {
 
   async deleteFeature(id: number) {
     await this.confirmationService.confirm('Confirm', 'Do you confirm to delete this Feature').toPromise().then(async res => {
-      if(res)
-        this.characterFeatures = this.characterFeatures.filter(i => i.Id != id);
+      if(res){
+        const isDeleted = await this.characterService.deleteCharacterFeatures(id);
+        if(isDeleted){
+          const index = this.characterFeatures.findIndex(i => i.Id == id);
+          this.characterFeatures.splice(index,1);
+          this.alertService.alert({alertInfo:{message:'Feature successfully deleted', type:'success'}});
+        }
+        else
+          this.alertService.alert({alertInfo:{message:'Something wrong happend, please try again later', type:'danger'}});
+      }
+
     });
   }
 

@@ -60,4 +60,8 @@ export class CharacterService extends BaseDataService {
   getCharacterFeatures(characterId: number, note: string): Promise<CharacterFeature[]>{
     return this.get<CharacterFeature[]>("GetCharacterFeatures",{characterId, note})
   }
+
+  deleteCharacterFeatures(featureId: number): Promise<boolean>{
+    return this.delete<boolean>("DeleteCharacterFeatures", {featureId});
+  }
 }

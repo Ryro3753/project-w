@@ -24,6 +24,7 @@ namespace API.Services
         Task<CharacterFeature> InsertCharacterFeature(InsertCharacterFeatureRequest request);
         Task<CharacterFeature> UpdateCharacterFeature(CharacterFeature request);
         Task<IEnumerable<CharacterFeature>> GetCharacterFeatures(int characterId, string note);
+        Task<bool> DeleteCharacterFeatures(int featureId);
     }
 
     public class CharacterService : ICharacterService
@@ -202,6 +203,11 @@ namespace API.Services
                 returnData.Add(new CharacterFeature { Id = item.Id, CharacterId = item.CharacterId, Feature = _featureService.ReadFeature(item.Feature), Note = item.Note });
             }
             return returnData;
+        }
+
+        public async Task<bool> DeleteCharacterFeatures(int featureId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CC]fn_deletecharacterfeature\"(@id)", new { id = featureId });
         }
     }
 }
