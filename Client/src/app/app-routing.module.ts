@@ -63,7 +63,7 @@ const routes: Routes = [
   },
   {
     path: 'Characters',
-    loadChildren: () => import('./pages/character-creation-page/character-creation-page.module').then(m => m.CharacterCreationPageModule),
+    loadChildren: () => import('./pages/characters-page/characters-page.module').then(m => m.CharactersPageModule),
     canActivate:[AuthGuard]
   },
 ];
