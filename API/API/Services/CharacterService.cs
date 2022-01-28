@@ -23,6 +23,7 @@ namespace API.Services
         Task<bool> UpdateCharacterAbilities(UpdateCharacterAbilitiesRequest request);
         Task<CharacterFeature> InsertCharacterFeature(InsertCharacterFeatureRequest request);
         Task<CharacterFeature> UpdateCharacterFeature(CharacterFeature request);
+        Task<IEnumerable<CharacterFeature>> GetCharacterFeatures(int characterId, string note);
     }
 
     public class CharacterService : ICharacterService
@@ -192,6 +193,15 @@ namespace API.Services
             };
         }
 
-
+        public async Task<IEnumerable<CharacterFeature>> GetCharacterFeatures(int characterId, string note)
+        {
+            var data = await _connection.QueryAsync<CharacterFeatureQuery>("Select * from public.\"[CC]fn_getcharacterfeatures\"(@getnote,@id)", new { getnote = note, id = characterId });
+            var returnData = new List<CharacterFeature>();
+            foreach (var item in data)
+            {
+                returnData.Add(new CharacterFeature { Id = item.Id, CharacterId = item.CharacterId, Feature = _featureService.ReadFeature(item.Feature), Note = item.Note });
+            }
+            return returnData;
+        }
     }
 }

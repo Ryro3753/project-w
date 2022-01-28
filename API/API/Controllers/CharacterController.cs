@@ -98,5 +98,11 @@ namespace API.Controllers
         {
             return await _characterService.UpdateCharacterFeature(request);
         }
+
+        [HttpGet("GetCharacterFeatures")]
+        public async Task<IEnumerable<CharacterFeature>> GetCharacterFeatures(int characterId, string note)
+        {
+            return await _characterService.GetCharacterFeatures(characterId, note);
+        }
     }
 }

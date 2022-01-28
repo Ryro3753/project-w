@@ -9,6 +9,7 @@ import { CharacterApperanceComponent } from './components/character-apperance/ch
 import { CharacterDetailsComponent } from './components/character-details/character-details.component';
 import { CharacterAbilitiesComponent } from './components/character-abilities/character-abilities.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CharacterFeaturesComponent } from './components/character-features/character-features.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CharacterBasicComponent,
     CharacterApperanceComponent,
     CharacterDetailsComponent,
-    CharacterAbilitiesComponent
+    CharacterAbilitiesComponent,
+    CharacterFeaturesComponent
   ],
   imports: [
     RouterModule.forChild([{

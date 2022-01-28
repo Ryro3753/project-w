@@ -1,0 +1,8 @@
+<div class="character-feature">
+    <div class="row justify-content-center mtr1">
+        <div class="col-sm-6" *ngIf="characterFeatures">
+            <app-character-feature-list [characterFeatures]="characterFeatures" [note]="note"
+                [characterId]="characterId" [height]="700" [from]="from"></app-character-feature-list>
+        </div>
+    </div>
+</div>

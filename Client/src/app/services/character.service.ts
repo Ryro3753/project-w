@@ -56,4 +56,8 @@ export class CharacterService extends BaseDataService {
   updateCharacterFeature(request: CharacterFeature): Promise<CharacterFeature>{
     return this.post<CharacterFeature>("UpdateCharacterFeature",request);
   }
+
+  getCharacterFeatures(characterId: number, note: string): Promise<CharacterFeature[]>{
+    return this.get<CharacterFeature[]>("GetCharacterFeatures",{characterId, note})
+  }
 }

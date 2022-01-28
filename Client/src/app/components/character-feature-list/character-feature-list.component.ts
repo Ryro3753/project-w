@@ -49,7 +49,8 @@ export class CharacterFeatureListComponent implements OnInit {
 
   async deleteFeature(id: number) {
     await this.confirmationService.confirm('Confirm', 'Do you confirm to delete this Feature').toPromise().then(async res => {
-      this.characterFeatures = this.characterFeatures.filter(i => i.Id != id);
+      if(res)
+        this.characterFeatures = this.characterFeatures.filter(i => i.Id != id);
     });
   }
 
@@ -75,6 +76,8 @@ export class CharacterFeatureListComponent implements OnInit {
         Feature: event.feature,
         Note: this.note
       });
+      const index = this.characterFeatures.findIndex(i => i.Id == result.Id);
+      this.characterFeatures[index] = result;
     }
   }
 }
