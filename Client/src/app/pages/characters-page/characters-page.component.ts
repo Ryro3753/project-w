@@ -40,7 +40,6 @@ export class CharactersPageComponent implements OnInit {
 
   async readData(userId: string) {
     this.allCharacters = await this.characterService.getCharacters(userId);
-    console.log(this.allCharacters)
   }
 
   async deleteCharacter(id: number){

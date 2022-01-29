@@ -55,7 +55,6 @@ export class FeaturePopupComponent implements OnInit, OnDestroy {
     this.feature = JSON.parse(JSON.stringify(featureEvent.feature));
     this.from = featureEvent.from;
     this.id = featureEvent.id;
-    console.log(featureEvent);
     if (this.feature != null)
       this.featuresToModels();
     this.ngxSmartModalService.getModal('featureModal').open();

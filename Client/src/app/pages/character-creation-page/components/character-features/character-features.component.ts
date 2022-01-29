@@ -20,9 +20,4 @@ export class CharacterFeaturesComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.characterFeatures = await this.characterService.getCharacterFeatures(this.characterId,this.note);
   }
-
-asd(){
-  console.log(this.characterFeatures);
-}
-
 }

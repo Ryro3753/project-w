@@ -76,6 +76,10 @@ font-weight: bold;
     font-weight: bold;
 }
 
+::ng-deep .noneSelect{
+    user-select: none;
+}
+
 ::ng-deep .customAddButton{
     color: white;
     font-weight: bold;

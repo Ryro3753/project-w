@@ -66,6 +66,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/characters-page/characters-page.module').then(m => m.CharactersPageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'Character-Sheet/:CharacterId',
+    loadChildren: () => import('./pages/character-sheet-page/characters-page.module').then(m => m.CharacterSheetPageModule),
+    canActivate:[AuthGuard]
+  },
 ];
 
 @NgModule({

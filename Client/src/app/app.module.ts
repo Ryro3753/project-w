@@ -18,7 +18,6 @@ import { SharePopupComponent } from './components/share-popup/share-popup.compon
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { FeaturePopupComponent } from './components/feature-popup/feature-popup.component';
-import { CharactersPageComponent } from './pages/characters-page/characters-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import { CharactersPageComponent } from './pages/characters-page/characters-page
     FeaturesPopupComponent,
     FeaturePopupComponent,
     SharePopupComponent,
-    ConfirmationComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
