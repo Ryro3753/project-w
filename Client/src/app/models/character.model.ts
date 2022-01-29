@@ -85,6 +85,7 @@ export interface Character{
     Name: string;
     Class: string;
     Race: string;
+    Level: number;
     HasImage: boolean;
     Username: string;
 }

@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string Class { get; set; }
         public string Race { get; set; }
+        public int Level { get; set; }
         public bool HasImage { get; set; }
         public string Username { get; set; }
     }

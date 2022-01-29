@@ -1,5 +1,8 @@
-<div class="characters-page">
+<div class="characters-page container">
+    <button class="btn btn-block  customBlockButton mtr1" (click)="newCharacter()"> <i class="bi bi-plus"></i>New Character</button>
     <div class="row">
-        
+        <div *ngFor="let item of allCharacters" class="col-sm-4">
+            <app-character-card [character]="item" (deleteClicked)="deleteCharacter($event)"></app-character-card>
+        </div>
     </div>
 </div>

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CharactersPageComponent } from './characters-page.component';
@@ -13,8 +14,8 @@ import { CharacterCardComponent } from './components/character-card/character-ca
       path: '',
       pathMatch: 'full',
       component: CharactersPageComponent
-
     }]),
+    CommonModule
   ],
   providers: [
   ],

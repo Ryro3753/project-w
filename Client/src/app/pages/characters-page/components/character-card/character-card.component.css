@@ -1,0 +1,7 @@
+.characterCard{
+    margin-top: 2rem;
+}
+.characterCard:hover{
+    background-color: #10002b;
+    color: white;
+}

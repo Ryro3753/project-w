@@ -1,1 +1,32 @@
-<p>character-card works!</p>
+<div class="card characterCard" *ngIf="character">
+    <div class="row p-2 underBorderColored">
+        <div class="col-sm-2 my-auto" *ngIf="character.HasImage">
+            <img [src]="characterImageBasePath + character.Id + '.png'"
+            class="responsiveIcon"/>
+        </div>
+        <div class="col-sm">
+            <p class="header5 m-0 underBorderColored textAlignCenter" [innerText]="character.Name"></p>
+            <p class="header6 underBorderColored widthFull textAlignCenter" [innerText]="character.Race + ' | ' + character.Class + ' | ' + character.Level + ' Level'"></p>
+        </div>
+    </div>
+    <div class="row underBorderColored p-2 justify-content-center">
+        <div class="col-sm-3">
+            <div class="click" (click)="view()">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                View
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="click" (click)="edit()">
+                <i class="bi bi bi-pencil-square"></i>
+                Edit
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="click" (click)="deleteCharacter()">
+                <i class="bi bi-trash"></i>
+                Delete
+            </div>
+        </div>
+    </div>
+</div>

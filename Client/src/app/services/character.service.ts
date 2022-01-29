@@ -68,4 +68,8 @@ export class CharacterService extends BaseDataService {
   getCharacters(userId: string): Promise<Character[]>{
     return this.get<Character[]>("GetCharacters",{userId})
   }
+
+  deleteCharacter(characterId: number): Promise<boolean>{
+    return this.delete<boolean>("DeleteCharacter", {characterId});
+  }
 }

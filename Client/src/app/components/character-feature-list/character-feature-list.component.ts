@@ -67,7 +67,6 @@ export class CharacterFeatureListComponent implements OnInit,OnDestroy {
         else
           this.alertService.alert({alertInfo:{message:'Something wrong happend, please try again later', type:'danger'}});
       }
-
     });
   }
 

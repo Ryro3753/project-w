@@ -117,5 +117,10 @@ namespace API.Controllers
             return await _characterService.GetCharacters(userId);
         }
 
+        [HttpDelete("DeleteCharacter")]
+        public async Task<bool> DeleteCharacter(int characterId)
+        {
+            return await _characterService.DeleteCharacter(characterId);
+        }
     }
 }

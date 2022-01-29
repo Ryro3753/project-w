@@ -26,6 +26,7 @@ namespace API.Services
         Task<IEnumerable<CharacterFeature>> GetCharacterFeatures(int characterId, string note);
         Task<bool> DeleteCharacterFeatures(int featureId);
         Task<IEnumerable<Character>> GetCharacters(string userId);
+        Task<bool> DeleteCharacter(int characterId);
     }
 
     public class CharacterService : ICharacterService
@@ -215,5 +216,11 @@ namespace API.Services
         {
             return await _connection.QueryAsync<Character>("Select * from public.\"[CC]fn_getcharacters\"(@userid)", new { userid = userId });
         }
+
+        public async Task<bool> DeleteCharacter(int characterId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CC]fn_deletecharacter\"(@id)", new { id = characterId });
+        }
+
     }
 }

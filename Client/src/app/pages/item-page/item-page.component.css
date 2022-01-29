@@ -14,6 +14,7 @@
 
 .itemButton:hover{
     background-color: #10002b;
+    box-shadow: 1px 1px 7px #7b2cbf;
 }
 
 .itemButtonName{
