@@ -79,3 +79,12 @@ export interface InsertCharacterFeatureRequest{
     Feature: Feature;
     Note: string;
 }
+
+export interface Character{
+    Id: number;
+    Name: string;
+    Class: string;
+    Race: string;
+    HasImage: boolean;
+    Username: string;
+}

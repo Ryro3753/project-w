@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { FeatureClosePopupEvent, FeaturePopupEvent } from 'src/app/events/feature.popup.event';
 import { CharacterFeature } from 'src/app/models/character.model';
@@ -13,7 +13,7 @@ import { ConfirmationService } from '../confirmation/confirmation.service';
   templateUrl: './character-feature-list.component.html',
   styleUrls: ['./character-feature-list.component.css']
 })
-export class CharacterFeatureListComponent implements OnInit {
+export class CharacterFeatureListComponent implements OnInit,OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -37,6 +37,12 @@ export class CharacterFeatureListComponent implements OnInit {
   cssClassesWithRequirement: string = this.cssClassesWithoutRequirement + ' listItemWithRequirements click';
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
   showRequirements(feature: CharacterFeature, index: number) {

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { CharacterApperance, CharacterBasics, CharacterCreationRequest, CharacterDescription, CharacterFeature, InsertCharacterFeatureRequest, UpdateCharacterAbilitiesRequest, UpdateCharacterApperanceRequest, UpdateCharacterRequest } from "../models/character.model"
+import { Character, CharacterApperance, CharacterBasics, CharacterCreationRequest, CharacterDescription, CharacterFeature, InsertCharacterFeatureRequest, UpdateCharacterAbilitiesRequest, UpdateCharacterApperanceRequest, UpdateCharacterRequest } from "../models/character.model"
 import { BaseDataService } from "./common/base-data.service"
 
 
@@ -63,5 +63,9 @@ export class CharacterService extends BaseDataService {
 
   deleteCharacterFeatures(featureId: number): Promise<boolean>{
     return this.delete<boolean>("DeleteCharacterFeatures", {featureId});
+  }
+
+  getCharacters(userId: string): Promise<Character[]>{
+    return this.get<Character[]>("GetCharacters",{userId})
   }
 }

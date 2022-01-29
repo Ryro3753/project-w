@@ -107,4 +107,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  characters(event: any) {
+    if (event.which == 2) {
+      window.open('/Characters', '_blank');
+    }
+    else if (event.which == 1) {
+      this.route.navigateByUrl('/Characters');
+    }
+  }
+
 }

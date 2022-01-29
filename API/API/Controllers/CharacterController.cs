@@ -110,5 +110,12 @@ namespace API.Controllers
         {
             return await _characterService.DeleteCharacterFeatures(featureId);
         }
+
+        [HttpGet("GetCharacters")]
+        public async Task<IEnumerable<Character>> GetCharacters(string userId)
+        {
+            return await _characterService.GetCharacters(userId);
+        }
+
     }
 }
