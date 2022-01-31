@@ -53,7 +53,11 @@ namespace API.Controllers
             return await _traitService.DeleteTrait(TraitId, UserId);
         }
 
-
+        [HttpGet("GetTraitsWithDetails")]
+        public async Task<IEnumerable<TraitWithFeature>> GetTraitsWithDetails(string userId)
+        {
+            return await _traitService.GetTraitsWithDetails(userId);
+        }
 
     }
 }

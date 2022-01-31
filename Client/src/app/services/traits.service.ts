@@ -37,4 +37,8 @@ export class TraitsService extends BaseDataService {
   deleteTrait(TraitId: number, UserId: string): Promise<boolean>{
     return this.delete<boolean>("DeleteTrait",{TraitId:TraitId, UserId: UserId},true);
   }
+
+  getTraitsWithDetails(userId: string): Promise<TraitWithFeature[]>{
+    return this.get<TraitWithFeature[]>("GetTraitsWithDetails", {userId});
+  }
 }

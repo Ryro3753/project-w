@@ -19,6 +19,7 @@ namespace API.Services
         Task<TraitWithFeature> UpdateTrait(TraitUpdateRequest request);
         Task<bool> ShareTrait(ShareRequest request);
         Task<bool> DeleteTrait(int TraitId, string UserId);
+        Task<IEnumerable<TraitWithFeature>> GetTraitsWithDetails(string userId);
     }
 
     public class TraitService : ITraitService
@@ -98,6 +99,18 @@ namespace API.Services
                 throw new Exception("You do not have permission to delete this trait");
             return result;
         }
+
+        public async Task<IEnumerable<TraitWithFeature>> GetTraitsWithDetails(string userId)
+        {
+            var data = await _connection.QueryAsync<TraitQuery>("Select * from public.fn_gettraitsanddetailsbyuserid(@userid)", new { userid = userId });
+            var returnData = new List<TraitWithFeature>();
+            foreach (var item in data)
+            {
+                returnData.Add(new TraitWithFeature { Id = item.Id, Description = item.Description, Name = item.Name, Username = item.Username, Features = _featureService.ReadFeatures(item.Features)});
+            }
+            return returnData;
+        }
+
 
     }
 }
