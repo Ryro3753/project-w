@@ -1,13 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { login, logout } from '../actions/login.action';
 import { User } from '../../models/common/user.model';
+import { TraitWithFeature } from 'src/app/models/traits.model';
+import { loadTraitsSuccess } from '../actions/traits.action.ts';
 
 export interface State {
     user: User | undefined;
+    traits: TraitWithFeature[] | undefined;
 }
 
 export const initialState: State = {
-    user: undefined
+    user: undefined,
+    traits: undefined
 };
 
 const _storeReducer = createReducer(
@@ -17,7 +21,10 @@ const _storeReducer = createReducer(
     }),
     on(logout, (state:State) => {
         return ({...state, user: undefined})
-    } )
+    } ),
+    on(loadTraitsSuccess, (state: State, payload:any) => {
+        return ({...state, traits: payload.traits});
+    })
   );
 
 

@@ -1,5 +1,6 @@
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
+import { Observable } from "rxjs"
 import { OnlyUserId, ShareRequest } from "../models/common/common.model"
 import { Trait, TraitUpdateRequest, TraitWithFeature } from "../models/traits.model"
 import { BaseDataService } from "./common/base-data.service"
@@ -38,7 +39,8 @@ export class TraitsService extends BaseDataService {
     return this.delete<boolean>("DeleteTrait",{TraitId:TraitId, UserId: UserId},true);
   }
 
-  getTraitsWithDetails(userId: string): Promise<TraitWithFeature[]>{
-    return this.get<TraitWithFeature[]>("GetTraitsWithDetails", {userId});
+  getTraitsWithDetails(userId: string): Observable<TraitWithFeature[]>{
+    const url = this.getUrl('Trait','GetTraitsWithDetails');
+    return this.httpClient.get<TraitWithFeature[]>(url,{params: {userId}});
   }
 }

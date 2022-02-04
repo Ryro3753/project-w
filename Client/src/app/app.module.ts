@@ -18,6 +18,8 @@ import { SharePopupComponent } from './components/share-popup/share-popup.compon
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { FeaturePopupComponent } from './components/feature-popup/feature-popup.component';
+import { EffectsModule } from '@ngrx/effects';
+import { TraitEffects } from './store/effects/traits.effect';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { FeaturePopupComponent } from './components/feature-popup/feature-popup.
     NgSelectModule,
     FormsModule,
     NgxSmartModalModule.forRoot(),
-    SimpleModalModule
+    SimpleModalModule,
+    EffectsModule.forRoot([TraitEffects])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
