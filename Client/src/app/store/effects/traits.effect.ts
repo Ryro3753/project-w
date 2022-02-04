@@ -1,7 +1,7 @@
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import { TraitsService } from 'src/app/services/traits.service';
-import { loadTraits, loadTraitsError, loadTraitsSuccess} from '../actions/traits.action.ts';
+import { loadTraits, loadTraitsError, loadTraitsSuccess} from '../actions/traits.action';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { TraitWithFeature } from 'src/app/models/traits.model';
 

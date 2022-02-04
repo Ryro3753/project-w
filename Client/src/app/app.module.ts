@@ -20,6 +20,7 @@ import { SimpleModalModule } from 'ngx-simple-modal';
 import { FeaturePopupComponent } from './components/feature-popup/feature-popup.component';
 import { EffectsModule } from '@ngrx/effects';
 import { TraitEffects } from './store/effects/traits.effect';
+import { CharacterSheetEffects } from './store/effects/character-sheet.effect';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { TraitEffects } from './store/effects/traits.effect';
     FormsModule,
     NgxSmartModalModule.forRoot(),
     SimpleModalModule,
-    EffectsModule.forRoot([TraitEffects])
+    EffectsModule.forRoot([TraitEffects,CharacterSheetEffects])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
