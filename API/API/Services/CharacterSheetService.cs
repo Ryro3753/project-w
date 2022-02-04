@@ -1,4 +1,5 @@
 ﻿using API.Models.Character;
+using API.Models.CharacterSheet;
 using Dapper;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
@@ -10,20 +11,53 @@ namespace API.Services
 {
     public interface ICharacterSheetService
     {
+        Task<CharacterAll> GetAll(int characterId);
     }
 
     public class CharacterSheetService : ICharacterSheetService
     {
         private readonly IDbConnection _connection;
         private readonly IFeatureService _featureService;
+        private readonly ICharacterService _characterService;
 
-        public CharacterSheetService(IDbConnection connection, IFeatureService featureService)
+        public CharacterSheetService(IDbConnection connection, IFeatureService featureService, ICharacterService characterService)
         {
             _connection = connection;
             _featureService = featureService;
+            _characterService = characterService;
         }
 
-        
+        public async Task<CharacterAll> GetAll(int characterId)
+        {
+            var data = new CharacterAll
+            {
+                Apperance = await _characterService.GetCharacterApperance(characterId),
+                Description = await _characterService.GetCharacterDescription(characterId),
+                Features = await GetAllCharacterFeatures(characterId),
+                Detail = await GetCharacterDetail(characterId)
+            };
+
+            return data;
+        }
+
+        public async Task<CharacterAllFeatures> GetAllCharacterFeatures(int characterId)
+        {
+            var data = new CharacterAllFeatures();
+
+            var basicFeatures = await _connection.QueryFirstOrDefaultAsync<CharacterBasicFeaturesQuery>("Select * from public.\"[CS]fn_getcharacterraceandclassfeatures\"(@id)", new { id = characterId });
+
+            data.ClassFeatures = _featureService.ReadFeatures(basicFeatures.ClassFeatures);
+            data.RaceFeatures = _featureService.ReadFeatures(basicFeatures.RaceFeatures);
+            data.CharacterFeatures =  await _characterService.GetCharacterFeatures(characterId, null);
+
+            return data;
+        }
+
+        public async Task<CharacterDetail> GetCharacterDetail(int characterId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<CharacterDetail>("Select * from public.\"[CS]fn_getcharacterdetails\"(@id)", new { id = characterId });
+        }
+
 
     }
 }
