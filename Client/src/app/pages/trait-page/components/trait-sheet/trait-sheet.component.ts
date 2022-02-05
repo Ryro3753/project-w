@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { ConfirmationService } from 'src/app/components/confirmation/confirmation.service';
@@ -14,7 +14,7 @@ import { TraitsService } from 'src/app/services/traits.service';
   templateUrl: './trait-sheet.component.html',
   styleUrls: ['./trait-sheet.component.css']
 })
-export class TraitSheetComponent implements OnInit {
+export class TraitSheetComponent implements OnInit,OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -32,6 +32,12 @@ export class TraitSheetComponent implements OnInit {
   ngOnInit(): void {
     this.subscribes.push(this.bus.of(FeaturesClosePopupEvent).subscribe(this.featuresPopupSaved.bind(this)));
     this.subscribes.push(this.bus.of(SharePopupUsernameEvent).subscribe(this.sharePopupResponse.bind(this)));
+  }
+
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
 

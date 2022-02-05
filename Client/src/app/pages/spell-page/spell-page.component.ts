@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
@@ -14,7 +14,7 @@ import { State } from 'src/app/store/reducer/reducer';
   templateUrl: './spell-page.component.html',
   styleUrls: ['./spell-page.component.css']
 })
-export class SpellPageComponent implements OnInit {
+export class SpellPageComponent implements OnInit,OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -39,6 +39,12 @@ export class SpellPageComponent implements OnInit {
       }
     }));
     this.spellLevels = this.spellService.getSpellLevels();
+  }
+
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
   async addNewSpell() {

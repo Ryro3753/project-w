@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
@@ -14,7 +14,7 @@ import { State } from 'src/app/store/reducer/reducer';
   templateUrl: './characters-page.component.html',
   styleUrls: ['./characters-page.component.css']
 })
-export class CharactersPageComponent implements OnInit {
+export class CharactersPageComponent implements OnInit,OnDestroy {
 
   subscribes: SubscriptionLike[] = [];
 
@@ -36,6 +36,12 @@ export class CharactersPageComponent implements OnInit {
         this.readData(i.user.Id);
       }
     }));
+  }
+
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
   async readData(userId: string) {

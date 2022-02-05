@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { AlertService } from 'src/app/components/alert/alert.service';
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './item-sidebar.component.html',
   styleUrls: ['./item-sidebar.component.css']
 })
-export class ItemSidebarComponent implements OnInit {
+export class ItemSidebarComponent implements OnInit,OnDestroy {
   
   subscribes: SubscriptionLike[] = [];
 
@@ -33,6 +33,12 @@ export class ItemSidebarComponent implements OnInit {
   itemImageBasePath = this.apiURL + '/images/ItemImages/';
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    while (this.subscribes.length > 0) {
+      this.subscribes.pop()?.unsubscribe();
+    }
   }
 
   close(){

@@ -5,7 +5,7 @@ export interface CharacterAll{
     Detail: CharacterDetail;
     Apperance: CharacterApperance;
     Description: CharacterDescription;
-    Features: CharacterAllFeatures[];
+    Features: CharacterAllFeatures;
 }
 
 
@@ -23,7 +23,7 @@ export interface CharacterDetail{
 
 export interface CharacterAllFeatures{
     RaceFeatures: Feature[];
-    ClassFeature: Feature[];
+    ClassFeatures: Feature[];
     CharacterFeatures: CharacterFeature[];
 }
 
