@@ -47,6 +47,7 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     this.subscribes.push(this.store.select(i => i.state.characterAll).subscribe((character: CharacterAll | undefined) => {
       if(character){
         this.characterDetails = character;
+        console.log(this.characterDetails.ClassColor);
         this.allFeatures = [];
         this.allFeatures.push(...this.characterDetails.Features.RaceFeatures);
         this.allFeatures.push(...this.characterDetails.Features.ClassFeatures);

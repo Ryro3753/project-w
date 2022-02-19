@@ -10,5 +10,6 @@ namespace API.Models.CharacterSheet
         public CharacterApperance Apperance { get; set; }
         public CharacterDescription Description { get; set; }
         public CharacterAllFeatures Features { get; set; }
+        public string ClassColor { get; set; }
     }
 }

@@ -34,7 +34,8 @@ namespace API.Services
                 Apperance = await _characterService.GetCharacterApperance(characterId),
                 Description = await _characterService.GetCharacterDescription(characterId),
                 Features = await GetAllCharacterFeatures(characterId),
-                Detail = await GetCharacterDetail(characterId)
+                Detail = await GetCharacterDetail(characterId),
+                ClassColor = await GetCharacterClassColor(characterId)
             };
 
             return data;
@@ -58,6 +59,9 @@ namespace API.Services
             return await _connection.QueryFirstOrDefaultAsync<CharacterDetail>("Select * from public.\"[CS]fn_getcharacterdetails\"(@id)", new { id = characterId });
         }
 
-
+        public async Task<string> GetCharacterClassColor(int characterId)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<string>("Select * from public.\"[CS]fn_getcharacterclasscolor\"(@id)", new { id = characterId });
+        }
     }
 }

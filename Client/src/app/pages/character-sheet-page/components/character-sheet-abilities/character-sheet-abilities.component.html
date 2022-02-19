@@ -1,7 +1,7 @@
 <div class="character-sheet-ability-cards" *ngIf="load">
-    <div class="card abilityCard">
+    <div class="card abilityCard" [ngStyle]="{'border-color': classColor}">
         <p class="abilityName">Strength</p>
-        <p class="abilityValue" [innerText]="abilities.Strength"></p>
+        <p class="abilityValue" [innerText]="abilities.Strength" [ngStyle]="{'border-bottom-color': classColor}"></p>
         <div class="row">
             <div class="col-sm-5">
                 <p class="abilityLabels">Modifier</p>
@@ -16,9 +16,9 @@
             </div>
         </div>
     </div>
-    <div class="card abilityCard">
+    <div class="card abilityCard" [ngStyle]="{'border-color': classColor}">
         <p class="abilityName">Dexterity</p>
-        <p class="abilityValue" [innerText]="abilities.Dexterity"></p>
+        <p class="abilityValue" [innerText]="abilities.Dexterity" [ngStyle]="{'border-bottom-color': classColor}"></p>
         <div class="row">
             <div class="col-sm-5">
                 <p class="abilityLabels">Modifier</p>
@@ -33,9 +33,9 @@
             </div>
         </div>
     </div>
-    <div class="card abilityCard">
+    <div class="card abilityCard" [ngStyle]="{'border-color': classColor}">
         <p class="abilityName">Constitution</p>
-        <p class="abilityValue" [innerText]="abilities.Constitution"></p>
+        <p class="abilityValue" [innerText]="abilities.Constitution" [ngStyle]="{'border-bottom-color': classColor}"></p>
         <div class="row">
             <div class="col-sm-5">
                 <p class="abilityLabels">Modifier</p>
@@ -50,9 +50,9 @@
             </div>
         </div>
     </div>
-    <div class="card abilityCard">
+    <div class="card abilityCard" [ngStyle]="{'border-color': classColor}">
         <p class="abilityName">Charisma</p>
-        <p class="abilityValue" [innerText]="abilities.Charisma"></p>
+        <p class="abilityValue" [innerText]="abilities.Charisma" [ngStyle]="{'border-bottom-color': classColor}"></p>
         <div class="row">
             <div class="col-sm-5">
                 <p class="abilityLabels">Modifier</p>
@@ -67,9 +67,9 @@
             </div>
         </div>
     </div>
-    <div class="card abilityCard">
+    <div class="card abilityCard" [ngStyle]="{'border-color': classColor}">
         <p class="abilityName">Intelligence</p>
-        <p class="abilityValue" [innerText]="abilities.Intelligence"></p>
+        <p class="abilityValue" [innerText]="abilities.Intelligence" [ngStyle]="{'border-bottom-color': classColor}"></p>
         <div class="row">
             <div class="col-sm-5">
                 <p class="abilityLabels">Modifier</p>
@@ -84,9 +84,9 @@
             </div>
         </div>
     </div>
-    <div class="card abilityCard">
+    <div class="card abilityCard" [ngStyle]="{'border-color': classColor}">
         <p class="abilityName">Wisdom</p>
-        <p class="abilityValue" [innerText]="abilities.Wisdom"></p>
+        <p class="abilityValue" [innerText]="abilities.Wisdom" [ngStyle]="{'border-bottom-color': classColor}"></p>
         <div class="row">
             <div class="col-sm-5">
                 <p class="abilityLabels">Modifier</p>
@@ -101,7 +101,7 @@
             </div>
         </div>
     </div>
-    <div class="card abilityCard p-2" *ngIf="advantages.length > 0 || disadvantages.length > 0">
+    <div class="card abilityCard p-2" *ngIf="advantages.length > 0 || disadvantages.length > 0" [ngStyle]="{'border-color': classColor}">
         <div class="row">
             <div class="my-auto">
                 <div *ngFor="let item of advantages">

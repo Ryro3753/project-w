@@ -16,6 +16,7 @@ export class CharacterSheetAbilitiesComponent implements OnInit {
   constructor(readonly calculatorService: CalculatorService,
     readonly store: Store<{ state: State }>) { }
 
+  @Input() classColor!: string;
   features!: Feature[];
   abilities: Abilities = {} as Abilities;
   abilitiesModifier: Abilities = {} as Abilities;

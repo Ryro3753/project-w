@@ -1,7 +1,7 @@
 <div class="character-sheet-page container">
     <div class="row" *ngIf="pageLoad">
         <div class="col-sm-2">
-            <app-character-sheet-abilities [validFeatures]="validFeatures"></app-character-sheet-abilities>
+            <app-character-sheet-abilities [validFeatures]="validFeatures" [classColor]="characterDetails.ClassColor"></app-character-sheet-abilities>
         </div>
     </div>
 </div>

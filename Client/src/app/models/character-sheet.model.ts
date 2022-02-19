@@ -6,6 +6,7 @@ export interface CharacterAll{
     Apperance: CharacterApperance;
     Description: CharacterDescription;
     Features: CharacterAllFeatures;
+    ClassColor:string
 }
 
 
