@@ -1,0 +1,50 @@
+.abilityValue{
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    border-bottom-style: solid;
+    border-bottom-color: #7b2cbf;
+    border-bottom-width: 0.15rem;
+}
+
+.abilityModifier{
+    text-align: center;
+    margin: 0;
+}
+
+.abilitySavingThrow{
+    text-align: center;
+    margin: 0;
+}
+
+.abilityName{
+    text-align: center;
+    margin: 0;
+}
+
+.abilityLabels{
+    font-size: x-small;
+    color: grey;
+    text-align: center;
+    margin: 0;
+}
+
+.abilityCard{
+    border-style: solid;
+    border-color: #7b2cbf;
+    border-width: 0.25rem;
+    margin-top: 1rem;
+}
+
+.abilityCard:hover{
+    box-shadow: 1px 1px 7px #7b2cbf;
+}
+
+.advantages{
+    color: green;
+}
+
+.disadvantages{
+    color: red;
+}

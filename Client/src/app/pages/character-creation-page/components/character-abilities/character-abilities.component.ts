@@ -27,7 +27,7 @@ export class CharacterAbilitiesComponent implements OnInit {
     const result = await this.characterService.getCharacterAbilities(this.characterId);
     this.abilityNames.forEach(e => {
       this.abilities[e] = result.filter(i => i.Note == e)[0];
-      this.modifiers[e] = this.calculatorService.calculateAbilityModifierRaw(Number(this.abilities[e].Feature.Value));
+      this.modifiers[e] = this.calculatorService.calculateAbilityModifier(Number(this.abilities[e].Feature.Value));
       this.calculateModifier(this.abilities[e].Feature.Value,e);
     })
     this.load = true;
@@ -41,7 +41,7 @@ export class CharacterAbilitiesComponent implements OnInit {
 
   calculateModifier(abilityValue: string, ability: string){
     const convertedAbilityValue =  Number(abilityValue);
-    this.modifiers[ability] = this.calculatorService.calculateAbilityModifierRaw(convertedAbilityValue);
+    this.modifiers[ability] = this.calculatorService.calculateAbilityModifier(convertedAbilityValue);
     this.modifierValue[ability] = this.getModifierNumberWithSign(this.modifiers[ability]);
   }
 

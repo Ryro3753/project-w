@@ -1,1 +1,118 @@
-<p>character-sheet-abilities works!</p>
+<div class="character-sheet-ability-cards" *ngIf="load">
+    <div class="card abilityCard">
+        <p class="abilityName">Strength</p>
+        <p class="abilityValue" [innerText]="abilities.Strength"></p>
+        <div class="row">
+            <div class="col-sm-5">
+                <p class="abilityLabels">Modifier</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(abilitiesModifier.Strength)"></p>
+            </div>
+            <div class="col-sm-2 my-auto">
+                <i [ngClass]="getProficiencyIcon(savingThrowsProficiency.Strength)"></i>
+            </div>
+            <div class="col-sm-5">
+                <p class="abilityLabels">Saving Throw</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(savingThrowsModifier.Strength)"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card abilityCard">
+        <p class="abilityName">Dexterity</p>
+        <p class="abilityValue" [innerText]="abilities.Dexterity"></p>
+        <div class="row">
+            <div class="col-sm-5">
+                <p class="abilityLabels">Modifier</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(abilitiesModifier.Dexterity)"></p>
+            </div>
+            <div class="col-sm-2 my-auto">
+                <i [ngClass]="getProficiencyIcon(savingThrowsProficiency.Dexterity)"></i>
+            </div>
+            <div class="col-sm-5">
+                <p class="abilityLabels">Saving Throw</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(savingThrowsModifier.Dexterity)"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card abilityCard">
+        <p class="abilityName">Constitution</p>
+        <p class="abilityValue" [innerText]="abilities.Constitution"></p>
+        <div class="row">
+            <div class="col-sm-5">
+                <p class="abilityLabels">Modifier</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(abilitiesModifier.Constitution)"></p>
+            </div>
+            <div class="col-sm-2 my-auto">
+                <i [ngClass]="getProficiencyIcon(savingThrowsProficiency.Constitution)"></i>
+            </div>
+            <div class="col-sm-5">
+                <p class="abilityLabels">Saving Throw</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(savingThrowsModifier.Constitution)"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card abilityCard">
+        <p class="abilityName">Charisma</p>
+        <p class="abilityValue" [innerText]="abilities.Charisma"></p>
+        <div class="row">
+            <div class="col-sm-5">
+                <p class="abilityLabels">Modifier</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(abilitiesModifier.Charisma)"></p>
+            </div>
+            <div class="col-sm-2 my-auto">
+                <i [ngClass]="getProficiencyIcon(savingThrowsProficiency.Charisma)"></i>
+            </div>
+            <div class="col-sm-5">
+                <p class="abilityLabels">Saving Throw</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(savingThrowsModifier.Charisma)"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card abilityCard">
+        <p class="abilityName">Intelligence</p>
+        <p class="abilityValue" [innerText]="abilities.Intelligence"></p>
+        <div class="row">
+            <div class="col-sm-5">
+                <p class="abilityLabels">Modifier</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(abilitiesModifier.Intelligence)"></p>
+            </div>
+            <div class="col-sm-2 my-auto">
+                <i [ngClass]="getProficiencyIcon(savingThrowsProficiency.Intelligence)"></i>
+            </div>
+            <div class="col-sm-5">
+                <p class="abilityLabels">Saving Throw</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(savingThrowsModifier.Intelligence)"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card abilityCard">
+        <p class="abilityName">Wisdom</p>
+        <p class="abilityValue" [innerText]="abilities.Wisdom"></p>
+        <div class="row">
+            <div class="col-sm-5">
+                <p class="abilityLabels">Modifier</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(abilitiesModifier.Wisdom)"></p>
+            </div>
+            <div class="col-sm-2 my-auto">
+                <i [ngClass]="getProficiencyIcon(savingThrowsProficiency.Wisdom)"></i>
+            </div>
+            <div class="col-sm-5">
+                <p class="abilityLabels">Saving Throw</p>
+                <p class="abilityModifier" [innerText]="getModifierNumberWithSign(savingThrowsModifier.Wisdom)"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card abilityCard p-2" *ngIf="advantages.length > 0 || disadvantages.length > 0">
+        <div class="row">
+            <div class="my-auto">
+                <div *ngFor="let item of advantages">
+                    <span title="Advantage"><i class="bi bi-circle-fill advantages"></i>{{item}}</span>
+                </div>
+            </div>
+            <div class="my-auto">
+                <div *ngFor="let item of disadvantages">
+                    <span title="Disadvantage"><i class="bi bi-circle-fill disadvantages"></i>{{item}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -27,3 +27,27 @@ export interface CharacterAllFeatures{
     CharacterFeatures: CharacterFeature[];
 }
 
+export interface Abilities{
+    Strength: number;
+    Dexterity: number;
+    Constitution: number;
+    Charisma: number;
+    Intelligence: number;
+    Wisdom: number;
+}
+
+export interface AbilitiesProficiency{
+    Strength: ProficiencyTypes;
+    Dexterity: ProficiencyTypes;
+    Constitution: ProficiencyTypes;
+    Charisma: ProficiencyTypes;
+    Intelligence: ProficiencyTypes;
+    Wisdom: ProficiencyTypes;
+}
+
+export enum ProficiencyTypes{
+    None,
+    HalfProficiency,
+    Proficiency,
+    Expertise
+}
