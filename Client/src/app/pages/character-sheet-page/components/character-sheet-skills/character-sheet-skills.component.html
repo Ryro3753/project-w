@@ -1,0 +1,14 @@
+
+<div class="character-sheet-skills" *ngIf="load" [ngStyle]="{'border-color': classColor}">
+    <div *ngFor="let item of skills" class="row skillLine" [ngStyle]="{'border-bottom-color': classColor}">
+        <div class="col-sm-2 my-auto">
+            <i [ngClass]="getProficiencyIcon(skillProficiency[item])"></i>
+        </div>
+        <div class="col-sm-3 my-auto">
+            <p class="m-0" [innerText]="getModifierNumberWithSign(skillModifiers[item])"></p>
+        </div>
+        <div class="col-sm-7 my-auto">
+            <p class="m-0" [innerText]="item"></p>
+        </div>
+    </div>
+</div>

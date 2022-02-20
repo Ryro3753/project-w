@@ -41,13 +41,6 @@ export class CharacterSheetAbilitiesComponent implements OnInit {
 
   @Input() set validFeatures(features: Feature[]){
     this.features = features;
-    this.features.push({
-      Section:'Saving Throw',
-      Type:'Disadvantage',
-      Value:'zz',
-      Note:'',
-      Requirements:[]
-        })
     this.readAbilityValues();
     this.readSavingThrowValues();
     this.readProficiency();
@@ -171,12 +164,12 @@ export class CharacterSheetAbilitiesComponent implements OnInit {
   }
 
   calculateSavingThrowModifiers(){
-    this.savingThrowsModifier.Strength = this.calculatorService.calculateSavingThrowModifier(this.savingThrows.Strength,this.abilitiesModifier.Strength,this.savingThrowsProficiency.Strength,this.levelProficiency);
-    this.savingThrowsModifier.Dexterity = this.calculatorService.calculateSavingThrowModifier(this.savingThrows.Dexterity,this.abilitiesModifier.Dexterity,this.savingThrowsProficiency.Dexterity,this.levelProficiency);
-    this.savingThrowsModifier.Charisma = this.calculatorService.calculateSavingThrowModifier(this.savingThrows.Charisma,this.abilitiesModifier.Charisma,this.savingThrowsProficiency.Charisma,this.levelProficiency);
-    this.savingThrowsModifier.Constitution = this.calculatorService.calculateSavingThrowModifier(this.savingThrows.Constitution,this.abilitiesModifier.Constitution,this.savingThrowsProficiency.Constitution,this.levelProficiency);
-    this.savingThrowsModifier.Wisdom = this.calculatorService.calculateSavingThrowModifier(this.savingThrows.Wisdom,this.abilitiesModifier.Wisdom,this.savingThrowsProficiency.Wisdom,this.levelProficiency);
-    this.savingThrowsModifier.Intelligence = this.calculatorService.calculateSavingThrowModifier(this.savingThrows.Intelligence,this.abilitiesModifier.Intelligence,this.savingThrowsProficiency.Intelligence,this.levelProficiency);
+    this.savingThrowsModifier.Strength = this.calculatorService.calculateModifier(this.savingThrows.Strength,this.abilitiesModifier.Strength,this.savingThrowsProficiency.Strength,this.levelProficiency);
+    this.savingThrowsModifier.Dexterity = this.calculatorService.calculateModifier(this.savingThrows.Dexterity,this.abilitiesModifier.Dexterity,this.savingThrowsProficiency.Dexterity,this.levelProficiency);
+    this.savingThrowsModifier.Charisma = this.calculatorService.calculateModifier(this.savingThrows.Charisma,this.abilitiesModifier.Charisma,this.savingThrowsProficiency.Charisma,this.levelProficiency);
+    this.savingThrowsModifier.Constitution = this.calculatorService.calculateModifier(this.savingThrows.Constitution,this.abilitiesModifier.Constitution,this.savingThrowsProficiency.Constitution,this.levelProficiency);
+    this.savingThrowsModifier.Wisdom = this.calculatorService.calculateModifier(this.savingThrows.Wisdom,this.abilitiesModifier.Wisdom,this.savingThrowsProficiency.Wisdom,this.levelProficiency);
+    this.savingThrowsModifier.Intelligence = this.calculatorService.calculateModifier(this.savingThrows.Intelligence,this.abilitiesModifier.Intelligence,this.savingThrowsProficiency.Intelligence,this.levelProficiency);
   }
 
 

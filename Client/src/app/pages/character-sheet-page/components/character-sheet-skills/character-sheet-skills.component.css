@@ -1,0 +1,12 @@
+.skillLine{
+    margin: 0;
+    border-bottom-style: solid;
+    border-bottom-width: 0.15rem;
+}
+
+.character-sheet-skills{
+    border-style: solid;
+    border-width: 0.25rem;
+    margin-top: 1rem;
+    background-color: white;
+}

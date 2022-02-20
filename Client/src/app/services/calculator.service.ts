@@ -13,7 +13,7 @@ export class CalculatorService {
     return Math.floor((ability - 10) / 2);
   }
 
-  calculateSavingThrowModifier(savingThrow: number, abilityModifier: number, proficiency: ProficiencyTypes, levelProficiency: number){
+  calculateModifier(raw: number, abilityModifier: number, proficiency: ProficiencyTypes, levelProficiency: number){
     let proficiencyValue = 0;
     if(proficiency == ProficiencyTypes.HalfProficiency)
       proficiencyValue = levelProficiency / 2;
@@ -21,7 +21,7 @@ export class CalculatorService {
       proficiencyValue = levelProficiency;
     else if(proficiency == ProficiencyTypes.Expertise)
       proficiencyValue = levelProficiency * 2;
-    return savingThrow + abilityModifier + proficiencyValue;
+    return raw + abilityModifier + proficiencyValue;
   }
 
   calculateProficiency(level: number): number{
