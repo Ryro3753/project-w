@@ -111,7 +111,7 @@ export class CharacterSheetSkillsComponent implements OnInit, OnDestroy {
   }
 
   refreshModifiers() {
-    if(!this.load)
+    if(!this.load || !this.abilityModifiers)
       return;
     this.skills.forEach(e => {
       this.skillModifiers[e] = this.calculatorService.calculateModifier(this.skillValues[e],this.abilityModifiers[this.skillWithAbilities[e]],this.skillProficiency[e],this.levelProficiency);

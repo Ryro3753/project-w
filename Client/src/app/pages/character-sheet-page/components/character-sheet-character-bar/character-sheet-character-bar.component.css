@@ -1,0 +1,13 @@
+.character-bar{
+    border-style: solid;
+    border-width: 0.20rem;
+    margin-top: 1rem;
+    background-color: white;
+    padding: 0.5rem;
+}
+
+.healthInput{
+    padding: 0;
+    text-align: center;
+    margin: 0;
+}

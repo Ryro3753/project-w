@@ -5,6 +5,8 @@ import { CharacterSheetPageComponent } from './character-sheet-page.component';
 import { CharacterSheetAbilitiesComponent } from './components/character-sheet-abilities/character-sheet-abilities.component';
 import { CharacterSheetSkillsComponent } from './components/character-sheet-skills/character-sheet-skills.component';
 import { CharacterSheetMiscellaneousCardComponent } from './components/character-sheet-miscellaneous-card/character-sheet-miscellaneous-card.component';
+import { CharacterSheetCharacterBarComponent } from './components/character-sheet-character-bar/character-sheet-character-bar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,7 @@ import { CharacterSheetMiscellaneousCardComponent } from './components/character
     CharacterSheetAbilitiesComponent,
     CharacterSheetSkillsComponent,
     CharacterSheetMiscellaneousCardComponent,
+    CharacterSheetCharacterBarComponent,
   ],
   imports: [
     RouterModule.forChild([{
@@ -19,7 +22,8 @@ import { CharacterSheetMiscellaneousCardComponent } from './components/character
       pathMatch: 'full',
       component: CharacterSheetPageComponent
     }]),
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [
   ],

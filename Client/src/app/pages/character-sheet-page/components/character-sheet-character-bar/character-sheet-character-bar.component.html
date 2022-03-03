@@ -1,0 +1,25 @@
+<div class="character-bar" *ngIf="load" [ngStyle]="{'border-color': classColor}"> 
+    <div class="row">
+        <div class="col-sm-2">
+            <p [innerText]="characterDetails.Name" class="header6 m-0"></p>
+            <img [src]="image ? characterImageBasePath + characterDetails.Id + '.png' : noImagePath "
+            class="responsiveIcon"
+            />
+        </div>
+        <div class="col-sm-3">
+            <p class="header6 centerlize">Health</p>
+            <span class="smallLabel centerlize">Current/Max (Temp)</span>
+            <div class="row">
+                <div class="col-sm" style="padding:0.1rem">
+                    <input [(ngModel)]="characterDetails.CurrentHealth" class="form-control healthInput">
+                </div>
+                <div class="col-sm" style="padding:0.1rem">
+                    <input [(ngModel)]="maxHealth" readonly="true" class="form-control healthInput">
+                </div>
+                <div class="col-sm" style="padding:0.1rem">
+                    <input [(ngModel)]="characterDetails.CurrentTempHealth" class="form-control healthInput">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
