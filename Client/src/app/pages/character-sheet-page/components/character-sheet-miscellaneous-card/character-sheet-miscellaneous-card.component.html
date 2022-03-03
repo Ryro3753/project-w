@@ -1,0 +1,10 @@
+<div class="card miscCard" *ngIf="load" [ngStyle]="{'border-color': classColor}">
+    <span class="miscHeader" >Language</span>
+    <span class="miscText" [innerText]="language" [ngStyle]="{'border-color': classColor}"></span>
+    <span class="miscHeader" >Armor Proficiency</span>
+    <span class="miscText" [innerText]="armorProficiencies" [ngStyle]="{'border-color': classColor}"></span>
+    <span class="miscHeader" >Weapon Proficiency</span>
+    <span class="miscText" [innerText]="weaponProficiency" [ngStyle]="{'border-color': classColor}"></span>
+    <span class="miscHeader" >Tool</span>
+    <span class="miscText" [innerText]="tool" [ngStyle]="{'border-color': classColor}"></span>
+</div>

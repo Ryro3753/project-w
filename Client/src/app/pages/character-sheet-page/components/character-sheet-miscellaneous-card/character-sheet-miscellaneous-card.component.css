@@ -1,0 +1,21 @@
+.miscHeader{
+    font-size: larger;
+    display: block;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.miscText{
+    display: block;
+    margin-bottom: 0.25rem;
+    border-bottom-style: solid;
+    border-bottom-width: 0.10rem;
+}
+
+.miscCard{
+    border-style: solid;
+    border-width: 0.20rem;
+    margin-top: 1rem;
+    background-color: white;
+    padding: 0.5rem;
+}
