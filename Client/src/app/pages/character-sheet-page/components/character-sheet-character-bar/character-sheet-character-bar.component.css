@@ -3,11 +3,18 @@
     border-width: 0.20rem;
     margin-top: 1rem;
     background-color: white;
-    padding: 0.5rem;
+    padding: 1rem;
 }
 
 .healthInput{
     padding: 0;
     text-align: center;
     margin: 0;
+}
+
+.conditionLine{
+    border-bottom-style: solid;
+    border-bottom-width: 0.05rem;
+    display: block;
+    font-size: large;
 }

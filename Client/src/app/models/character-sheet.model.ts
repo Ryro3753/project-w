@@ -13,7 +13,7 @@ export interface CharacterAll{
 export interface CharacterDetail{
     Id: number;
     Name: string;
-    Level: number;
+    Speed: number;
     Class: string;
     Race: string;
     Inspiration: boolean;
@@ -51,4 +51,15 @@ export enum ProficiencyTypes{
     HalfProficiency,
     Proficiency,
     Expertise
+}
+
+export enum DefenseTypes{
+    Resistance,
+    Immunity,
+    Vulnerability
+}
+
+export interface Defense{
+    DefenseType: DefenseTypes,
+    Name: string
 }

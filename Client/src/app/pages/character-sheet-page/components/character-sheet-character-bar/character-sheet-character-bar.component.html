@@ -1,10 +1,12 @@
-<div class="character-bar" *ngIf="load" [ngStyle]="{'border-color': classColor}"> 
+<div class="character-bar" *ngIf="load" [ngStyle]="{'border-color': classColor}">
     <div class="row">
-        <div class="col-sm-2">
-            <p [innerText]="characterDetails.Name" class="header6 m-0"></p>
+        <div class="col-sm-2 my-auto">
+            <p [innerText]="characterDetails.Name" class="header6 m-0 centerlize"></p>
             <img [src]="image ? characterImageBasePath + characterDetails.Id + '.png' : noImagePath "
-            class="responsiveIcon"
-            />
+                class="responsiveIcon" />
+            <span class="smallLabel" [innerText]="characterDetails.Race"></span>
+            <span class="smallLabel" [innerText]="characterDetails.Class"></span>
+            <span class="smallLabel" [innerText]="level + ' Level'"></span>
         </div>
         <div class="col-sm-3">
             <p class="header6 centerlize">Health</p>
@@ -18,6 +20,54 @@
                 </div>
                 <div class="col-sm" style="padding:0.1rem">
                     <input [(ngModel)]="characterDetails.CurrentTempHealth" class="form-control healthInput">
+                </div>
+            </div>
+            <p class="header6 centerlize">Mana</p>
+            <span class="smallLabel centerlize">Current/Max</span>
+            <div class="row">
+                <div class="col-sm" style="padding:0.1rem">
+                    <input [(ngModel)]="characterDetails.CurrentMana" class="form-control healthInput">
+                </div>
+                <div class="col-sm" style="padding:0.1rem">
+                    <input [(ngModel)]="maxMana" readonly="true" class="form-control healthInput">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="header6 centerlize">Proficiency</p>
+                    <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(proficiency)"></p>
+
+                </div>
+                <div class="col-sm-4">
+                    <p class="header6 centerlize">Initiative</p>
+                    <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(initiative)"></p>
+                </div>
+                <div class="col-sm-4">
+                    <p class="header6 centerlize">Speed</p>
+                    <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(speed)"></p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-5 card">
+                    <p class="header6 centerlize">Conditions</p>
+                    <div style="overflow-y:auto;height: 100px;">
+                        <div *ngFor="let item of conditions">
+                            <span class="conditionLine" [innerText]="item"
+                                [ngStyle]="{'border-color': classColor}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 offset-1 card">
+                    <p class="header6 centerlize">Defenses</p>
+                    <div style="overflow-y:auto;height: 100px;">
+                        <div *ngFor="let item of defenses">
+                            <span class="conditionLine" [ngStyle]="getDefenseStyle(item.DefenseType)"
+                                >{{getDefenseType(item.DefenseType) + ' - '}}<span
+                                    [innerText]="item.Name"></span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
-import { CharacterAll } from 'src/app/models/character-sheet.model';
+import { CharacterAll, CharacterDetail } from 'src/app/models/character-sheet.model';
 import { User } from 'src/app/models/common/user.model';
 import { Feature } from 'src/app/models/feature.model';
 import { TraitWithFeature } from 'src/app/models/traits.model';
@@ -28,7 +28,9 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     characterId!: number;
     currentUser: User | undefined;
     allTraits!: TraitWithFeature[];
-    characterDetails!: CharacterAll;
+    character!: CharacterAll;
+    characterDetails!: CharacterDetail;
+
 
     allFeatures: Feature[] = [];
     validFeatures!: Feature[];
@@ -46,11 +48,12 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     }))
     this.subscribes.push(this.store.select(i => i.state.characterAll).subscribe((character: CharacterAll | undefined) => {
       if(character){
-        this.characterDetails = character;
+        this.character = character;
+        this.characterDetails = JSON.parse(JSON.stringify(this.character.Detail));
         this.allFeatures = [];
-        this.allFeatures.push(...this.characterDetails.Features.RaceFeatures);
-        this.allFeatures.push(...this.characterDetails.Features.ClassFeatures);
-        this.allFeatures.push(...this.characterDetails.Features.CharacterFeatures.map(i => i.Feature));
+        this.allFeatures.push(...this.character.Features.RaceFeatures);
+        this.allFeatures.push(...this.character.Features.ClassFeatures);
+        this.allFeatures.push(...this.character.Features.CharacterFeatures.map(i => i.Feature));
         this.readValidFeatures();
       }
     }))

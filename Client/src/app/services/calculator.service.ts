@@ -24,8 +24,8 @@ export class CalculatorService {
     return raw + abilityModifier + proficiencyValue;
   }
 
-  calculateProficiency(level: number): number{
-    return 2 + Math.floor((level - 1)/4)
+  calculateProficiency(level: number, extra: number): number{
+    return (2 + Math.floor((level - 1)/4)) + extra;
   }
 
 }

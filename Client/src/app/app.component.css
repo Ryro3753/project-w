@@ -55,6 +55,7 @@ color:gray;
 text-decoration: underline;
 font-size: smaller;
 margin: 0;
+display: block;
 }
 
 ::ng-deep .header4{

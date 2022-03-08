@@ -107,7 +107,9 @@ export class CharacterSheetSkillsComponent implements OnInit, OnDestroy {
   readProficiency() {
     const levelIndex = this.features.findIndex(i => i.Section == 'Character' && i.Type == 'Level' && !isNaN(Number(i.Value)))
     const level = levelIndex !== -1 ? Number(this.features[levelIndex].Value) : 1;
-    this.levelProficiency = this.calculatorService.calculateProficiency(level);
+    const proficiencyIndex = this.features.findIndex(i => i.Section == 'Character' && i.Type == 'Proficiency' && !isNaN(Number(i.Value)))
+    const proficiency = proficiencyIndex !== -1 ? Number(this.features[proficiencyIndex].Value) : 0;
+    this.levelProficiency = this.calculatorService.calculateProficiency(level,proficiency);
   }
 
   refreshModifiers() {

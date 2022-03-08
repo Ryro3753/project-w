@@ -1,19 +1,19 @@
 <div class="character-sheet-page container">
     <div class="row" *ngIf="pageLoad">
         <div class="col-sm-2">
-            <app-character-sheet-abilities [validFeatures]="validFeatures" [classColor]="characterDetails.ClassColor">
+            <app-character-sheet-abilities [validFeatures]="validFeatures" [classColor]="character.ClassColor">
             </app-character-sheet-abilities>
         </div>
         <div class="col-sm-3">
-            <app-character-sheet-skills [validFeatures]="validFeatures" [classColor]="characterDetails.ClassColor">
+            <app-character-sheet-skills [validFeatures]="validFeatures" [classColor]="character.ClassColor">
             </app-character-sheet-skills>
             <app-character-sheet-miscellaneous-card [validFeatures]="validFeatures"
-                [classColor]="characterDetails.ClassColor"></app-character-sheet-miscellaneous-card>
+                [classColor]="character.ClassColor"></app-character-sheet-miscellaneous-card>
         </div>
         <div class="col-sm-7">
-            <app-character-sheet-character-bar [validFeatures]="validFeatures"
-                [classColor]="characterDetails.ClassColor" [characterDetails]="characterDetails.Detail"
-                [image]="characterDetails.Apperance.HasImage"></app-character-sheet-character-bar>
+            <app-character-sheet-character-bar [characterDetails]="characterDetails"
+                [validFeatures]="validFeatures" [classColor]="character.ClassColor"
+                [image]="character.Apperance.HasImage"></app-character-sheet-character-bar>
         </div>
     </div>
 </div>
