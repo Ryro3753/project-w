@@ -25,5 +25,11 @@ namespace API.Controllers
        {
             return await _characterSheetService.GetAll(characterId);
        }
+       [HttpPost("UpdateCharacterDetails")]
+        public async Task<bool> UpdateCharacterDetails([FromBody] UpdateCharacterDetailRequest request)
+        {
+            return await _characterSheetService.UpdateCharacterDetails(request);
+        }
+
     }
 }

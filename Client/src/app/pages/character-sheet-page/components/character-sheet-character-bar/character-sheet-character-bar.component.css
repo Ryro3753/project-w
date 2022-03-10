@@ -18,3 +18,27 @@
     display: block;
     font-size: large;
 }
+
+.character-bar:hover{
+    box-shadow: 1px 1px 7px;
+    box-shadow: inset;
+}
+
+.character-bar-stats{
+    border-style: solid;
+    border-width: 0.20rem;
+    margin-top: 1rem;
+    background-color: white;
+    padding: 0.2rem;
+}
+
+.character-bar-stats:hover{
+    box-shadow: 1px 1px 7px;
+    box-shadow: inset;
+}
+
+
+.stat-right{
+    border-right-style: solid;
+    border-right-width: 0.05rem;
+}

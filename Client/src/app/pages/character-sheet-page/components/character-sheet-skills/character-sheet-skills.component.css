@@ -12,3 +12,8 @@
     background-color: white;
     padding: 0.5rem;
 }
+
+.character-sheet-skills:hover{
+    box-shadow: 1px 1px 7px;
+    box-shadow: inset;
+}

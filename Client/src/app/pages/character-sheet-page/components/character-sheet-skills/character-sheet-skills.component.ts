@@ -78,7 +78,7 @@ export class CharacterSheetSkillsComponent implements OnInit, OnDestroy {
 
   readSkillValues() {
     this.skills.forEach(e => {
-      const skillIndex = this.features.findIndex(i => i.Section == 'Skill' && !isNaN(Number(i.Value)));
+      const skillIndex = this.features.findIndex(i => i.Section == 'Skill' && i.Type == e && !isNaN(Number(i.Value)));
       this.skillValues[e] = skillIndex !== -1 ? Number(this.features[skillIndex].Value) : 0;
     })
   }

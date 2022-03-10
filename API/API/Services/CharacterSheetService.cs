@@ -12,6 +12,7 @@ namespace API.Services
     public interface ICharacterSheetService
     {
         Task<CharacterAll> GetAll(int characterId);
+        Task<bool> UpdateCharacterDetails(UpdateCharacterDetailRequest request);
     }
 
     public class CharacterSheetService : ICharacterSheetService
@@ -62,6 +63,18 @@ namespace API.Services
         public async Task<string> GetCharacterClassColor(int characterId)
         {
             return await _connection.QueryFirstOrDefaultAsync<string>("Select * from public.\"[CS]fn_getcharacterclasscolor\"(@id)", new { id = characterId });
+        }
+
+        public async Task<bool> UpdateCharacterDetails(UpdateCharacterDetailRequest request)
+        {
+            return await _connection.QueryFirstOrDefaultAsync<bool>("Select * from public.\"[CS]fn_updatecharacterdetails\"(@characterid,@inspiration,@health,@tempHealth,@mana)",
+                new {
+                    characterid = request.CharacterId,
+                    inspiration = request.Inspiration,
+                    health = request.CurrentHealth,
+                    tempHealth = request.CurrentTempHealth,
+                    mana = request.CurrentMana
+                });
         }
     }
 }

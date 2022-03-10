@@ -13,20 +13,20 @@
             <span class="smallLabel centerlize">Current/Max (Temp)</span>
             <div class="row">
                 <div class="col-sm" style="padding:0.1rem">
-                    <input [(ngModel)]="characterDetails.CurrentHealth" class="form-control healthInput">
+                    <input type="number" [(ngModel)]="characterDetails.CurrentHealth" class="form-control healthInput" (change)="saveValues()">
                 </div>
                 <div class="col-sm" style="padding:0.1rem">
                     <input [(ngModel)]="maxHealth" readonly="true" class="form-control healthInput">
                 </div>
                 <div class="col-sm" style="padding:0.1rem">
-                    <input [(ngModel)]="characterDetails.CurrentTempHealth" class="form-control healthInput">
+                    <input type="number" [(ngModel)]="characterDetails.CurrentTempHealth" class="form-control healthInput" (change)="saveValues()">
                 </div>
             </div>
             <p class="header6 centerlize">Mana</p>
             <span class="smallLabel centerlize">Current/Max</span>
             <div class="row">
                 <div class="col-sm" style="padding:0.1rem">
-                    <input [(ngModel)]="characterDetails.CurrentMana" class="form-control healthInput">
+                    <input type="number" [(ngModel)]="characterDetails.CurrentMana" class="form-control healthInput" (change)="saveValues()">
                 </div>
                 <div class="col-sm" style="padding:0.1rem">
                     <input [(ngModel)]="maxMana" readonly="true" class="form-control healthInput">
@@ -34,21 +34,6 @@
             </div>
         </div>
         <div class="col-sm-7">
-            <div class="row">
-                <div class="col-sm-4">
-                    <p class="header6 centerlize">Proficiency</p>
-                    <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(proficiency)"></p>
-
-                </div>
-                <div class="col-sm-4">
-                    <p class="header6 centerlize">Initiative</p>
-                    <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(initiative)"></p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="header6 centerlize">Speed</p>
-                    <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(speed)"></p>
-                </div>
-            </div>
             <div class="row justify-content-center">
                 <div class="col-sm-5 card">
                     <p class="header6 centerlize">Conditions</p>
@@ -73,3 +58,46 @@
         </div>
     </div>
 </div>
+<div class="character-bar-stats" *ngIf="load" [ngStyle]="{'border-color': classColor}">
+    <div class="row justify-content-center">
+        <div class="col-sm-2 stat-right" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Proficiency</p>
+            <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(proficiency)"></p>
+        </div>
+        <div class="col-sm-2 stat-right" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Initiative</p>
+            <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(initiative)"></p>
+        </div>
+        <div class="col-sm-2 stat-right" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Speed</p>
+            <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(speed)"></p>
+        </div>
+        <div class="col-sm-3 stat-right" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Armor Class</p>
+            <p class="header6 centerlize" [innerText]="armorClass"></p>
+        </div>
+        <div class="col-sm-2" [ngStyle]="{'border-color': classColor}" style="text-align: center;align-content: center;">
+            <p class="header6 centerlize">Inspiration</p>
+            <input class="form-check-input" style="text-align: center; " type="checkbox"[(ngModel)]="characterDetails.Inspiration" (change)="saveValues()">
+        </div>
+    </div>
+</div>
+
+<div class="character-bar-stats" *ngIf="load" [ngStyle]="{'border-color': classColor}">
+    <div class="row justify-content-center">
+        <div class="col-sm-3 stat-right" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Passive Perception</p>
+            <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(passivePerception)"></p>
+        </div>
+        <div class="col-sm-4 stat-right" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Passive Investigation</p>
+            <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(passiveInvestigation)"></p>
+        </div>
+        <div class="col-sm-3" [ngStyle]="{'border-color': classColor}">
+            <p class="header6 centerlize">Passive Insight</p>
+            <p class="header6 centerlize" [innerText]="getModifierNumberWithSign(passiveInsight)"></p>
+        </div>
+    </div>
+</div>
+
+

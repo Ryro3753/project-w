@@ -22,6 +22,14 @@ export interface CharacterDetail{
     CurrentTempHealth: number;
 }
 
+export interface UpdateCharacterDetailRequest{
+    CharacterId: number;
+    Inspiration: boolean;
+    CurrentHealth: number;
+    CurrentMana: number;
+    CurrentTempHealth: number;
+}
+
 export interface CharacterAllFeatures{
     RaceFeatures: Feature[];
     ClassFeatures: Feature[];
