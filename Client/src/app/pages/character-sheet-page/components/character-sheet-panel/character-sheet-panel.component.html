@@ -1,0 +1,6 @@
+<div class="character-sheet-panel" *ngIf="load" [ngStyle]="{'border-color': classColor}">
+    <div>
+        <span *ngFor="let item of tabs; let i = index" [innerText]="item" (click)="pageClicked(i)" class="tab"
+            [ngClass]="i == clickedIndex ? 'clickedTab' : ''" [ngStyle]="{'border-color': classColor}"></span>
+    </div>
+</div>

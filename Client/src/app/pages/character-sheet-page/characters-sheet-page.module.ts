@@ -7,6 +7,7 @@ import { CharacterSheetSkillsComponent } from './components/character-sheet-skil
 import { CharacterSheetMiscellaneousCardComponent } from './components/character-sheet-miscellaneous-card/character-sheet-miscellaneous-card.component';
 import { CharacterSheetCharacterBarComponent } from './components/character-sheet-character-bar/character-sheet-character-bar.component';
 import { FormsModule } from '@angular/forms';
+import { CharacterSheetPanelComponent } from './components/character-sheet-panel/character-sheet-panel.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     CharacterSheetSkillsComponent,
     CharacterSheetMiscellaneousCardComponent,
     CharacterSheetCharacterBarComponent,
+    CharacterSheetPanelComponent,
   ],
   imports: [
     RouterModule.forChild([{

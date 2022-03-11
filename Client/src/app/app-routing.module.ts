@@ -68,7 +68,7 @@ const routes: Routes = [
   },
   {
     path: 'Character-Sheet/:CharacterId',
-    loadChildren: () => import('./pages/character-sheet-page/characters-page.module').then(m => m.CharacterSheetPageModule),
+    loadChildren: () => import('./pages/character-sheet-page/characters-sheet-page.module').then(m => m.CharacterSheetPageModule),
     canActivate:[AuthGuard]
   },
 ];
