@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CharacterFeature } from 'src/app/models/character.model';
 import { Feature } from 'src/app/models/feature.model';
 
 @Component({
@@ -14,6 +15,8 @@ export class CharacterSheetPanelComponent implements OnInit {
   features!: Feature[];
   load!: boolean;
   clickedIndex = -1;
+  @Input() characterFeatures!: CharacterFeature[];
+  @Input() characterId!: number;
 
   tabs = [
     'Spells',
@@ -33,7 +36,6 @@ export class CharacterSheetPanelComponent implements OnInit {
   }
 
   pageClicked(index: number){
-    console.log(index);
     this.clickedIndex = index;
   }
 

@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
+import { FeatureRefresh } from 'src/app/events/features.popup.event';
 import { CharacterAll, CharacterDetail } from 'src/app/models/character-sheet.model';
 import { User } from 'src/app/models/common/user.model';
 import { Feature } from 'src/app/models/feature.model';
 import { TraitWithFeature } from 'src/app/models/traits.model';
+import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { FeatureService } from 'src/app/services/feature.service';
 import { loadCharacterAll } from 'src/app/store/actions/character-sheet.action';
 import { loadTraits } from 'src/app/store/actions/traits.action';
@@ -22,8 +24,10 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
   
   constructor(readonly store: Store<{ state: State }>,
     readonly activatedRoute: ActivatedRoute,
-    readonly featureServices: FeatureService
-    ) { }
+    readonly featureServices: FeatureService,
+    readonly bus: MessageBusService
+    ) {
+     }
 
     characterId!: number;
     currentUser: User | undefined;
@@ -38,7 +42,8 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     pageLoad: boolean = false;
 
   ngOnInit(): void {
-    this.subscribes.push(this.activatedRoute.params.subscribe((param: any) => {
+      this.subscribes.push(this.bus.of(FeatureRefresh).subscribe(this.refreshFeature.bind(this)))
+      this.subscribes.push(this.activatedRoute.params.subscribe((param: any) => {
       this.characterId = param['CharacterId'];
       this.readCharacterData();
     }));
@@ -48,8 +53,8 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     }))
     this.subscribes.push(this.store.select(i => i.state.characterAll).subscribe((character: CharacterAll | undefined) => {
       if(character){
-        this.character = character;
-        this.characterDetails = JSON.parse(JSON.stringify(this.character.Detail));
+        this.character = JSON.parse(JSON.stringify(character));
+        this.characterDetails = this.character.Detail;
         this.allFeatures = [];
         this.allFeatures.push(...this.character.Features.RaceFeatures);
         this.allFeatures.push(...this.character.Features.ClassFeatures);
@@ -91,6 +96,15 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     while (this.subscribes.length > 0) {
       this.subscribes.pop()?.unsubscribe();
     }
+  }
+
+  refreshFeature(featureRefresh:FeatureRefresh){
+    this.character.Features.CharacterFeatures = featureRefresh.features;
+    this.allFeatures = [];
+    this.allFeatures.push(...this.character.Features.RaceFeatures);
+    this.allFeatures.push(...this.character.Features.ClassFeatures);
+    this.allFeatures.push(...featureRefresh.features.map(i => i.Feature));
+    this.readValidFeatures();
   }
 
 }

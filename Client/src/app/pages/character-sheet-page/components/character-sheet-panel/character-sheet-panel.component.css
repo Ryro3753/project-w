@@ -4,6 +4,8 @@
     margin-top: 1rem;
     background-color: white;
     padding: 0.5rem;
+    height: 28rem;
+    overflow-y: auto;
 }
 
 
@@ -26,5 +28,12 @@
 
 .clickedTab{
     border-bottom-style: solid;
-    border-bottom-width: 0.25rem;
+    border-bottom-width: 0.15rem;
+    color: black
+}
+
+.tabs{
+    border-bottom-style: solid;
+    border-bottom-width: 0.15rem;
+    margin-bottom: 0.5rem;
 }

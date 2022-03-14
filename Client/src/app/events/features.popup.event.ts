@@ -1,3 +1,4 @@
+import { CharacterFeature } from "../models/character.model";
 import { Feature } from "../models/feature.model";
 
 export class FeaturesPopupEvent{
@@ -8,4 +9,8 @@ export class FeaturesPopupEvent{
 export class FeaturesClosePopupEvent{
     constructor(public to: string, public features: Feature[]){
     }
+}
+
+export class FeatureRefresh{
+    constructor(public features: CharacterFeature[]){}
 }

@@ -62,7 +62,7 @@ export class CharacterSheetCharacterBarComponent implements OnInit {
       this.characterDetails.CurrentHealth = this.maxHealth;
     }
 
-    const maxManaIndex = this.features.findIndex(i => i.Section == 'Character' && i.Type == 'Max Health' && !isNaN(Number(i.Value)));
+    const maxManaIndex = this.features.findIndex(i => i.Section == 'Character' && i.Type == 'Max Mana' && !isNaN(Number(i.Value)));
     this.maxMana = maxManaIndex !== -1 ? Number(this.features[maxManaIndex].Value) : 0;
     if (this.characterDetails && this.characterDetails.CurrentMana == -1) {
       this.characterDetails.CurrentMana = this.maxMana;

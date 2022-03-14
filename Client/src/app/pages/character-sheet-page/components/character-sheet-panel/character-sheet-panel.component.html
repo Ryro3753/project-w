@@ -1,6 +1,7 @@
 <div class="character-sheet-panel" *ngIf="load" [ngStyle]="{'border-color': classColor}">
-    <div>
+    <div class="tabs" [ngStyle]="{'border-color': classColor}">
         <span *ngFor="let item of tabs; let i = index" [innerText]="item" (click)="pageClicked(i)" class="tab"
             [ngClass]="i == clickedIndex ? 'clickedTab' : ''" [ngStyle]="{'border-color': classColor}"></span>
     </div>
+    <app-feature-panel *ngIf="clickedIndex == 2" [characterFeatures]="characterFeatures" [characterId]="characterId" ></app-feature-panel>
 </div>

@@ -8,6 +8,8 @@ import { CharacterSheetMiscellaneousCardComponent } from './components/character
 import { CharacterSheetCharacterBarComponent } from './components/character-sheet-character-bar/character-sheet-character-bar.component';
 import { FormsModule } from '@angular/forms';
 import { CharacterSheetPanelComponent } from './components/character-sheet-panel/character-sheet-panel.component';
+import { FeaturePanelComponent } from './components/character-sheet-panel/components/feature-panel/feature-panel.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { CharacterSheetPanelComponent } from './components/character-sheet-panel
     CharacterSheetMiscellaneousCardComponent,
     CharacterSheetCharacterBarComponent,
     CharacterSheetPanelComponent,
+    FeaturePanelComponent,
   ],
   imports: [
     RouterModule.forChild([{
@@ -25,7 +28,8 @@ import { CharacterSheetPanelComponent } from './components/character-sheet-panel
       component: CharacterSheetPageComponent
     }]),
     CommonModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
   ],
