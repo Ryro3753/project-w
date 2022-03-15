@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CharacterFeature } from 'src/app/models/character.model';
+import { CharacterApperance, CharacterFeature } from 'src/app/models/character.model';
 import { Feature } from 'src/app/models/feature.model';
 
 @Component({
@@ -16,13 +16,15 @@ export class CharacterSheetPanelComponent implements OnInit {
   load!: boolean;
   clickedIndex = -1;
   @Input() characterFeatures!: CharacterFeature[];
+  @Input() characterApperance!: CharacterApperance;
   @Input() characterId!: number;
 
   tabs = [
     'Spells',
     'Inventory',
     'Features',
-    'Description',
+    'Apperance',
+    'Character Details',
   ]
 
 

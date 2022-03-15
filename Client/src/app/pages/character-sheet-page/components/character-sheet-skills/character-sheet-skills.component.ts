@@ -93,7 +93,7 @@ export class CharacterSheetSkillsComponent implements OnInit, OnDestroy {
         this.skillProficiency[e] = ProficiencyTypes.HalfProficiency;
     })
     this.skills.forEach(e => {
-      const skillIndex = this.features.findIndex(i => i.Section == 'Skill' && i.Type == e && i.Value == 'Proficiency');
+      const skillIndex = this.features.findIndex(i => i.Section == 'Skill' && i.Type == e && i.Value == 'Proficient');
       if (skillIndex != -1)
         this.skillProficiency[e] = ProficiencyTypes.Proficiency;
     })

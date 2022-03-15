@@ -4,4 +4,5 @@
             [ngClass]="i == clickedIndex ? 'clickedTab' : ''" [ngStyle]="{'border-color': classColor}"></span>
     </div>
     <app-feature-panel *ngIf="clickedIndex == 2" [characterFeatures]="characterFeatures" [characterId]="characterId" ></app-feature-panel>
+    <app-apperance-panel *ngIf="clickedIndex == 3" [characterApperance]="characterApperance" [classColor]="classColor"></app-apperance-panel>
 </div>

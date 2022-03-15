@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { CharacterSheetPanelComponent } from './components/character-sheet-panel/character-sheet-panel.component';
 import { FeaturePanelComponent } from './components/character-sheet-panel/components/feature-panel/feature-panel.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ApperancePanelComponent } from './components/character-sheet-panel/components/apperance-panel/apperance-panel.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CharacterSheetCharacterBarComponent,
     CharacterSheetPanelComponent,
     FeaturePanelComponent,
+    ApperancePanelComponent,
   ],
   imports: [
     RouterModule.forChild([{

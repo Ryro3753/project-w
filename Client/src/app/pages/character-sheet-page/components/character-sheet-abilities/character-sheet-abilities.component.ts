@@ -110,6 +110,14 @@ export class CharacterSheetAbilitiesComponent implements OnInit {
   }
 
   readSavingThrowProficiency(){
+    this.savingThrowsProficiency.Strength = ProficiencyTypes.None;
+    this.savingThrowsProficiency.Dexterity = ProficiencyTypes.None;
+    this.savingThrowsProficiency.Constitution = ProficiencyTypes.None;
+    this.savingThrowsProficiency.Charisma = ProficiencyTypes.None;
+    this.savingThrowsProficiency.Intelligence = ProficiencyTypes.None;
+    this.savingThrowsProficiency.Wisdom = ProficiencyTypes.None;
+
+
     this.features.filter(i => i.Section == 'Saving Throw' && i.Value == 'Half-Proficient').forEach(e => {
       if(e.Type == 'Strength')
         this.savingThrowsProficiency.Strength = ProficiencyTypes.HalfProficiency;
@@ -157,6 +165,8 @@ export class CharacterSheetAbilitiesComponent implements OnInit {
   }
 
   readSavingThrowVangates(){
+    this.advantages = [];
+    this.disadvantages = [];
     this.features.filter(i => i.Section == 'Saving Throw' && i.Type == 'Advantage').forEach(e => {
       this.advantages.push(e.Value);
     })

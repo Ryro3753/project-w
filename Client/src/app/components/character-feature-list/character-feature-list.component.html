@@ -1,6 +1,6 @@
 <div class="card" [style]="'height: ' + height + 'px;overflow-y: auto'">
     <ul class="list-group feature-list">
-      <div *ngFor="let item of characterFeatures; let i = index;">
+      <div *ngFor="let item of getFeatures(); let i = index;">
         <li
           [ngClass]="item.Feature.Requirements !== null && item.Feature.Requirements.length > 0 ? cssClassesWithRequirement : cssClassesWithoutRequirement"
           [title]="item.Feature.Note !== null && item.Note !== '' ? item.Note : '' ">

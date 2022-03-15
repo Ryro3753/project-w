@@ -30,6 +30,7 @@ export class CharacterFeatureListComponent implements OnInit,OnDestroy {
   @Input() from!: string;
   @Input() characterId!: number;
   @Input() note: string = '';
+  @Input() showOnlyNotes: boolean = false;
 
   showRequirementsToggle: boolean[] = [];
 
@@ -95,5 +96,13 @@ export class CharacterFeatureListComponent implements OnInit,OnDestroy {
       const index = this.characterFeatures.findIndex(i => i.Id == result.Id);
       this.characterFeatures[index] = result;
     }
+  }
+
+  getFeatures(): CharacterFeature[]{
+    if(this.showOnlyNotes){
+      return this.characterFeatures.filter(i => i.Note == this.note);
+    }
+    else
+      return this.characterFeatures;
   }
 }
