@@ -14,7 +14,6 @@ export class ApperancePanelComponent implements OnInit {
   @Input() classColor!: string;
 
   ngOnInit(): void {
-    console.log(this.characterApperance);
   }
 
   getHeaderStyle(){
