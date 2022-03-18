@@ -3,8 +3,9 @@ import { login, logout } from '../actions/login.action';
 import { User } from '../../models/common/user.model';
 import { TraitWithFeature } from 'src/app/models/traits.model';
 import { loadTraitsSuccess } from '../actions/traits.action';
-import { loadCharacterAllSuccess, saveCharacterAbilities, saveCharacterAbilitiesModifiers } from '../actions/character-sheet.action';
+import { loadCharacterAllSuccess, loadSpellAllSuccess, saveCharacterAbilities, saveCharacterAbilitiesModifiers } from '../actions/character-sheet.action';
 import { Abilities, CharacterAll } from 'src/app/models/character-sheet.model';
+import { SpellDetail } from 'src/app/models/spell.model';
 
 export interface State {
     user: User | undefined;
@@ -12,6 +13,7 @@ export interface State {
     characterAll: CharacterAll | undefined;
     characterAbilities: Abilities | undefined;
     characterAbilitiesModifiers: Abilities | undefined;
+    spells: SpellDetail[] | undefined;
 }
 
 export const initialState: State = {
@@ -19,7 +21,8 @@ export const initialState: State = {
     traits: undefined,
     characterAll: undefined,
     characterAbilities: undefined,
-    characterAbilitiesModifiers: undefined
+    characterAbilitiesModifiers: undefined,
+    spells: undefined
 };
 
 const _storeReducer = createReducer(
@@ -42,6 +45,9 @@ const _storeReducer = createReducer(
     on(saveCharacterAbilitiesModifiers, (state: State, payload:any) => {
         return ({...state, characterAbilitiesModifiers: payload});
     }),
+    on(loadSpellAllSuccess, (state:State, payload: any) => {
+        return ({...state, spells: payload.spells});
+    })
   );
 
 

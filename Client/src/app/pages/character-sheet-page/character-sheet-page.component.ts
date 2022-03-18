@@ -6,10 +6,11 @@ import { FeatureRefresh } from 'src/app/events/features.popup.event';
 import { CharacterAll, CharacterDetail } from 'src/app/models/character-sheet.model';
 import { User } from 'src/app/models/common/user.model';
 import { Feature } from 'src/app/models/feature.model';
+import { SpellDetail } from 'src/app/models/spell.model';
 import { TraitWithFeature } from 'src/app/models/traits.model';
 import { MessageBusService } from 'src/app/services/common/messagebus.service';
 import { FeatureService } from 'src/app/services/feature.service';
-import { loadCharacterAll } from 'src/app/store/actions/character-sheet.action';
+import { loadCharacterAll, loadSpellAll } from 'src/app/store/actions/character-sheet.action';
 import { loadTraits } from 'src/app/store/actions/traits.action';
 import { State } from 'src/app/store/reducer/reducer';
 
@@ -32,6 +33,7 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     characterId!: number;
     currentUser: User | undefined;
     allTraits!: TraitWithFeature[];
+    allSpells!:SpellDetail[];
     character!: CharacterAll;
     characterDetails!: CharacterDetail;
 
@@ -50,6 +52,7 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
     this.subscribes.push(this.store.select(i => i.state.user).subscribe((user: User | undefined) => {
       this.currentUser = user;
       this.readTraits();
+      this.readSpells();
     }))
     this.subscribes.push(this.store.select(i => i.state.characterAll).subscribe((character: CharacterAll | undefined) => {
       if(character){
@@ -68,12 +71,23 @@ export class CharacterSheetPageComponent implements OnInit, OnDestroy {
         this.readValidFeatures();
       }
     }))
+    this.subscribes.push(this.store.select(i => i.state.spells).subscribe((spells: SpellDetail[] | undefined) => {
+      if(spells){
+        this.allSpells = spells;
+      }
+    }))
   }
 
   readTraits(){
     if(this.currentUser){
       this.store.dispatch(loadTraits({userId: this.currentUser.Id}));
       this.readValidFeatures();
+    }
+  }
+
+  readSpells(){
+    if(this.currentUser){
+      this.store.dispatch(loadSpellAll({userId:this.currentUser.Id}));
     }
   }
 

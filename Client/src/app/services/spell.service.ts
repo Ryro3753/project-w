@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
+import { Observable } from "rxjs"
 import { OnlyUserId, ShareRequest } from "../models/common/common.model"
 import { Spell, SpellDetail, SpellUpdateRequest } from "../models/spell.model"
 import { BaseDataService } from "./common/base-data.service"
@@ -16,6 +17,11 @@ export class SpellService extends BaseDataService {
 
   getAllSpellsByUserId(userId: string): Promise<Spell[]>{
     return this.get<Spell[]>("GetAllSpellsByUserId", {userId});
+  }
+
+  getAllSpells(userId: string): Observable<SpellDetail[]>{
+    const url = this.getUrl('Spell','GetAllSpells');
+    return this.httpClient.get<SpellDetail[]>(url,{params: {userId}});
   }
 
   getSpell(spellId: number, userId: string): Promise<SpellDetail>{

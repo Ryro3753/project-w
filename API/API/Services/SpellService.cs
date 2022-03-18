@@ -16,6 +16,7 @@ namespace API.Services
         Task<SpellDetail> UpdateSpell(SpellUpdateRequest request);
         Task<bool> ShareSpell(ShareRequest request);
         Task<bool> DeleteSpell(int SpellId, string UserId);
+        Task<IEnumerable<SpellDetail>> GetAllSpells(string userId);
     }
 
     public class SpellService : ISpellService
@@ -35,9 +36,9 @@ namespace API.Services
             return result;
         }
 
-        public async Task<SpellDetail> GetSpell(int traitId, string userId)
+        public async Task<SpellDetail> GetSpell(int spellId, string userId)
         {
-            var data = await _connection.QueryFirstOrDefaultAsync<SpellDetail>("Select * from public.fn_getspell(@traitid,@userid)", new { traitid = traitId, userid = userId });
+            var data = await _connection.QueryFirstOrDefaultAsync<SpellDetail>("Select * from public.fn_getspell(@traitid,@userid)", new { spellId = spellId, userid = userId });
             if (data == null)
                 throw new Exception("No spell found");
 
@@ -90,6 +91,12 @@ namespace API.Services
             if (!result)
                 throw new Exception("You do not have permission to delete this spell");
             return result;
+        }
+
+        public async Task<IEnumerable<SpellDetail>> GetAllSpells(string userId)
+        {
+            return await _connection.QueryAsync<SpellDetail>("Select * from public.fn_getallspells(@userid)", new { userid = userId });
+
         }
 
     }

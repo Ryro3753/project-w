@@ -54,7 +54,11 @@ namespace API.Controllers
             return await _spellService.DeleteSpell(SpellId, UserId);
         }
 
-
+        [HttpGet("GetAllSpells")]
+        public async Task<IEnumerable<SpellDetail>> GetAllSpells(string userId)
+        {
+            return await _spellService.GetAllSpells(userId);
+        }
 
     }
 }

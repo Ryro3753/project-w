@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CharacterApperance, CharacterDescription, CharacterFeature } from 'src/app/models/character.model';
 import { Feature } from 'src/app/models/feature.model';
+import { SpellDetail } from 'src/app/models/spell.model';
 
 @Component({
   selector: 'app-character-sheet-panel',
@@ -18,6 +19,7 @@ export class CharacterSheetPanelComponent implements OnInit {
   @Input() characterFeatures!: CharacterFeature[];
   @Input() characterApperance!: CharacterApperance;
   @Input() characterDescription!: CharacterDescription;
+  @Input() allSpells!: SpellDetail[];
   @Input() characterId!: number;
 
   tabs = [
