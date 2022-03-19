@@ -12,10 +12,10 @@ export class CharacterSheetPanelComponent implements OnInit {
 
   constructor() { }
 
-  @Input() classColor!: string;
   features!: Feature[];
   load!: boolean;
   clickedIndex = -1;
+  @Input() classColor!: string;
   @Input() characterFeatures!: CharacterFeature[];
   @Input() characterApperance!: CharacterApperance;
   @Input() characterDescription!: CharacterDescription;
@@ -43,5 +43,7 @@ export class CharacterSheetPanelComponent implements OnInit {
   pageClicked(index: number){
     this.clickedIndex = index;
   }
+
+
 
 }

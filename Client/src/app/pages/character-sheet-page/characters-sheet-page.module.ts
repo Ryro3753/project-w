@@ -12,6 +12,8 @@ import { FeaturePanelComponent } from './components/character-sheet-panel/compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ApperancePanelComponent } from './components/character-sheet-panel/components/apperance-panel/apperance-panel.component';
 import { DescriptionPanelComponent } from './components/character-sheet-panel/components/description-panel/description-panel.component';
+import { SpellPanelComponent } from './components/character-sheet-panel/components/spell-panel/spell-panel.component';
+import { InventoryPanelComponent } from './components/character-sheet-panel/components/inventory-panel/inventory-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { DescriptionPanelComponent } from './components/character-sheet-panel/co
     FeaturePanelComponent,
     ApperancePanelComponent,
     DescriptionPanelComponent,
+    SpellPanelComponent,
+    InventoryPanelComponent,
   ],
   imports: [
     RouterModule.forChild([{

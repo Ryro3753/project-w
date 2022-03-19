@@ -3,6 +3,8 @@
         <span *ngFor="let item of tabs; let i = index" [innerText]="item" (click)="pageClicked(i)" class="tab"
             [ngClass]="i == clickedIndex ? 'clickedTab' : ''" [ngStyle]="{'border-color': classColor}"></span>
     </div>
+    <app-spell-panel *ngIf="clickedIndex == 0" [characterId]="characterId" [allSpells]="allSpells" [validFeatures]="features"></app-spell-panel>
+    <app-inventory-panel *ngIf="clickedIndex == 1" [characterFeatures]="characterFeatures" [characterId]="characterId"></app-inventory-panel>
     <app-feature-panel *ngIf="clickedIndex == 2" [characterFeatures]="characterFeatures" [characterId]="characterId" ></app-feature-panel>
     <app-apperance-panel *ngIf="clickedIndex == 3" [characterApperance]="characterApperance" [classColor]="classColor"></app-apperance-panel>
     <app-description-panel *ngIf="clickedIndex == 4" [characterDescription]="characterDescription" [classColor]="classColor"></app-description-panel>
