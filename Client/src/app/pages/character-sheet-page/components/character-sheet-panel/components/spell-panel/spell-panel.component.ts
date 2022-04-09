@@ -35,6 +35,7 @@ export class SpellPanelComponent implements OnInit {
       if(spellIndex != -1)
         this.spells.push(this.allSpells[spellIndex]);
     })
+    this.spells = [...new Set(this.spells)];
   }
 
 }

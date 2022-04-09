@@ -38,7 +38,7 @@ namespace API.Services
 
         public async Task<SpellDetail> GetSpell(int spellId, string userId)
         {
-            var data = await _connection.QueryFirstOrDefaultAsync<SpellDetail>("Select * from public.fn_getspell(@traitid,@userid)", new { spellId = spellId, userid = userId });
+            var data = await _connection.QueryFirstOrDefaultAsync<SpellDetail>("Select * from public.fn_getspell(@spellId,@userid)", new { spellId = spellId, userid = userId });
             if (data == null)
                 throw new Exception("No spell found");
 
