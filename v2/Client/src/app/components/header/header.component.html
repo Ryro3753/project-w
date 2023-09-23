@@ -1,0 +1,17 @@
+<header
+  class="background-color-d-blue text-white h-12 center-it border-b-8 border-color-d-black"
+>
+  <div class="container">
+    <div class="grid grid-cols-12">
+      <div class="col-start-5 col-end-7">asd</div>
+      <div
+        class="col-start-10 col-end-12 gap-5 hover:underline hover:cursor-pointer"
+        (click)="userClicked()"
+      >
+        <span class="mr-3" [innerText]="user.username" *ngIf="user"></span>
+        <span class="mr-3" *ngIf="!user">Sign In</span>
+        <i class="bi bi-person-circle text-2xl"></i>
+      </div>
+    </div>
+  </div>
+</header>

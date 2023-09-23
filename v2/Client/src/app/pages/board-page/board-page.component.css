@@ -1,0 +1,6 @@
+.canvas-wrapper {
+    position: absolute;
+    overflow: auto;
+    max-height: 88vh;
+    max-width: 100%;
+}
